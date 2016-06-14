@@ -28,7 +28,7 @@ Data/WorkingFolderIcon.ico
 *.ini
 
 # Files included
-!./Duality.dll
+!Duality.dll
 !DualityEditor.exe
 !DualityEditor.exe.config
 !DualityPrimitives.dll
