@@ -23,4 +23,7 @@ if (InputManager.IsButtonPressed("Right")) //Right is the Virtual Button's name
 * At the moment, the user can assing new VirtualButtons to the InputManager via code. These changes do not reflect in the editor window. The user might need to do this (in game keybinding management for example), so it'd be nice to implement this.
 * Multiple instances of the single key cannot be added to the same Virtual Button, but if the user changes an existing key, the program allows the same key. This leads to weird behaviour, thus needs to be fixed.
 
+##License
+The code is under MIT license, details in the license file.
+Icons used from the [fatcow.com](http://www.fatcow.com/free-icons) collection under [CC-BY-3.0 US](http://creativecommons.org/licenses/by/3.0/us/).
 ![](http://i.imgur.com/gK4DzQo.png)
