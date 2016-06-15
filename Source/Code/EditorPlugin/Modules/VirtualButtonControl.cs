@@ -25,6 +25,9 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin
             inputKeyBoxCreator.AddButtonClicked += AddKeyToButton;
         }
 
+        public bool HasKeyInVirtualButton(Key key)        
+            => virtualButton.AssociatedKeys.Contains(key);
+        
         private void FillWithVirtualButton(VirtualButton button)
         {
             virtualButton = button;
@@ -41,9 +44,15 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin
             button.RemoveKey(key);
         }
 
-        private void KeyChangedCallback(VirtualButton button, Key oldKey, Key newKey)
+        private void KeyChangedCallback(InputKeyBox inputKeyBox, VirtualButton button, Key oldKey, Key newKey)
         {
-            if (oldKey == newKey) return;
+            if (oldKey == newKey)            
+                return;
+
+            if (virtualButton.AssociatedKeys.Contains(newKey)) {
+                inputKeyBox.SetKey(oldKey);
+                return;
+            }
 
             button.RemoveKey(oldKey);
             button.AssociateKey(newKey);
@@ -68,9 +77,9 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin
             {
                 DeleteKeyCallback(button, inputKeyBox.SelectedKey);
             };
-            inputKeyBox.KeySelectionChanged += (oldKey) =>
+            inputKeyBox.KeySelectionChanged += (keyBox, oldKey) =>
             {
-                KeyChangedCallback(button, oldKey, inputKeyBox.SelectedKey);
+                KeyChangedCallback(keyBox, button, oldKey, inputKeyBox.SelectedKey);
             };
         }
 

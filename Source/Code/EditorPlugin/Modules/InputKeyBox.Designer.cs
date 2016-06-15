@@ -45,7 +45,7 @@
             this.comboBox.Size = new System.Drawing.Size(120, 21);
             this.comboBox.TabIndex = 0;
             this.toolTip1.SetToolTip(this.comboBox, "Physical key on international keyboard");
-            this.comboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
+            this.comboBox.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
             // 
             // deleteButton
             // 

@@ -24,7 +24,7 @@
               <value dataType="Enum" type="Duality.Input.Key" name="A" value="83" />
             </item>
           </m_slots>
-          <m_version dataType="Int">2</m_version>
+          <m_version dataType="Int">16</m_version>
         </associatedKeys>
         <ButtonChanged dataType="Delegate" type="System.Action" id="3573126030" multi="true">
           <method dataType="MemberInfo" id="1941610290" value="M:MFEP.Duality.Plugins.InputPlugin.InputManager+&lt;&gt;c:&lt;RegisterButton&gt;b__6_0" />
@@ -90,10 +90,10 @@
           <m_buckets dataType="Array" type="System.Int32[]" id="650027460">1, 0, 2</m_buckets>
           <m_comparer dataType="Struct" type="System.Collections.Generic.EnumEqualityComparer`1[[Duality.Input.Key]]" id="1447494038" />
           <m_count dataType="Int">2</m_count>
-          <m_freeList dataType="Int">-1</m_freeList>
-          <m_lastIndex dataType="Int">2</m_lastIndex>
+          <m_freeList dataType="Int">2</m_freeList>
+          <m_lastIndex dataType="Int">3</m_lastIndex>
           <m_siInfo />
-          <m_slots dataType="Array" type="System.Collections.Generic.HashSet`1+Slot[[Duality.Input.Key]][]" id="3919863936" length="3">
+          <m_slots dataType="Array" type="System.Collections.Generic.HashSet`1+Slot[[Duality.Input.Key]][]" id="3919863936">
             <item dataType="Struct" type="System.Collections.Generic.HashSet`1+Slot[[Duality.Input.Key]]">
               <hashCode dataType="Int">48</hashCode>
               <next dataType="Int">-1</next>
@@ -104,8 +104,13 @@
               <next dataType="Int">-1</next>
               <value dataType="Enum" type="Duality.Input.Key" name="D" value="86" />
             </item>
+            <item dataType="Struct" type="System.Collections.Generic.HashSet`1+Slot[[Duality.Input.Key]]">
+              <hashCode dataType="Int">-1</hashCode>
+              <next dataType="Int">-1</next>
+              <value dataType="Enum" type="Duality.Input.Key" name="Unknown" value="0" />
+            </item>
           </m_slots>
-          <m_version dataType="Int">2</m_version>
+          <m_version dataType="Int">12</m_version>
         </associatedKeys>
         <ButtonChanged dataType="Delegate" type="System.Action" id="946826262" multi="true">
           <method dataType="ObjectRef">1941610290</method>

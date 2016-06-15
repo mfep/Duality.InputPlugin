@@ -29,7 +29,7 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin
         }        
 
         public event Action DeleteButtonClick;
-        public event Action<Key> KeySelectionChanged;
+        public event Action<InputKeyBox, Key> KeySelectionChanged;
 
         public InputKeyBox()
         {            
@@ -44,17 +44,17 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin
             SelectedKey = key;
         }
 
-        private void comboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            var oldKey = SelectedKey;
-            SelectedKey = (Key)comboBox.SelectedItem;
-            KeySelectionChanged?.Invoke(oldKey);
-        }
-
         protected virtual void deleteButton_Click(object sender, EventArgs e)
         {
             DeleteButtonClick?.Invoke();
             Dispose();
+        }
+
+        private void comboBox_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            var oldKey = SelectedKey;
+            SelectedKey = (Key)comboBox.SelectedItem;
+            KeySelectionChanged?.Invoke(this, oldKey);
         }
     }
 }
