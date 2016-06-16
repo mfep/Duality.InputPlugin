@@ -4,9 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Runtime.CompilerServices;
+
 using Duality;
 using Duality.Serialization;
 using Key = Duality.Input.Key;
+
+[assembly: InternalsVisibleTo("InputPlugin.editor")]
 
 namespace MFEP.Duality.Plugins.InputPlugin
 {
@@ -15,9 +19,9 @@ namespace MFEP.Duality.Plugins.InputPlugin
         private static Dictionary<string, VirtualButton> buttonMapping = new Dictionary<string, VirtualButton>();
         private const string mappingPath = "keyMapping.xml";
 
-        public static event Action ButtonsChanged = SaveMapping;
+        internal static event Action ButtonsChanged = SaveMapping;
 
-        public static VirtualButton[] Buttons
+        internal static VirtualButton[] Buttons
         {
             get
             {
@@ -25,7 +29,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
             }
         }        
 
-        public static bool RegisterButton(VirtualButton button)
+        internal static bool RegisterButton(VirtualButton button)
         {
             if (buttonMapping.ContainsKey(button.Name)) return false;
             buttonMapping.Add(button.Name, button);
@@ -34,7 +38,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
             return true;
         }
 
-        public static void RemoveButton(string name)
+        internal static void RemoveButton(string name)
         {
             if (!buttonMapping.ContainsKey(name)) {
                 LogNonExistingButton(name);
@@ -71,7 +75,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
             return buttonMapping[name].IsReleased;
         }        
 
-        public static string GetUnusedButtonName()
+        internal static string GetUnusedButtonName()
         {
             string buttonName = "Button0";
             int i = 0;
@@ -81,12 +85,12 @@ namespace MFEP.Duality.Plugins.InputPlugin
             return buttonName;
         }
 
-        public static void SaveMapping()
+        internal static void SaveMapping()
         {
             Serializer.WriteObject(buttonMapping, mappingPath, typeof(XmlSerializer));
         }
 
-        public static void LoadMapping()
+        internal static void LoadMapping()
         {
             buttonMapping = Serializer.TryReadObject<Dictionary<string, VirtualButton>>(mappingPath, typeof(XmlSerializer));
             if (buttonMapping == null) buttonMapping = new Dictionary<string, VirtualButton>();

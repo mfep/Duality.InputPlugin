@@ -19,7 +19,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MFEP.Duality.Editor.Plugins.InputPlugin</RootNamespace>
-    <AssemblyName>GamePlugin.editor</AssemblyName>
+    <AssemblyName>InputPlugin.editor</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -55,8 +55,8 @@
     <Reference Include="DualityEditor">
       <HintPath>..\..\..\DualityEditor.exe</HintPath>
     </Reference>
-    <Reference Include="GamePlugin.core">
-      <HintPath>..\CorePlugin\bin\Debug\GamePlugin.core.dll</HintPath>
+    <Reference Include="InputPlugin.core">
+      <HintPath>..\CorePlugin\bin\Debug\InputPlugin.core.dll</HintPath>
     </Reference>
     <Reference Include="PopupControl">
       <HintPath>..\packages\AdamsLair.WinForms.PopupControl.1.0.0.0\lib\PopupControl.dll</HintPath>

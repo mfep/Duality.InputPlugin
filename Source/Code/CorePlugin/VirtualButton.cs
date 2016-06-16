@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
+
 
 using Duality;
 using Key = Duality.Input.Key;
+
+[assembly: InternalsVisibleTo("InputPlugin.editor")]
 
 namespace MFEP.Duality.Plugins.InputPlugin
 {
