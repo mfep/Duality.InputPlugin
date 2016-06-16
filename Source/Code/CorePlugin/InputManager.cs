@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Duality;
-using Duality.Resources;
+using Duality.Serialization;
 using Key = Duality.Input.Key;
 
 namespace MFEP.Duality.Plugins.InputPlugin
@@ -13,6 +13,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
     static public class InputManager
     {
         private static Dictionary<string, VirtualButton> buttonMapping = new Dictionary<string, VirtualButton>();
+        private const string mappingPath = "keyMapping.xml";
 
         public static event Action ButtonsChanged = SaveMapping;
 
@@ -82,20 +83,13 @@ namespace MFEP.Duality.Plugins.InputPlugin
 
         public static void SaveMapping()
         {
-            var res = new InputMappingRes();
-            res.SaveVirtualButtonDict(buttonMapping);
-            res.Save("keyMapping.res");
+            Serializer.WriteObject(buttonMapping, mappingPath, typeof(XmlSerializer));
         }
 
         public static void LoadMapping()
         {
-            Resource.Load<InputMappingRes>("keyMapping.res", (res) =>
-            {
-                buttonMapping = null;
-                res.LoadVirtualButtonDict(out buttonMapping);
-                if (buttonMapping == null) buttonMapping = new Dictionary<string, VirtualButton>();
-                ButtonsChanged();
-            });
+            buttonMapping = Serializer.TryReadObject<Dictionary<string, VirtualButton>>(mappingPath, typeof(XmlSerializer));
+            if (buttonMapping == null) buttonMapping = new Dictionary<string, VirtualButton>();
         }
 
         private static void LogNonExistingButton(string name)

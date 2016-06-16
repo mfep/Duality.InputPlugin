@@ -61,7 +61,6 @@
     <Compile Include="CorePlugin.cs" />
     <Compile Include="Example\MovementComponent.cs" />
     <Compile Include="InputManager.cs" />
-    <Compile Include="InputMappingRes.cs" />
     <Compile Include="VirtualButton.cs" />
   </ItemGroup>
   <ItemGroup>
