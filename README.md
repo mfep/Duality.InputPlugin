@@ -16,8 +16,14 @@ The ordinary way of installing Duality plugins. Unless you'd like to modify the 
 5. Done. The Input Mapping menu is available under View on the menustrip.
 
 ##Usage
-Under `View` menu, there's a new entry called `Input Mapping`. It spawns a new editor window, which can be snapped, docked and positioned like any other. In that menu, you need to add and name the so called Virtual Buttons, then assign physical keys to them. Do this by selecting the key's name in the drop down list next to the green plus icon, then clicking the icon. The assigned keys can be removed by clicking the red minus icon, or they can be modified just by The plugin saves these changes automatically to the `keyMapping.xml` resource file, which you need to ship with the project. If the Virtual Buttons are created, you can refer to them in the code by their name, for example:
+Under `View` menu, there's a new entry called `Input Mapping`. It spawns a new editor window, which can be snapped, docked and positioned like any other. In that menu, you need to add and name the so called Virtual Buttons, then assign physical keys to them. Do this by selecting the key's name in the drop down list next to the green plus icon, then clicking the icon. The assigned keys can be removed by clicking the red minus icon, or they can be modified just by The plugin saves these changes automatically to the `keyMapping.xml` resource file, which you need to ship with the project. If the Virtual Buttons are created, you can refer to them in the code by their name. Notice that first you need to add the assembly to the Visual Studio project as a reference.
+
+Example:
 ``` csharp
+using MFEP.Duality.Plugins.InputPlugin;
+
+...
+
 Vector2 direction = Vector2.Zero;
 if (InputManager.IsButtonPressed("Right")) //Right is the Virtual Button's name
 {
