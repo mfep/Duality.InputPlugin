@@ -98,7 +98,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 
         private static void LogNonExistingButton(string name)
         {
-            Log.Game.WriteError($"The button named '{name}' does not exists.");
+            Log.Game.WriteError($"The button named '{name}' does not exist.");
         }
     }
 }
