@@ -14,7 +14,7 @@ using MFEP.Duality.Plugins.InputPlugin;
 
 namespace MFEP.Duality.Editor.Plugins.InputPlugin
 {
-    public partial class VirtualButtonControl : UserControl
+    internal partial class VirtualButtonControl : UserControl
     {
         VirtualButton virtualButton;
 

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>MFEP.Duality.Plugins.InputPlugin</id>
+    <version>1.0.0</version>
+    <title>InputPlugin (Core)</title>
+    <authors>Lőrinc Serfőző</authors>
+    <owners>Lőrinc Serfőző</owners>
+    <licenseUrl>https://raw.githubusercontent.com/mfep/Duality.InputPlugin/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/mfep/Duality.InputPlugin</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Keyboard abstraction plugin for Duality game engine.</description>
+    <releaseNotes>Initial release.</releaseNotes>
+    <copyright>Copyright 2016</copyright>
+    <tags>Duality Keyboard Input Manager Abstraction</tags>
+    <dependencies>
+      <dependency id="AdamsLair.Duality" version="2.0.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\Release\InputPlugin.core.dll" target="lib" />
+    <file src="bin\Release\InputPlugin.core.pdb" target="lib" />
+  </files>
+</package>

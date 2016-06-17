@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorePlugin", "CorePlugin\CorePlugin.csproj", "{AFE883F3-72B4-4C7C-A1D1-44EDC09C8F6E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InputPlugin.core", "CorePlugin\InputPlugin.core.csproj", "{AFE883F3-72B4-4C7C-A1D1-44EDC09C8F6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EditorPlugin", "EditorPlugin\EditorPlugin.csproj", "{78DBC94D-EE9D-4AC0-95ED-91A0AE2F6652}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InputPlugin.editor", "EditorPlugin\InputPlugin.editor.csproj", "{78DBC94D-EE9D-4AC0-95ED-91A0AE2F6652}"
 	ProjectSection(ProjectDependencies) = postProject
 		{AFE883F3-72B4-4C7C-A1D1-44EDC09C8F6E} = {AFE883F3-72B4-4C7C-A1D1-44EDC09C8F6E}
 	EndProjectSection

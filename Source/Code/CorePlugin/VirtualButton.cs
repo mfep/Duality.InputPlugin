@@ -13,7 +13,7 @@ using Key = Duality.Input.Key;
 
 namespace MFEP.Duality.Plugins.InputPlugin
 {
-    public class VirtualButton
+    internal class VirtualButton
     {
         private HashSet<Key> associatedKeys = new HashSet<Key>();
 
