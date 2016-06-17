@@ -87,13 +87,18 @@ namespace MFEP.Duality.Plugins.InputPlugin
 
         internal static void SaveMapping()
         {
+            Log.Core.Write("Saving input mapping.");
             Serializer.WriteObject(buttonMapping, mappingPath, typeof(XmlSerializer));
         }
 
         internal static void LoadMapping()
         {
+            Log.Core.Write("Loading input mapping.");
             buttonMapping = Serializer.TryReadObject<Dictionary<string, VirtualButton>>(mappingPath, typeof(XmlSerializer));
-            if (buttonMapping == null) buttonMapping = new Dictionary<string, VirtualButton>();
+            if (buttonMapping == null) {
+                buttonMapping = new Dictionary<string, VirtualButton>();
+                Log.Core.Write("Input mapping not found. Creating empty.");
+            }
         }
 
         private static void LogNonExistingButton(string name)
