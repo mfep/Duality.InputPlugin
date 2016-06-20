@@ -91,7 +91,15 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin
             if (InputManager.RegisterButton(newButton)) {
                 InputManager.RemoveButton(virtualButton.Name);
                 virtualButton = newButton;
-            }            
+            }
+        }
+
+        private void textBox1_Leave(object sender, EventArgs e)
+        {
+            string text = textBox1.Text;
+            if (!InputManager.Buttons.Any((button) => button.Name.Equals(text))){
+                textBox1.Text = InputManager.GetUnusedButtonName();
+            }
         }
 
         private void removeButton_Click(object sender, EventArgs e)

@@ -65,7 +65,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
             }
             return buttonMapping[name].IsHit;
         }
-
+        
         public static bool IsButtonReleased(string name)
         {
             if (!buttonMapping.ContainsKey(name)) {
@@ -87,7 +87,6 @@ namespace MFEP.Duality.Plugins.InputPlugin
 
         internal static void SaveMapping()
         {
-            Log.Core.Write("Saving input mapping.");
             Serializer.WriteObject(buttonMapping, mappingPath, typeof(XmlSerializer));
         }
 

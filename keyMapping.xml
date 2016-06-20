@@ -36,12 +36,12 @@
       <_x003C_Name_x003E_k__BackingField dataType="String">Up</_x003C_Name_x003E_k__BackingField>
       <associatedKeys dataType="Struct" type="System.Collections.Generic.HashSet`1[[Duality.Input.Key]]" id="2696347487">
         <m_buckets dataType="Array" type="System.Int32[]" id="1485019246">2, 0, 0</m_buckets>
-        <m_comparer dataType="ObjectRef">3573126030</m_comparer>
+        <m_comparer dataType="Struct" type="System.Collections.Generic.EnumEqualityComparer`1[[Duality.Input.Key]]" id="1014616010" />
         <m_count dataType="Int">2</m_count>
         <m_freeList dataType="Int">-1</m_freeList>
         <m_lastIndex dataType="Int">2</m_lastIndex>
         <m_siInfo />
-        <m_slots dataType="Array" type="System.Collections.Generic.HashSet`1+Slot[[Duality.Input.Key]][]" id="1014616010" length="3">
+        <m_slots dataType="Array" type="System.Collections.Generic.HashSet`1+Slot[[Duality.Input.Key]][]" id="1845743710" length="3">
           <item dataType="Struct" type="System.Collections.Generic.HashSet`1+Slot[[Duality.Input.Key]]">
             <hashCode dataType="Int">45</hashCode>
             <next dataType="Int">-1</next>
@@ -55,13 +55,19 @@
         </m_slots>
         <m_version dataType="Int">2</m_version>
       </associatedKeys>
-      <ButtonChanged dataType="ObjectRef">649525530</ButtonChanged>
+      <ButtonChanged dataType="Delegate" type="System.Action" id="847900448" multi="true">
+        <method dataType="ObjectRef">411997508</method>
+        <target dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.InputManager+&lt;&gt;c" id="855378517" />
+        <invocationList dataType="Array" type="System.Delegate[]" id="1844585800">
+          <item dataType="ObjectRef">847900448</item>
+        </invocationList>
+      </ButtonChanged>
     </Up>
     <Down dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.VirtualButton" id="876525375">
       <_x003C_Name_x003E_k__BackingField dataType="String">Down</_x003C_Name_x003E_k__BackingField>
       <associatedKeys dataType="Struct" type="System.Collections.Generic.HashSet`1[[Duality.Input.Key]]" id="295733828">
         <m_buckets dataType="Array" type="System.Int32[]" id="2142472772">0, 1, 2</m_buckets>
-        <m_comparer dataType="ObjectRef">3573126030</m_comparer>
+        <m_comparer dataType="ObjectRef">1014616010</m_comparer>
         <m_count dataType="Int">2</m_count>
         <m_freeList dataType="Int">-1</m_freeList>
         <m_lastIndex dataType="Int">2</m_lastIndex>
@@ -80,18 +86,18 @@
         </m_slots>
         <m_version dataType="Int">2</m_version>
       </associatedKeys>
-      <ButtonChanged dataType="ObjectRef">649525530</ButtonChanged>
+      <ButtonChanged dataType="ObjectRef">847900448</ButtonChanged>
     </Down>
     <Right dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.VirtualButton" id="2716248726">
       <_x003C_Name_x003E_k__BackingField dataType="String">Right</_x003C_Name_x003E_k__BackingField>
       <associatedKeys dataType="Struct" type="System.Collections.Generic.HashSet`1[[Duality.Input.Key]]" id="3244550529">
         <m_buckets dataType="Array" type="System.Int32[]" id="1003990830">1, 0, 2</m_buckets>
-        <m_comparer dataType="ObjectRef">3573126030</m_comparer>
+        <m_comparer dataType="Struct" type="System.Collections.Generic.EnumEqualityComparer`1[[Duality.Input.Key]]" id="2498410698" />
         <m_count dataType="Int">2</m_count>
         <m_freeList dataType="Int">-1</m_freeList>
         <m_lastIndex dataType="Int">2</m_lastIndex>
         <m_siInfo />
-        <m_slots dataType="Array" type="System.Collections.Generic.HashSet`1+Slot[[Duality.Input.Key]][]" id="2498410698" length="3">
+        <m_slots dataType="Array" type="System.Collections.Generic.HashSet`1+Slot[[Duality.Input.Key]][]" id="4055511710" length="3">
           <item dataType="Struct" type="System.Collections.Generic.HashSet`1+Slot[[Duality.Input.Key]]">
             <hashCode dataType="Int">48</hashCode>
             <next dataType="Int">-1</next>
@@ -105,7 +111,13 @@
         </m_slots>
         <m_version dataType="Int">2</m_version>
       </associatedKeys>
-      <ButtonChanged dataType="ObjectRef">649525530</ButtonChanged>
+      <ButtonChanged dataType="Delegate" type="System.Action" id="3416008032" multi="true">
+        <method dataType="ObjectRef">411997508</method>
+        <target dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.InputManager+&lt;&gt;c" id="1887721035" />
+        <invocationList dataType="Array" type="System.Delegate[]" id="2777096008">
+          <item dataType="ObjectRef">3416008032</item>
+        </invocationList>
+      </ButtonChanged>
     </Right>
   </body>
 </root>
