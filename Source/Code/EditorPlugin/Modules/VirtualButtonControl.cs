@@ -85,20 +85,19 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+
+        }
+
+        private void textBox1_Leave(object sender, EventArgs e)
+        {
             if (string.IsNullOrWhiteSpace(textBox1.Text)) return;
             var newButton = virtualButton.Clone();
             newButton.ChangeName(textBox1.Text);
             if (InputManager.RegisterButton(newButton)) {
                 InputManager.RemoveButton(virtualButton.Name);
                 virtualButton = newButton;
-            }
-        }
-
-        private void textBox1_Leave(object sender, EventArgs e)
-        {
-            string text = textBox1.Text;
-            if (!InputManager.Buttons.Any((button) => button.Name.Equals(text))){
-                textBox1.Text = InputManager.GetUnusedButtonName();
+            } else {
+                textBox1.Text = virtualButton.Name;
             }
         }
 
@@ -106,6 +105,13 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin
         {
             InputManager.RemoveButton(virtualButton.Name);
             Dispose();
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(e.KeyChar == (char)Keys.Return) {
+                Parent.Focus();
+            }
         }
     }
 }
