@@ -83,11 +83,6 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin
             };
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void textBox1_Leave(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(textBox1.Text)) return;
