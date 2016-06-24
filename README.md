@@ -30,9 +30,23 @@ if (InputManager.IsButtonPressed("Right")) //Right is the Virtual Button's name
     direction += Vector2.UnitX;
 }
 ```
+
+By version 1.0.3, you can add and remove VirtualButtons by script using the static `InputManager` class, and the changes appear in the editor window.  Example:
+
+``` csharp
+VirtualButton button = new VirtualButton(nameString);
+button.AssociateKey(Duality.Input.Key.Right);
+button.AssociateKey(Duality.Input.Key.D);
+InputManager.RegisterButton(button);
+
+...
+
+InputManager.RemoveButton(button.Name);
+```
+
 ##Known Issues
 
-* At the moment, the user can assing new VirtualButtons to the InputManager via code. These changes do not reflect in the editor window. The user might need to do this (in game keybinding management for example), so it'd be nice to implement this.
+* COMPLETED ~~At the moment, the user can assing new VirtualButtons to the InputManager via code. These changes do not reflect in the editor window. The user might need to do this (in game keybinding management for example), so it'd be nice to implement this.~~
 * FIXED ~~Multiple instances of the single key cannot be added to the same Virtual Button, but if the user changes an existing key, the program allows the same key. This leads to weird behaviour, thus needs to be fixed.~~
 
 ##License
