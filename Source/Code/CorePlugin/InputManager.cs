@@ -19,33 +19,39 @@ namespace MFEP.Duality.Plugins.InputPlugin
         private static Dictionary<string, VirtualButton> buttonMapping = new Dictionary<string, VirtualButton>();
         private const string mappingPath = "keyMapping.xml";
 
-        internal static event Action ButtonsChanged = SaveMapping;
+        public static event Action<string> ButtonsChanged = (unused) => { SaveMapping(); };
 
-        internal static VirtualButton[] Buttons
+        public static VirtualButton[] Buttons
         {
             get
             {
                 return buttonMapping.Values.ToArray();
             }
-        }        
+        }
 
-        internal static bool RegisterButton(VirtualButton button)
+        public static VirtualButton GetVirtualButton(string name) {
+            if (!buttonMapping.ContainsKey(name)) return null;
+            return buttonMapping[name];
+        }
+
+        public static bool RegisterButton(VirtualButton button)
         {
+            if (button == null) return false;
             if (buttonMapping.ContainsKey(button.Name)) return false;
             buttonMapping.Add(button.Name, button);
-            button.ButtonChanged += () => { ButtonsChanged?.Invoke(); };
-            ButtonsChanged?.Invoke();
+            button.ButtonChanged += () => { ButtonsChanged?.Invoke(button.Name); };
+            ButtonsChanged?.Invoke(button.Name);
             return true;
         }
 
-        internal static void RemoveButton(string name)
+        public static void RemoveButton(string name)
         {
             if (!buttonMapping.ContainsKey(name)) {
                 LogNonExistingButton(name);
                 return;
             }
             buttonMapping.Remove(name);
-            ButtonsChanged?.Invoke();
+            ButtonsChanged?.Invoke(name);
         }
 
         public static bool IsButtonPressed(string name)
@@ -75,7 +81,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
             return buttonMapping[name].IsReleased;
         }        
 
-        internal static string GetUnusedButtonName()
+        public static string GetUnusedButtonName()
         {
             string buttonName = "Button0";
             int i = 0;

@@ -99,7 +99,14 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin
         private void removeButton_Click(object sender, EventArgs e)
         {
             InputManager.RemoveButton(virtualButton.Name);
-            Dispose();
+            Control parent = Parent;
+            while(parent != null) {
+                var inputEditor = parent as InputEditor;
+                if(inputEditor != null) {
+                    inputEditor.RemoveVirtualButtonControl(virtualButton.Name);
+                }
+                parent = parent.Parent;
+            }
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)

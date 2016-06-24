@@ -9,11 +9,9 @@ using System.Runtime.CompilerServices;
 using Duality;
 using Key = Duality.Input.Key;
 
-[assembly: InternalsVisibleTo("InputPlugin.editor")]
-
 namespace MFEP.Duality.Plugins.InputPlugin
 {
-    internal class VirtualButton
+    public class VirtualButton
     {
         private HashSet<Key> associatedKeys = new HashSet<Key>();
 
@@ -53,6 +51,11 @@ namespace MFEP.Duality.Plugins.InputPlugin
             {
                 return associatedKeys.ToArray();
             }
+        }
+
+        public VirtualButton()
+        {
+            Name = InputManager.GetUnusedButtonName();
         }
 
         public VirtualButton(string name)

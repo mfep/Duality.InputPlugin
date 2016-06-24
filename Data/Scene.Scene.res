@@ -157,7 +157,7 @@
           </item>
         </_items>
         <_size dataType="Int">3</_size>
-        <_version dataType="Int">5</_version>
+        <_version dataType="Int">7</_version>
       </compList>
       <compMap dataType="Struct" type="System.Collections.Generic.Dictionary`2[[System.Type],[Duality.Component]]" id="1597679502" surrogate="true">
         <header />
@@ -183,6 +183,100 @@
       </identifier>
       <initState dataType="Enum" type="Duality.InitState" name="Initialized" value="1" />
       <name dataType="String">SpriteRenderer</name>
+      <parent />
+      <prefabLink />
+    </item>
+    <item dataType="Struct" type="Duality.GameObject" id="1205615953">
+      <active dataType="Bool">true</active>
+      <children />
+      <compList dataType="Struct" type="System.Collections.Generic.List`1[[Duality.Component]]" id="1095147187">
+        <_items dataType="Array" type="Duality.Component[]" id="2807501862" length="4">
+          <item dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.Example.VirtualButtonsFromCode" id="3101668559">
+            <active dataType="Bool">true</active>
+            <gameobj dataType="ObjectRef">1205615953</gameobj>
+          </item>
+          <item dataType="Struct" type="Duality.Components.Transform" id="3565930885">
+            <active dataType="Bool">true</active>
+            <angle dataType="Float">0</angle>
+            <angleAbs dataType="Float">0</angleAbs>
+            <angleVel dataType="Float">0</angleVel>
+            <angleVelAbs dataType="Float">0</angleVelAbs>
+            <deriveAngle dataType="Bool">true</deriveAngle>
+            <gameobj dataType="ObjectRef">1205615953</gameobj>
+            <ignoreParent dataType="Bool">false</ignoreParent>
+            <parentTransform />
+            <pos dataType="Struct" type="Duality.Vector3">
+              <X dataType="Float">0</X>
+              <Y dataType="Float">-160</Y>
+              <Z dataType="Float">0</Z>
+            </pos>
+            <posAbs dataType="Struct" type="Duality.Vector3">
+              <X dataType="Float">0</X>
+              <Y dataType="Float">-160</Y>
+              <Z dataType="Float">0</Z>
+            </posAbs>
+            <scale dataType="Float">1</scale>
+            <scaleAbs dataType="Float">1</scaleAbs>
+            <vel dataType="Struct" type="Duality.Vector3" />
+            <velAbs dataType="Struct" type="Duality.Vector3" />
+          </item>
+          <item dataType="Struct" type="Duality.Components.Renderers.TextRenderer" id="2948244775">
+            <active dataType="Bool">true</active>
+            <blockAlign dataType="Enum" type="Duality.Alignment" name="Center" value="0" />
+            <colorTint dataType="Struct" type="Duality.Drawing.ColorRgba">
+              <A dataType="Byte">255</A>
+              <B dataType="Byte">255</B>
+              <G dataType="Byte">255</G>
+              <R dataType="Byte">255</R>
+            </colorTint>
+            <customMat />
+            <gameobj dataType="ObjectRef">1205615953</gameobj>
+            <iconMat dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Material]]" />
+            <offset dataType="Int">0</offset>
+            <text dataType="Struct" type="Duality.Drawing.FormattedText" id="3702535719">
+              <flowAreas />
+              <fonts dataType="Array" type="Duality.ContentRef`1[[Duality.Resources.Font]][]" id="936032718">
+                <item dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Font]]">
+                  <contentPath dataType="String">Default:Font:GenericMonospace10</contentPath>
+                </item>
+              </fonts>
+              <icons />
+              <lineAlign dataType="Enum" type="Duality.Alignment" name="Left" value="1" />
+              <maxHeight dataType="Int">0</maxHeight>
+              <maxWidth dataType="Int">0</maxWidth>
+              <sourceText dataType="String">Press space to add random virtual buttons (in sandbox mode)</sourceText>
+              <wrapMode dataType="Enum" type="Duality.Drawing.FormattedText+WrapMode" name="Word" value="1" />
+            </text>
+            <visibilityGroup dataType="Enum" type="Duality.Drawing.VisibilityFlag" name="Group0" value="1" />
+          </item>
+        </_items>
+        <_size dataType="Int">3</_size>
+        <_version dataType="Int">3</_version>
+      </compList>
+      <compMap dataType="Struct" type="System.Collections.Generic.Dictionary`2[[System.Type],[Duality.Component]]" id="2675975864" surrogate="true">
+        <header />
+        <body>
+          <keys dataType="Array" type="System.Object[]" id="2071981273">
+            <item dataType="Type" id="691785166" value="MFEP.Duality.Plugins.InputPlugin.Example.VirtualButtonsFromCode" />
+            <item dataType="ObjectRef">1390601430</item>
+            <item dataType="Type" id="2176306506" value="Duality.Components.Renderers.TextRenderer" />
+          </keys>
+          <values dataType="Array" type="System.Object[]" id="4006821376">
+            <item dataType="ObjectRef">3101668559</item>
+            <item dataType="ObjectRef">3565930885</item>
+            <item dataType="ObjectRef">2948244775</item>
+          </values>
+        </body>
+      </compMap>
+      <compTransform dataType="ObjectRef">3565930885</compTransform>
+      <identifier dataType="Struct" type="System.Guid" surrogate="true">
+        <header>
+          <data dataType="Array" type="System.Byte[]" id="1199693211">P3qs0XDjMEem5XXvDHvKXg==</data>
+        </header>
+        <body />
+      </identifier>
+      <initState dataType="Enum" type="Duality.InitState" name="Initialized" value="1" />
+      <name dataType="String">VirtualButtonsFromCode</name>
       <parent />
       <prefabLink />
     </item>
