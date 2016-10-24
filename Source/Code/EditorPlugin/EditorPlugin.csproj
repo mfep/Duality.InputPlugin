@@ -55,9 +55,6 @@
     <Reference Include="DualityEditor">
       <HintPath>..\..\..\DualityEditor.exe</HintPath>
     </Reference>
-    <Reference Include="InputPlugin.core">
-      <HintPath>..\CorePlugin\bin\Debug\InputPlugin.core.dll</HintPath>
-    </Reference>
     <Reference Include="PopupControl">
       <HintPath>..\packages\AdamsLair.WinForms.PopupControl.1.0.0.0\lib\PopupControl.dll</HintPath>
     </Reference>
@@ -134,6 +131,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\keyboard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CorePlugin\CorePlugin.csproj">
+      <Project>{afe883f3-72b4-4c7c-a1d1-44edc09c8f6e}</Project>
+      <Name>CorePlugin</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
