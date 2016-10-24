@@ -1,0 +1,12 @@
+version: 1.0.4.{build}
+
+platform: Any CPU
+configuration: Release
+
+before_build:
+  - nuget restore Source\Code\ProjectPlugins.sln
+
+build:
+  project: Source\Code\ProjectPlugins.sln
+  verbosity: minimal
+  publish_nuget: true
