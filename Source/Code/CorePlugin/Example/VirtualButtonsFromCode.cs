@@ -1,9 +1,11 @@
 ﻿using System;
 using Duality;
+using Duality.Editor;
 using Duality.Input;
 
 namespace MFEP.Duality.Plugins.InputPlugin.Example
 {
+	[EditorHintCategory (ResNames.EditorCategory)]
 	public class VirtualButtonsFromCode : Component
 	{
 		[DontSerialize] private readonly Random random;

@@ -1,7 +1,9 @@
 ﻿using Duality;
+using Duality.Editor;
 
 namespace MFEP.Duality.Plugins.InputPlugin.Example
 {
+	[EditorHintCategory (ResNames.EditorCategory)]
 	public class MovementComponent : Component, ICmpUpdatable
 	{
 		public float MovementSpeed { get; set; }
