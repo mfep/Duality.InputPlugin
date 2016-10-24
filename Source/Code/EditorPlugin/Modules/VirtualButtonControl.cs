@@ -1,119 +1,97 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-
-using Key = Duality.Input.Key;
-
+using Duality.Input;
 using MFEP.Duality.Plugins.InputPlugin;
 
 namespace MFEP.Duality.Editor.Plugins.InputPlugin
 {
-    internal partial class VirtualButtonControl : UserControl
-    {
-        VirtualButton virtualButton;
+	internal partial class VirtualButtonControl : UserControl
+	{
+		private VirtualButton virtualButton;
 
-        public VirtualButtonControl(VirtualButton button)
-        {
-            InitializeComponent();
-            FillWithVirtualButton(button);
-            inputKeyBoxCreator.AddButtonClicked += AddKeyToButton;
-        }
+		public VirtualButtonControl (VirtualButton button)
+		{
+			InitializeComponent ();
+			FillWithVirtualButton (button);
+			inputKeyBoxCreator.AddButtonClicked += AddKeyToButton;
+		}
 
-        public bool HasKeyInVirtualButton(Key key)        
-            => virtualButton.AssociatedKeys.Contains(key);
-        
-        private void FillWithVirtualButton(VirtualButton button)
-        {
-            virtualButton = button;
+		public bool HasKeyInVirtualButton (Key key)
+			=> virtualButton.AssociatedKeys.Contains (key);
 
-            textBox1.Text = button.Name;
+		private void FillWithVirtualButton (VirtualButton button)
+		{
+			virtualButton = button;
 
-            foreach (var key in button.AssociatedKeys) {
-                AddInputKeyBox(button, key);
-            }
-        }
+			textBox1.Text = button.Name;
 
-        private void DeleteKeyCallback(VirtualButton button, Key key)
-        {
-            button.RemoveKey(key);
-        }
+			foreach (var key in button.AssociatedKeys) AddInputKeyBox (button, key);
+		}
 
-        private void KeyChangedCallback(InputKeyBox inputKeyBox, VirtualButton button, Key oldKey, Key newKey)
-        {
-            if (oldKey == newKey)            
-                return;
+		private void DeleteKeyCallback (VirtualButton button, Key key)
+		{
+			button.RemoveKey (key);
+		}
 
-            if (virtualButton.AssociatedKeys.Contains(newKey)) {
-                inputKeyBox.SetKey(oldKey);
-                return;
-            }
+		private void KeyChangedCallback (InputKeyBox inputKeyBox, VirtualButton button, Key oldKey, Key newKey)
+		{
+			if (oldKey == newKey)
+				return;
 
-            button.RemoveKey(oldKey);
-            button.AssociateKey(newKey);
-        }
+			if (virtualButton.AssociatedKeys.Contains (newKey)) {
+				inputKeyBox.SetKey (oldKey);
+				return;
+			}
 
-        private void AddKeyToButton(Key key)
-        {
-            if (virtualButton.AssociateKey(key)) {
-                AddInputKeyBox(virtualButton, key);
-            }
-        }
+			button.RemoveKey (oldKey);
+			button.AssociateKey (newKey);
+		}
 
-        private void AddInputKeyBox(VirtualButton button, Key key)
-        {
-            var inputKeyBox = new InputKeyBox();
-            inputKeyBox.Dock = DockStyle.Top;
-            keysPanel.Controls.Add(inputKeyBox);
-            inputKeyBoxCreator.BringToFront();
-            inputKeyBox.SetKey(key);
+		private void AddKeyToButton (Key key)
+		{
+			if (virtualButton.AssociateKey (key)) AddInputKeyBox (virtualButton, key);
+		}
 
-            inputKeyBox.DeleteButtonClick += () =>
-            {
-                DeleteKeyCallback(button, inputKeyBox.SelectedKey);
-            };
-            inputKeyBox.KeySelectionChanged += (keyBox, oldKey) =>
-            {
-                KeyChangedCallback(keyBox, button, oldKey, inputKeyBox.SelectedKey);
-            };
-        }
+		private void AddInputKeyBox (VirtualButton button, Key key)
+		{
+			var inputKeyBox = new InputKeyBox { Dock = DockStyle.Top };
+			keysPanel.Controls.Add (inputKeyBox);
+			inputKeyBoxCreator.BringToFront ();
+			inputKeyBox.SetKey (key);
 
-        private void textBox1_Leave(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(textBox1.Text)) return;
-            var newButton = virtualButton.Clone();
-            newButton.ChangeName(textBox1.Text);
-            if (InputManager.RegisterButton(newButton)) {
-                InputManager.RemoveButton(virtualButton.Name);
-                virtualButton = newButton;
-            } else {
-                textBox1.Text = virtualButton.Name;
-            }
-        }
+			inputKeyBox.DeleteButtonClick += () => { DeleteKeyCallback (button, inputKeyBox.SelectedKey); };
+			inputKeyBox.KeySelectionChanged +=
+				(keyBox, oldKey) => { KeyChangedCallback (keyBox, button, oldKey, inputKeyBox.SelectedKey); };
+		}
 
-        private void removeButton_Click(object sender, EventArgs e)
-        {
-            InputManager.RemoveButton(virtualButton.Name);
-            Control parent = Parent;
-            while(parent != null) {
-                var inputEditor = parent as InputEditor;
-                if(inputEditor != null) {
-                    inputEditor.RemoveVirtualButtonControl(virtualButton.Name);
-                }
-                parent = parent.Parent;
-            }
-        }
+		private void textBox1_Leave (object sender, EventArgs e)
+		{
+			if (string.IsNullOrWhiteSpace (textBox1.Text)) return;
+			var newButton = virtualButton.Clone ();
+			newButton.ChangeName (textBox1.Text);
+			if (InputManager.RegisterButton (newButton)) {
+				InputManager.RemoveButton (virtualButton.Name);
+				virtualButton = newButton;
+			} else {
+				textBox1.Text = virtualButton.Name;
+			}
+		}
 
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if(e.KeyChar == (char)Keys.Return) {
-                Parent.Focus();
-            }
-        }
-    }
+		private void removeButton_Click (object sender, EventArgs e)
+		{
+			InputManager.RemoveButton (virtualButton.Name);
+			Control parent = Parent;
+			while (parent != null) {
+				var inputEditor = parent as InputEditor;
+				inputEditor?.RemoveVirtualButtonControl (virtualButton.Name);
+				parent = parent.Parent;
+			}
+		}
+
+		private void textBox1_KeyPress (object sender, KeyPressEventArgs e)
+		{
+			if (e.KeyChar == (char)Keys.Return) Parent.Focus ();
+		}
+	}
 }

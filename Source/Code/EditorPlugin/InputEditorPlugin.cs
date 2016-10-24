@@ -1,49 +1,38 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Linq;
-
+using AdamsLair.WinForms.ItemModels;
 using Duality.Editor;
 using Duality.Editor.Forms;
 using Duality.Editor.Properties;
-
-using WeifenLuo.WinFormsUI.Docking;
-
-using AdamsLair.WinForms.ItemModels;
+using MFEP.Duality.Editor.Plugins.InputPlugin.Properties;
 
 namespace MFEP.Duality.Editor.Plugins.InputPlugin
 {
-    public class InputEditorPlugin : EditorPlugin
+	public class InputEditorPlugin : EditorPlugin
 	{
+		public override string Id => "InputEditorPlugin";
 
-		public override string Id
+		protected override void InitPlugin (MainForm main)
 		{
-			get { return "InputEditorPlugin"; }
+			base.InitPlugin (main);
+			MenuModelItem viewItem = main.MainMenu.RequestItem (GeneralRes.MenuName_View);
+			viewItem.AddItem (new MenuModelItem
+			{
+				Name = "Input Mapping",
+				ActionHandler = menuItem_Click,
+				Icon = Resources.keyboard
+			});
 		}
 
-        protected override void InitPlugin(MainForm main)
-        {
-            base.InitPlugin(main);
-            MenuModelItem viewItem = main.MainMenu.RequestItem(GeneralRes.MenuName_View);
-            viewItem.AddItem(new MenuModelItem
-            {
-                Name = "Input Mapping",
-                ActionHandler = menuItem_Click,
-                Icon = Properties.Resources.keyboard
-            });
-        }
+		private void RequestInputEditor ()
+		{
+			var inputEditor = new InputEditor ();
+			inputEditor.FormClosed += (sender, e) => { inputEditor = null; };
+			inputEditor.Show (DualityEditorApp.MainForm.MainDockPanel);
+		}
 
-        private void RequestInputEditor()
-        {            
-            var inputEditor = new InputEditor();
-            inputEditor.FormClosed += (sender, e) => { inputEditor = null; };
-            inputEditor.Show(DualityEditorApp.MainForm.MainDockPanel);         
-        }
-
-        private void menuItem_Click(object sender, EventArgs e)
-        {            
-               RequestInputEditor();            
-        }
-    }
+		private void menuItem_Click (object sender, EventArgs e)
+		{
+			RequestInputEditor ();
+		}
+	}
 }
