@@ -1,6 +1,8 @@
 # Duality.InputPlugin
 Keyboard abstraction plugin for Duality game engine
 
+[![Build status](https://ci.appveyor.com/api/projects/status/6slo8ymu84yvbbs3?svg=true)](https://ci.appveyor.com/project/mfep/duality-inputplugin)
+
 ##Installing via NuGet package
 The ordinary way of installing Duality plugins. Unless you'd like to modify the code, you need this.
 
