@@ -3,6 +3,7 @@ using AdamsLair.WinForms.ItemModels;
 using Duality.Editor;
 using Duality.Editor.Forms;
 using Duality.Editor.Properties;
+using MFEP.Duality.Editor.Plugins.InputPlugin.Modules;
 using MFEP.Duality.Editor.Plugins.InputPlugin.Properties;
 
 namespace MFEP.Duality.Editor.Plugins.InputPlugin
@@ -14,7 +15,7 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin
 		protected override void InitPlugin (MainForm main)
 		{
 			base.InitPlugin (main);
-			MenuModelItem viewItem = main.MainMenu.RequestItem (GeneralRes.MenuName_View);
+			var viewItem = main.MainMenu.RequestItem (GeneralRes.MenuName_View);
 			viewItem.AddItem (new MenuModelItem
 			{
 				Name = "Input Mapping",

@@ -244,7 +244,7 @@
               <lineAlign dataType="Enum" type="Duality.Alignment" name="Left" value="1" />
               <maxHeight dataType="Int">0</maxHeight>
               <maxWidth dataType="Int">0</maxWidth>
-              <sourceText dataType="String">Press space to add random virtual buttons (in sandbox mode)</sourceText>
+              <sourceText dataType="String">Press 1,2,3,4,5 to manipulate Virtual Buttons from code</sourceText>
               <wrapMode dataType="Enum" type="Duality.Drawing.FormattedText+WrapMode" name="Word" value="1" />
             </text>
             <visibilityGroup dataType="Enum" type="Duality.Drawing.VisibilityFlag" name="Group0" value="1" />

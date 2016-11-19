@@ -1,69 +1,45 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 using MFEP.Duality.Plugins.InputPlugin;
 using WeifenLuo.WinFormsUI.Docking;
+using ButtonTuple = System.Tuple<string, Duality.Input.Key[]>;
 
-namespace MFEP.Duality.Editor.Plugins.InputPlugin
+namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 {
 	public partial class InputEditor : DockContent
 	{
-		private readonly Dictionary<string, VirtualButtonControl> virtualButtonControlDict =
-			new Dictionary<string, VirtualButtonControl> ();
-
 		public InputEditor ()
 		{
 			InitializeComponent ();
-			CreateButtonsFromManager ();
-			InputManager.ButtonsChanged += ButtonsChangedCallback;
+			foreach (var buttonTuple in InputManager.Buttons) CreateButtonControl (buttonTuple);
+			SubscribeToInputManager ();
 		}
 
-		private void CreateButtonsFromManager ()
+		private void SubscribeToInputManager ()
 		{
-			foreach (var button in InputManager.Buttons) AddVirtualButtonControl (button);
+			InputManager.ButtonAdded += ManagerButtonAdded;
 		}
 
-		private void DisposeButtons ()
+		private void ManagerButtonAdded (ButtonTuple buttonTuple)
 		{
-			foreach (var virtualButtonControl in virtualButtonControlDict.Values.ToList ()) virtualButtonControl.Dispose ();
+			CreateButtonControl (buttonTuple);
 		}
 
-		private void AddVirtualButtonControl (VirtualButton button)
+		private void CreateButtonControl (ButtonTuple buttonTuple)
 		{
-			if (virtualButtonControlDict.ContainsKey (button.Name)) return;
-			var virtualButtonControl = new VirtualButtonControl (button)
+			var buttonControl = new ButtonControl (buttonTuple)
 			{
 				Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top,
 				Dock = DockStyle.Top
 			};
-			virtualButtonsPanel.Controls.Add (virtualButtonControl);
-			virtualButtonControl.BringToFront ();
+			virtualButtonsPanel.Controls.Add (buttonControl);
+			buttonControl.BringToFront ();
 			newButton.BringToFront ();
-			virtualButtonControlDict.Add (button.Name, virtualButtonControl);
-		}
-
-		internal void RemoveVirtualButtonControl (string buttonName)
-		{
-			if (virtualButtonControlDict.ContainsKey (buttonName) && !virtualButtonControlDict[buttonName].IsDisposed) {
-				virtualButtonControlDict[buttonName].Dispose ();
-				virtualButtonControlDict.Remove (buttonName);
-			}
 		}
 
 		private void newButton_Click (object sender, EventArgs e)
 		{
-			var button = new VirtualButton (InputManager.GetUnusedButtonName ());
-			InputManager.RegisterButton (button);
-			AddVirtualButtonControl (button);
-		}
-
-		private void ButtonsChangedCallback (string buttonName)
-		{
-			if (!virtualButtonControlDict.ContainsKey (buttonName))
-				AddVirtualButtonControl (InputManager.GetVirtualButton (buttonName));
-			if ((InputManager.GetVirtualButton (buttonName) == null) && virtualButtonControlDict.ContainsKey (buttonName))
-				RemoveVirtualButtonControl (buttonName);
+			InputManager.RegisterButton ();
 		}
 	}
 }

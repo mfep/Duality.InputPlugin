@@ -1,6 +1,6 @@
-﻿namespace MFEP.Duality.Editor.Plugins.InputPlugin
+﻿namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 {
-    partial class VirtualButtonControl
+    partial class ButtonControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -34,7 +34,6 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.keysPanel = new System.Windows.Forms.Panel();
-            this.inputKeyBoxCreator = new MFEP.Duality.Editor.Plugins.InputPlugin.InputKeyBoxCreator();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -105,28 +104,13 @@
             this.keysPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.keysPanel.AutoSize = true;
             this.keysPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.keysPanel.Controls.Add(this.inputKeyBoxCreator);
             this.keysPanel.Location = new System.Drawing.Point(128, 7);
             this.keysPanel.MinimumSize = new System.Drawing.Size(141, 0);
             this.keysPanel.Name = "keysPanel";
             this.keysPanel.Size = new System.Drawing.Size(141, 21);
             this.keysPanel.TabIndex = 3;
             // 
-            // inputKeyBoxCreator
-            // 
-            this.inputKeyBoxCreator.AutoSize = true;
-            this.inputKeyBoxCreator.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.inputKeyBoxCreator.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(212)))), ((int)(((byte)(212)))));
-            this.inputKeyBoxCreator.BtnTooltip = "Add new key to VirtualButton";
-            this.inputKeyBoxCreator.Dock = System.Windows.Forms.DockStyle.Top;
-            this.inputKeyBoxCreator.Location = new System.Drawing.Point(0, 0);
-            this.inputKeyBoxCreator.MaximumSize = new System.Drawing.Size(141, 21);
-            this.inputKeyBoxCreator.MinimumSize = new System.Drawing.Size(141, 21);
-            this.inputKeyBoxCreator.Name = "inputKeyBoxCreator";
-            this.inputKeyBoxCreator.Size = new System.Drawing.Size(141, 21);
-            this.inputKeyBoxCreator.TabIndex = 0;
-            // 
-            // VirtualButtonControl
+            // ButtonControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -136,7 +120,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.MinimumSize = new System.Drawing.Size(0, 85);
-            this.Name = "VirtualButtonControl";
+            this.Name = "ButtonControl";
             this.Padding = new System.Windows.Forms.Padding(6);
             this.Size = new System.Drawing.Size(402, 85);
             this.panel1.ResumeLayout(false);
@@ -157,7 +141,6 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel keysPanel;
-        private InputKeyBoxCreator inputKeyBoxCreator;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button removeButton;
     }

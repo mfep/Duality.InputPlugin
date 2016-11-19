@@ -70,6 +70,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modules\AddKeyBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\AddKeyBox.Designer.cs">
+      <DependentUpon>AddKeyBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\RemoveKeyBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\RemoveKeyBox.Designer.cs">
+      <DependentUpon>RemoveKeyBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="InputEditorPlugin.cs" />
     <Compile Include="Modules\InputEditor.cs">
@@ -84,17 +96,11 @@
     <Compile Include="Modules\InputKeyBox.Designer.cs">
       <DependentUpon>InputKeyBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\InputKeyBoxCreator.cs">
+    <Compile Include="Modules\ButtonControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Modules\InputKeyBoxCreator.Designer.cs">
-      <DependentUpon>InputKeyBoxCreator.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\VirtualButtonControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Modules\VirtualButtonControl.Designer.cs">
-      <DependentUpon>VirtualButtonControl.cs</DependentUpon>
+    <Compile Include="Modules\ButtonControl.Designer.cs">
+      <DependentUpon>ButtonControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -103,17 +109,17 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Modules\AddKeyBox.resx">
+      <DependentUpon>AddKeyBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\InputEditor.resx">
       <DependentUpon>InputEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Modules\InputKeyBox.resx">
-      <DependentUpon>InputKeyBox.cs</DependentUpon>
+    <EmbeddedResource Include="Modules\RemoveKeyBox.resx">
+      <DependentUpon>RemoveKeyBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Modules\InputKeyBoxCreator.resx">
-      <DependentUpon>InputKeyBoxCreator.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Modules\VirtualButtonControl.resx">
-      <DependentUpon>VirtualButtonControl.cs</DependentUpon>
+    <EmbeddedResource Include="Modules\ButtonControl.resx">
+      <DependentUpon>ButtonControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
