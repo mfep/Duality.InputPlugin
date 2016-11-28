@@ -30,10 +30,14 @@
 		{
 			this.SuspendLayout();
 			// 
+			// comboBox
+			// 
+			this.toolTip1.SetToolTip(this.comboBox, "Physical key on international keyboard");
+			// 
 			// button
 			// 
 			this.button.Image = global::MFEP.Duality.Editor.Plugins.InputPlugin.Properties.Resources.add;
-			this.toolTip1.SetToolTip(this.button, "Remove this key from the VirtualButton");
+			this.toolTip1.SetToolTip(this.button, "Add this Key to the VirtualButton.");
 			this.button.Click += new System.EventHandler(this.button_Click);
 			// 
 			// AddKeyBox

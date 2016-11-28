@@ -58,7 +58,6 @@
 			this.button.Name = "button";
 			this.button.Size = new System.Drawing.Size(21, 21);
 			this.button.TabIndex = 1;
-			this.toolTip1.SetToolTip(this.button, "Remove this key from the VirtualButton");
 			this.button.UseVisualStyleBackColor = false;
 			// 
 			// InputKeyBox

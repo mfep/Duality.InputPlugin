@@ -126,15 +126,15 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			Log.Core.Write ("Input mapping not found. Creating empty.");
 		}
 
-        private static string GetUnusedButtonName()
-        {
-            var buttonName = "Button0";
-            var i = 0;
-            while (buttonDict.Keys.Contains(buttonName)) buttonName = $"Button{++i}";
-            return buttonName;
-        }
+		private static string GetUnusedButtonName ()
+		{
+			var buttonName = "Button0";
+			var i = 0;
+			while (buttonDict.Keys.Contains (buttonName)) buttonName = $"Button{++i}";
+			return buttonName;
+		}
 
-        private static void LogNonExistingButton (string name, string addition = "")
+		private static void LogNonExistingButton (string name, string addition = "")
 		{
 			Log.Game.WriteError ($"{addition}The button named '{name}' does not exist.");
 		}

@@ -37,7 +37,7 @@
 			// 
 			// button
 			// 
-			this.toolTip1.SetToolTip(this.button, "Remove this key from the VirtualButton");
+			this.toolTip1.SetToolTip(this.button, "Remove this Key from the VirtualButton.");
 			this.button.Click += new System.EventHandler(this.button_Click);
 			// 
 			// RemoveKeyBox
