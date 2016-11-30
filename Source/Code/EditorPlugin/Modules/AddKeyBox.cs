@@ -1,5 +1,5 @@
 ﻿using System;
-using Duality.Input;
+using MFEP.Duality.Plugins.InputPlugin;
 
 namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 {
@@ -10,11 +10,11 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 			InitializeComponent ();
 		}
 
-		public event Action<Key> AddButtonClicked;
+		public event Action<KeyValue> AddButtonClicked;
 
 		private void button_Click (object sender, EventArgs e)
 		{
-			AddButtonClicked?.Invoke (SelectedKey);
+			AddButtonClicked?.Invoke (SelectedKeyValue);
 		}
 	}
 }

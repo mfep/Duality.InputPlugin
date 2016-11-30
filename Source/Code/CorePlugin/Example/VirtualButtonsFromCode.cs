@@ -2,7 +2,7 @@
 using Duality;
 using Duality.Editor;
 using Duality.Input;
-using ButtonTuple = System.Tuple<string, Duality.Input.Key[]>;
+using ButtonTuple = System.Tuple<string, MFEP.Duality.Plugins.InputPlugin.KeyValue[]>;
 
 namespace MFEP.Duality.Plugins.InputPlugin.Example
 {
@@ -42,8 +42,8 @@ namespace MFEP.Duality.Plugins.InputPlugin.Example
 
 		private void AddButtons ()
 		{
-			InputManager.RegisterButton (new ButtonTuple ("Eat", new[] { Key.ControlLeft, Key.ControlRight }));
-			InputManager.RegisterButton (new ButtonTuple ("Sleep", new[] { Key.AltLeft, Key.AltRight }));
+			InputManager.RegisterButton (new ButtonTuple ("Eat", new[] { new KeyValue (Key.ControlLeft), new KeyValue (Key.ControlRight) }));
+			InputManager.RegisterButton (new ButtonTuple ("Sleep", new[] { new KeyValue (Key.AltLeft), new KeyValue (Key.AltRight) }));
 		}
 	}
 }

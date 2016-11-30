@@ -36,9 +36,9 @@
 			// 
 			// button
 			// 
-			this.button.Image = global::MFEP.Duality.Editor.Plugins.InputPlugin.Properties.Resources.add;
-			this.toolTip1.SetToolTip(this.button, "Add this Key to the VirtualButton.");
-			this.button.Click += new System.EventHandler(this.button_Click);
+			this.addRemoveBtn.Image = global::MFEP.Duality.Editor.Plugins.InputPlugin.Properties.Resources.add;
+			this.toolTip1.SetToolTip(this.addRemoveBtn, "Add this Key to the VirtualButton.");
+			this.addRemoveBtn.Click += new System.EventHandler(this.button_Click);
 			// 
 			// AddKeyBox
 			// 

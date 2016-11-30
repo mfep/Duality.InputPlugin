@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Example\MovementComponent.cs" />
     <Compile Include="Example\VirtualButtonsFromCode.cs" />
+    <Compile Include="KeyValue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CorePlugin.cs" />
     <Compile Include="InputManager.cs" />

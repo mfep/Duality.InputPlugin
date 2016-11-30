@@ -89,5 +89,15 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap mouse_pc {
+            get {
+                object obj = ResourceManager.GetObject("mouse_pc", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

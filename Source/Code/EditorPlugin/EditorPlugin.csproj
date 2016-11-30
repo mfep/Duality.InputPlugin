@@ -114,6 +114,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\InputEditor.resx">
       <DependentUpon>InputEditor.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\RemoveKeyBox.resx">
       <DependentUpon>RemoveKeyBox.cs</DependentUpon>
@@ -124,6 +125,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -141,6 +143,9 @@
       <Project>{afe883f3-72b4-4c7c-a1d1-44edc09c8f6e}</Project>
       <Name>CorePlugin</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mouse_pc.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

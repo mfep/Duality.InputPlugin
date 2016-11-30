@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Duality.Input;
 using MFEP.Duality.Plugins.InputPlugin;
-using ButtonTuple = System.Tuple<string, Duality.Input.Key[]>;
+using ButtonTuple = System.Tuple<string, MFEP.Duality.Plugins.InputPlugin.KeyValue[]>;
 
 namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 {
 	internal partial class ButtonControl : UserControl
 	{
-		private readonly Dictionary<Key, RemoveKeyBox> removeKeyBoxDict = new Dictionary<Key, RemoveKeyBox> ();
+		private readonly Dictionary<KeyValue, RemoveKeyBox> removeKeyBoxDict = new Dictionary<KeyValue, RemoveKeyBox> ();
 		private AddKeyBox addKeyBox;
 		private string btnName;
 
@@ -19,7 +18,7 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 			btnName = buttonTuple.Item1;
 			textBox1.Text = buttonTuple.Item1;
 			CreateAddKeybox ();
-			foreach (var key in buttonTuple.Item2) CreateRemoveKeyBox (key);
+			foreach (var keyValue in buttonTuple.Item2) CreateRemoveKeyBox (keyValue);
 			SubscribeToInputManager ();
 		}
 
@@ -39,14 +38,14 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 			}
 		}
 
-		private void ManagerKeyRemovedFromButton (string name, Key key)
+		private void ManagerKeyRemovedFromButton (string name, KeyValue keyValue)
 		{
-			if (name == btnName) removeKeyBoxDict[key].Dispose ();
+			if (name == btnName) removeKeyBoxDict[keyValue].Dispose ();
 		}
 
-		private void ManagerKeyAddedToButton (string name, Key key)
+		private void ManagerKeyAddedToButton (string name, KeyValue keyValue)
 		{
-			if (name == btnName) CreateRemoveKeyBox (key);
+			if (name == btnName) CreateRemoveKeyBox (keyValue);
 		}
 
 		private void ManagerButtonRemoved (string buttonName)
@@ -66,24 +65,24 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 			addKeyBox.AddButtonClicked += AddKeyboxButtonClicked;
 		}
 
-		private void AddKeyboxButtonClicked (Key key)
+		private void AddKeyboxButtonClicked (KeyValue keyValue)
 		{
-			InputManager.AddKeyToButton (btnName, key);
+			InputManager.AddKeyValueToButton (btnName, keyValue);
 		}
 
-		private void CreateRemoveKeyBox (Key key)
+		private void CreateRemoveKeyBox (KeyValue keyValue)
 		{
-			var removeKeyBox = new RemoveKeyBox (key) { Dock = DockStyle.Top };
+			var removeKeyBox = new RemoveKeyBox (keyValue) { Dock = DockStyle.Top };
 			keysPanel.Controls.Add (removeKeyBox);
 			removeKeyBox.BringToFront ();
 			addKeyBox.BringToFront ();
 			removeKeyBox.RemoveButtonClicked += RemoveKeyBoxButtonClicked;
-			removeKeyBoxDict[key] = removeKeyBox;
+			removeKeyBoxDict[keyValue] = removeKeyBox;
 		}
 
-		private void RemoveKeyBoxButtonClicked (Key key)
+		private void RemoveKeyBoxButtonClicked (KeyValue keyValue)
 		{
-			InputManager.RemoveKeyFromButton (btnName, key);
+			InputManager.RemoveKeyValueFromButton (btnName, keyValue);
 		}
 
 		private void textBox1_Leave (object sender, EventArgs e)

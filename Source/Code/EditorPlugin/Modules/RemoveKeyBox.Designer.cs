@@ -35,10 +35,14 @@
 			this.comboBox.Enabled = false;
 			this.toolTip1.SetToolTip(this.comboBox, "Physical key on international keyboard");
 			// 
-			// button
+			// addRemoveBtn
 			// 
-			this.toolTip1.SetToolTip(this.button, "Remove this Key from the VirtualButton.");
-			this.button.Click += new System.EventHandler(this.button_Click);
+			this.toolTip1.SetToolTip(this.addRemoveBtn, "Remove this Key from the VirtualButton.");
+			this.addRemoveBtn.Click += new System.EventHandler(this.removeButton_Click);
+			// 
+			// KeyTypeBtn
+			// 
+			this.KeyTypeBtn.Enabled = false;
 			// 
 			// RemoveKeyBox
 			// 

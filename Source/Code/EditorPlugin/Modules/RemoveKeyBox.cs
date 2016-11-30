@@ -1,21 +1,21 @@
 ﻿using System;
-using Duality.Input;
+using MFEP.Duality.Plugins.InputPlugin;
 
 namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 {
 	internal partial class RemoveKeyBox : InputKeyBox
 	{
-		public RemoveKeyBox (Key key)
+		public RemoveKeyBox (KeyValue keyValue)
 		{
 			InitializeComponent ();
-			comboBox.SelectedItem = key;
+			SelectKeyValue (keyValue);
 		}
 
-		public event Action<Key> RemoveButtonClicked;
+		public event Action<KeyValue> RemoveButtonClicked;
 
-		private void button_Click (object sender, EventArgs e)
+		private void removeButton_Click (object sender, EventArgs e)
 		{
-			RemoveButtonClicked?.Invoke (SelectedKey);
+			RemoveButtonClicked?.Invoke (SelectedKeyValue);
 		}
 	}
 }

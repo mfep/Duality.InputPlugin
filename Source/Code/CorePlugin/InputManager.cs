@@ -4,7 +4,7 @@ using System.Linq;
 using Duality;
 using Duality.Input;
 using Duality.Serialization;
-using ButtonTuple = System.Tuple<string, Duality.Input.Key[]>;
+using ButtonTuple = System.Tuple<string, MFEP.Duality.Plugins.InputPlugin.KeyValue[]>;
 
 namespace MFEP.Duality.Plugins.InputPlugin
 {
@@ -14,21 +14,21 @@ namespace MFEP.Duality.Plugins.InputPlugin
 
 		public static ButtonTuple[] Buttons
 		{
-			get { return buttonDict.Select (pair => new ButtonTuple (pair.Key, pair.Value.Keys)).ToArray (); }
+			get { return buttonDict.Select (pair => new ButtonTuple (pair.Key, pair.Value.KeyVals)).ToArray (); }
 		}
 
 		public static event Action<ButtonTuple> ButtonAdded;
 		public static event Action<string> ButtonRemoved;
 		public static event Action<string, string> ButtonRenamed;
-		public static event Action<string, Key> KeyAddedToButton;
-		public static event Action<string, Key> KeyRemovedFromButton;
+		public static event Action<string, KeyValue> KeyAddedToButton;
+		public static event Action<string, KeyValue> KeyRemovedFromButton;
 
 		public static void RegisterButton ()
 		{
 			var newName = GetUnusedButtonName ();
-			buttonDict[newName] = new VirtualButton (new Key[0]);
+			buttonDict[newName] = new VirtualButton ();
 			SaveMapping ();
-			ButtonAdded?.Invoke (new ButtonTuple (newName, new Key[0]));
+			ButtonAdded?.Invoke (new ButtonTuple (newName, new KeyValue[0]));
 		}
 
 		public static bool RegisterButton (ButtonTuple newButton)
@@ -53,28 +53,48 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			return true;
 		}
 
-		public static bool AddKeyToButton (string name, Key newKey)
+		public static bool AddKeyValueToButton (string name, KeyValue keyValue)
 		{
 			if (!buttonDict.ContainsKey (name)) {
 				LogNonExistingButton (name, "Cannot add key to button. ");
 				return false;
 			}
-			if (!buttonDict[name].AssociateKey (newKey)) return false;
+			if (!buttonDict[name].Associate (keyValue)) return false;
 			SaveMapping ();
-			KeyAddedToButton?.Invoke (name, newKey);
+			KeyAddedToButton?.Invoke (name, keyValue);
 			return true;
 		}
 
-		public static bool RemoveKeyFromButton (string name, Key key)
+		public static bool AddKeyToButton (string name, Key newKey)
+		{
+			return AddKeyValueToButton (name, new KeyValue (newKey));
+		}
+
+		public static bool AddMouseButtonToButton (string name, MouseButton mouseButton)
+		{
+			return AddKeyValueToButton (name, new KeyValue (mouseButton));
+		}
+
+		public static bool RemoveKeyValueFromButton (string name, KeyValue keyValue)
 		{
 			if (!buttonDict.ContainsKey (name)) {
 				LogNonExistingButton (name, "Cannot remove key from button. ");
 				return false;
 			}
-			if (!buttonDict[name].RemoveKey (key)) return false;
+			if (!buttonDict[name].Remove (keyValue)) return false;
 			SaveMapping ();
-			KeyRemovedFromButton?.Invoke (name, key);
+			KeyRemovedFromButton?.Invoke (name, keyValue);
 			return true;
+		}
+
+		public static bool RemoveKeyFromButton (string name, Key key)
+		{
+			return RemoveKeyValueFromButton (name, new KeyValue (key));
+		}
+
+		public static bool RemoveMouseButtonFromButton (string name, MouseButton mouseButton)
+		{
+			return RemoveKeyValueFromButton (name, new KeyValue (mouseButton));
 		}
 
 		public static bool RenameButton (string originalName, string newName)

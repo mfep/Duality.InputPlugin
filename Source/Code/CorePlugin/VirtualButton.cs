@@ -1,47 +1,45 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Duality;
-using Duality.Input;
 
 namespace MFEP.Duality.Plugins.InputPlugin
 {
 	internal class VirtualButton
 	{
-		private readonly HashSet<Key> associatedKeys = new HashSet<Key> ();
+		private readonly HashSet<KeyValue> associatedKeyVals = new HashSet<KeyValue> ();
 
-		public VirtualButton (Key[] keyArray)
+		public VirtualButton (KeyValue[] keyValues = null)
 		{
-			if (keyArray == null) return;
-			foreach (var key in keyArray) AssociateKey (key);
+			if (keyValues == null) return;
+			foreach (var key in keyValues) Associate (key);
 		}
 
 		public bool IsPressed
 		{
-			get { return associatedKeys.Any (key => DualityApp.Keyboard.KeyPressed (key)); }
+			get { return associatedKeyVals.Any (keyVal => keyVal.IsPressed); }
 		}
 
 		public bool IsHit
 		{
-			get { return associatedKeys.Any (key => DualityApp.Keyboard.KeyHit (key)); }
+			get { return associatedKeyVals.Any (keyVal => keyVal.IsHit); }
 		}
 
 		public bool IsReleased
 		{
-			get { return associatedKeys.Any (key => DualityApp.Keyboard.KeyReleased (key)); }
+			get { return associatedKeyVals.Any (keyVal => keyVal.IsReleased); }
 		}
 
-		public Key[] Keys => associatedKeys.ToArray ();
+		public KeyValue[] KeyVals => associatedKeyVals.ToArray ();
 
-		public bool AssociateKey (Key key)
+		public bool Associate (KeyValue key)
 		{
-			if (associatedKeys.Contains (key)) return false;
-			associatedKeys.Add (key);
+			if (associatedKeyVals.Contains (key)) return false;
+			associatedKeyVals.Add (key);
 			return true;
 		}
 
-		public bool RemoveKey (Key key)
+		public bool Remove (KeyValue keyVal)
 		{
-			return associatedKeys.Remove (key);
+			return associatedKeyVals.Remove (keyVal);
 		}
 	}
 }
