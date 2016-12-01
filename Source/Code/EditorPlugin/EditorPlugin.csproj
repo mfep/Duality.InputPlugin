@@ -116,6 +116,9 @@
       <DependentUpon>InputEditor.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Modules\InputKeyBox.resx">
+      <DependentUpon>InputKeyBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\RemoveKeyBox.resx">
       <DependentUpon>RemoveKeyBox.cs</DependentUpon>
     </EmbeddedResource>

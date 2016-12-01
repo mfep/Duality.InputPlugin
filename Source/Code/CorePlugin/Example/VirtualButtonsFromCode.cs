@@ -1,5 +1,4 @@
-﻿using System;
-using Duality;
+﻿using Duality;
 using Duality.Editor;
 using Duality.Input;
 using ButtonTuple = System.Tuple<string, MFEP.Duality.Plugins.InputPlugin.KeyValue[]>;
@@ -9,8 +8,6 @@ namespace MFEP.Duality.Plugins.InputPlugin.Example
 	[EditorHintCategory (ResNames.EditorCategory)]
 	public class VirtualButtonsFromCode : Component, ICmpUpdatable
 	{
-		[DontSerialize] private readonly Random random = new Random (DateTime.Now.Millisecond);
-
 		public void OnUpdate ()
 		{
 			if (DualityApp.Keyboard[Key.Number1]) AddButtons ();

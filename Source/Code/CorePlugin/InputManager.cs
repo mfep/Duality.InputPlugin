@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Duality;
 using Duality.Input;
-using Duality.Serialization;
 using ButtonTuple = System.Tuple<string, MFEP.Duality.Plugins.InputPlugin.KeyValue[]>;
 
 namespace MFEP.Duality.Plugins.InputPlugin
@@ -11,6 +10,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 	public static class InputManager
 	{
 		[DontSerialize] private static Dictionary<string, VirtualButton> buttonDict = new Dictionary<string, VirtualButton> ();
+		[DontSerialize] private static IMappingSerializer serializer;
 
 		public static ButtonTuple[] Buttons
 		{
@@ -132,18 +132,23 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			return false;
 		}
 
+		public static void SetSerializer (IMappingSerializer _serializer)
+		{
+			serializer = _serializer;
+		}
+
 		internal static void SaveMapping ()
 		{
-			Serializer.WriteObject (buttonDict, ResNames.MappingFileName, typeof(XmlSerializer));
+			serializer?.SaveMapping (buttonDict);
 		}
 
 		internal static void LoadMapping ()
 		{
 			Log.Core.Write ("Loading input mapping.");
-			buttonDict = Serializer.TryReadObject<Dictionary<string, VirtualButton>> (ResNames.MappingFileName, typeof(XmlSerializer));
+			buttonDict = serializer?.LoadMapping () as Dictionary<string, VirtualButton>;
 			if (buttonDict != null) return;
 			buttonDict = new Dictionary<string, VirtualButton> ();
-			Log.Core.Write ("Input mapping not found. Creating empty.");
+			Log.Core.WriteWarning ("Input mapping not found. Creating empty.");
 		}
 
 		private static string GetUnusedButtonName ()

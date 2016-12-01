@@ -87,6 +87,8 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 
 		private void textBox1_Leave (object sender, EventArgs e)
 		{
+			if (btnName == textBox1.Text)
+				return;
 			if (!InputManager.RenameButton (btnName, textBox1.Text)) textBox1.Text = btnName;
 		}
 

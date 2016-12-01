@@ -41,11 +41,13 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 					var keys = Enum.GetValues (typeof(Key)).Cast<Key> ().ToList ();
 					comboBox.DataSource = keys;
 					KeyTypeBtn.Image = Resources.keyboard;
+					toolTip1.SetToolTip (comboBox, "Physical key on the international keyboard");
 					break;
 				case KeyType.MouseButtonType:
 					var mouseButtons = Enum.GetValues (typeof(MouseButton)).Cast<MouseButton> ().ToList ();
 					comboBox.DataSource = mouseButtons;
 					KeyTypeBtn.Image = Resources.mouse_pc;
+					toolTip1.SetToolTip(comboBox, "Physical button on the mouse");
 					break;
 				default:
 					throw new ArgumentOutOfRangeException ();

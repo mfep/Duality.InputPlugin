@@ -72,6 +72,7 @@
 			this.KeyTypeBtn.Name = "KeyTypeBtn";
 			this.KeyTypeBtn.Size = new System.Drawing.Size(21, 21);
 			this.KeyTypeBtn.TabIndex = 2;
+			this.toolTip1.SetToolTip(this.KeyTypeBtn, "Select input device");
 			this.KeyTypeBtn.UseVisualStyleBackColor = false;
 			this.KeyTypeBtn.Click += new System.EventHandler(this.KeyTypeBtn_Click);
 			// 

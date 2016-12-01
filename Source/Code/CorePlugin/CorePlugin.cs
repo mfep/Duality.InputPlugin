@@ -10,6 +10,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		protected override void InitPlugin ()
 		{
 			base.InitPlugin ();
+			InputManager.SetSerializer (new DualityXmlSerializer ());
 			InputManager.LoadMapping ();
 		}
 
