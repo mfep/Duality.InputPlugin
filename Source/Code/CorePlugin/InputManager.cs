@@ -114,22 +114,19 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		public static bool IsButtonPressed (string name)
 		{
 			if (buttonDict.ContainsKey (name)) return buttonDict[name].IsPressed;
-			LogNonExistingButton (name);
-			return false;
+			throw new ArgumentException ($"The button named {name} does not exist.");
 		}
 
 		public static bool IsButtonHit (string name)
 		{
 			if (buttonDict.ContainsKey (name)) return buttonDict[name].IsHit;
-			LogNonExistingButton (name);
-			return false;
+			throw new ArgumentException ($"The button named {name} does not exist.");
 		}
 
 		public static bool IsButtonReleased (string name)
 		{
 			if (buttonDict.ContainsKey (name)) return buttonDict[name].IsReleased;
-			LogNonExistingButton (name);
-			return false;
+			throw new ArgumentException ($"The button named {name} does not exist.");
 		}
 
 		public static void SetSerializer (IMappingSerializer _serializer)
