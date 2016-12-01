@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>MFEP.Duality.Plugins.InputPlugin</id>
-    <version>1.1.0</version>
+    <version>1.2.0</version>
     <title>InputPlugin (Core)</title>
     <authors>Lőrinc Serfőző</authors>
     <owners>Lőrinc Serfőző</owners>
@@ -12,7 +12,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Keyboard abstraction plugin for Duality game engine.</description>
     <summary>Keyboard abstraction plugin for Duality game engine.</summary>
-    <releaseNotes></releaseNotes>
+    <releaseNotes>Mouse button support</releaseNotes>
     <copyright>Copyright 2016</copyright>
     <tags>Duality Core Plugin Keyboard Input Manager</tags>
     <dependencies>

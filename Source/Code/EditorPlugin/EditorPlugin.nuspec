@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>MFEP.Duality.Editor.Plugins.InputPlugin</id>
-    <version>1.1.0</version>
+    <version>1.2.0</version>
     <title>InputPlugin (Editor)</title>
     <authors>Lőrinc Serfőző</authors>
     <owners>Lőrinc Serfőző</owners>
@@ -12,13 +12,13 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Keyboard abstraction plugin for Duality game engine.</description>
     <summary>Keyboard abstraction plugin for Duality game engine.</summary>
-    <releaseNotes></releaseNotes>
+    <releaseNotes>Mouse button support</releaseNotes>
     <copyright>Copyright 2016</copyright>
     <tags>Duality Editor Plugin Keyboard Input Manager</tags>
     <dependencies>
       <dependency id="AdamsLair.Duality" version="2.0.0" />
       <dependency id="AdamsLair.Duality.Editor" version="2.0.0" />
-      <dependency id="MFEP.Duality.Plugins.InputPlugin" version="1.1.0" />
+      <dependency id="MFEP.Duality.Plugins.InputPlugin" version="1.2.0" />
     </dependencies>
   </metadata>
   <files>
