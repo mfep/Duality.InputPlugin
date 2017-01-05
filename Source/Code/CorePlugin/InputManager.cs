@@ -44,60 +44,60 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			return true;
 		}
 
-		public static bool RemoveButton (string name)
+		public static bool RemoveButton (string buttonName)
 		{
-			if (!buttonDict.ContainsKey (name)) {
-				LogNonExistingButton (name, "Cannot remove button. ");
+			if (!buttonDict.ContainsKey (buttonName)) {
+				LogNonExistingButton (buttonName, "Cannot remove button. ");
 				return false;
 			}
-			buttonDict.Remove (name);
+			buttonDict.Remove (buttonName);
 			SaveMapping ();
-			ButtonRemoved?.Invoke (name);
+			ButtonRemoved?.Invoke (buttonName);
 			return true;
 		}
 
-		public static bool AddToButton (string name, KeyValue keyValue)
+		public static bool AddToButton (string buttonName, KeyValue keyValue)
 		{
-			if (!buttonDict.ContainsKey (name)) {
-				LogNonExistingButton (name, "Cannot add key to button. ");
+			if (!buttonDict.ContainsKey (buttonName)) {
+				LogNonExistingButton (buttonName, "Cannot add key to button. ");
 				return false;
 			}
-			if (!buttonDict[name].Associate (keyValue)) return false;
+			if (!buttonDict[buttonName].Associate (keyValue)) return false;
 			SaveMapping ();
-			KeyAddedToButton?.Invoke (name, keyValue);
+			KeyAddedToButton?.Invoke (buttonName, keyValue);
 			return true;
 		}
 
-		public static bool AddToButton (string name, Key newKey)
+		public static bool AddToButton (string buttonName, Key newKey)
 		{
-			return AddToButton (name, new KeyValue (newKey));
+			return AddToButton (buttonName, new KeyValue (newKey));
 		}
 
-		public static bool AddToButton (string name, MouseButton mouseButton)
+		public static bool AddToButton (string buttonName, MouseButton mouseButton)
 		{
-			return AddToButton (name, new KeyValue (mouseButton));
+			return AddToButton (buttonName, new KeyValue (mouseButton));
 		}
 
-		public static bool RemoveFromButton (string name, KeyValue keyValue)
+		public static bool RemoveFromButton (string buttonName, KeyValue keyValue)
 		{
-			if (!buttonDict.ContainsKey (name)) {
-				LogNonExistingButton (name, "Cannot remove key from button. ");
+			if (!buttonDict.ContainsKey (buttonName)) {
+				LogNonExistingButton (buttonName, "Cannot remove key from button. ");
 				return false;
 			}
-			if (!buttonDict[name].Remove (keyValue)) return false;
+			if (!buttonDict[buttonName].Remove (keyValue)) return false;
 			SaveMapping ();
-			KeyRemovedFromButton?.Invoke (name, keyValue);
+			KeyRemovedFromButton?.Invoke (buttonName, keyValue);
 			return true;
 		}
 
-		public static bool RemoveFromButton (string name, Key key)
+		public static bool RemoveFromButton (string buttonName, Key key)
 		{
-			return RemoveFromButton (name, new KeyValue (key));
+			return RemoveFromButton (buttonName, new KeyValue (key));
 		}
 
-		public static bool RemoveFromButton (string name, MouseButton mouseButton)
+		public static bool RemoveFromButton (string buttonName, MouseButton mouseButton)
 		{
-			return RemoveFromButton (name, new KeyValue (mouseButton));
+			return RemoveFromButton (buttonName, new KeyValue (mouseButton));
 		}
 
 		public static bool RenameButton (string originalName, string newName)
@@ -114,22 +114,22 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			return true;
 		}
 
-		public static bool IsButtonPressed (string name)
+		public static bool IsButtonPressed (string buttonName)
 		{
-			if (buttonDict.ContainsKey (name)) return buttonDict[name].IsPressed;
-			throw new ArgumentException ($"The button named {name} does not exist.");
+			if (buttonDict.ContainsKey (buttonName)) return buttonDict[buttonName].IsPressed;
+			throw new ArgumentException ($"The button named {buttonName} does not exist.");
 		}
 
-		public static bool IsButtonHit (string name)
+		public static bool IsButtonHit (string buttonName)
 		{
-			if (buttonDict.ContainsKey (name)) return buttonDict[name].IsHit;
-			throw new ArgumentException ($"The button named {name} does not exist.");
+			if (buttonDict.ContainsKey (buttonName)) return buttonDict[buttonName].IsHit;
+			throw new ArgumentException ($"The button named {buttonName} does not exist.");
 		}
 
-		public static bool IsButtonReleased (string name)
+		public static bool IsButtonReleased (string buttonName)
 		{
-			if (buttonDict.ContainsKey (name)) return buttonDict[name].IsReleased;
-			throw new ArgumentException ($"The button named {name} does not exist.");
+			if (buttonDict.ContainsKey (buttonName)) return buttonDict[buttonName].IsReleased;
+			throw new ArgumentException ($"The button named {buttonName} does not exist.");
 		}
 
 		internal static void SetSerializer (IMappingSerializer _serializer)
