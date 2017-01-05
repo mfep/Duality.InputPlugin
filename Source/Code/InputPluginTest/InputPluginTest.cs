@@ -33,7 +33,7 @@ namespace MFEP.Duality.Plugins.InputPlugin.Test
 			Assert.IsTrue (AddToButton ("Up", Key.A));
 			Assert.IsTrue (AddToButton ("Up", MouseButton.Extra2));
 			Assert.IsTrue (AddToButton ("Up", new KeyValue (Key.Escape)));
-			Assert.AreEqual (Buttons.First (btn => btn.ButtonName == "Up").KeyValues.Select (kv => kv.Index).ToArray (),
+			Assert.AreEqual (GetKeysOfButton("Up").Select(vb => vb.Index),
 				new[] { (int)Key.Up, (int)MouseButton.Left, (int)Key.A, (int)MouseButton.Extra2, (int)Key.Escape });
 		}
 

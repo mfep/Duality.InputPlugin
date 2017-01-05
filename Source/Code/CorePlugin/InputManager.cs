@@ -24,6 +24,15 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		public static event Action<string, KeyValue> KeyAddedToButton;
 		public static event Action<string, KeyValue> KeyRemovedFromButton;
 
+		public static KeyValue[] GetKeysOfButton (string buttonName)
+		{
+			if (!buttonDict.ContainsKey (buttonName)) {
+				LogNonExistingButton (buttonName);
+				return null;
+			}
+			return buttonDict[buttonName].KeyVals;
+		}
+
 		public static void RegisterButton ()
 		{
 			var newName = GetUnusedButtonName ();
