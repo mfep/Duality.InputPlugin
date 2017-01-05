@@ -54,7 +54,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			return true;
 		}
 
-		public static bool AddKeyValueToButton (string name, KeyValue keyValue)
+		public static bool AddToButton (string name, KeyValue keyValue)
 		{
 			if (!buttonDict.ContainsKey (name)) {
 				LogNonExistingButton (name, "Cannot add key to button. ");
@@ -66,17 +66,17 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			return true;
 		}
 
-		public static bool AddKeyToButton (string name, Key newKey)
+		public static bool AddToButton (string name, Key newKey)
 		{
-			return AddKeyValueToButton (name, new KeyValue (newKey));
+			return AddToButton (name, new KeyValue (newKey));
 		}
 
-		public static bool AddMouseButtonToButton (string name, MouseButton mouseButton)
+		public static bool AddToButton (string name, MouseButton mouseButton)
 		{
-			return AddKeyValueToButton (name, new KeyValue (mouseButton));
+			return AddToButton (name, new KeyValue (mouseButton));
 		}
 
-		public static bool RemoveKeyValueFromButton (string name, KeyValue keyValue)
+		public static bool RemoveFromButton (string name, KeyValue keyValue)
 		{
 			if (!buttonDict.ContainsKey (name)) {
 				LogNonExistingButton (name, "Cannot remove key from button. ");
@@ -88,14 +88,14 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			return true;
 		}
 
-		public static bool RemoveKeyFromButton (string name, Key key)
+		public static bool RemoveFromButton (string name, Key key)
 		{
-			return RemoveKeyValueFromButton (name, new KeyValue (key));
+			return RemoveFromButton (name, new KeyValue (key));
 		}
 
-		public static bool RemoveMouseButtonFromButton (string name, MouseButton mouseButton)
+		public static bool RemoveFromButton (string name, MouseButton mouseButton)
 		{
-			return RemoveKeyValueFromButton (name, new KeyValue (mouseButton));
+			return RemoveFromButton (name, new KeyValue (mouseButton));
 		}
 
 		public static bool RenameButton (string originalName, string newName)

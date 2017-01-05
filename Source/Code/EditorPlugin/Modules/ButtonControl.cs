@@ -66,7 +66,7 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 
 		private void AddKeyboxButtonClicked (KeyValue keyValue)
 		{
-			InputManager.AddKeyValueToButton (btnName, keyValue);
+			InputManager.AddToButton (btnName, keyValue);
 		}
 
 		private void CreateRemoveKeyBox (KeyValue keyValue)
@@ -81,7 +81,7 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 
 		private void RemoveKeyBoxButtonClicked (KeyValue keyValue)
 		{
-			InputManager.RemoveKeyValueFromButton (btnName, keyValue);
+			InputManager.RemoveFromButton (btnName, keyValue);
 		}
 
 		private void textBox1_Leave (object sender, EventArgs e)

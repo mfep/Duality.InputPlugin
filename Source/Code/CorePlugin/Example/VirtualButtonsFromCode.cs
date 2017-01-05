@@ -18,12 +18,12 @@ namespace MFEP.Duality.Plugins.InputPlugin.Example
 
 		private void RemoveKeys ()
 		{
-			InputManager.RemoveKeyFromButton ("Rave", Key.Space);
+			InputManager.RemoveFromButton ("Rave", Key.Space);
 		}
 
 		private void AddKeys ()
 		{
-			InputManager.AddKeyToButton ("Rave", Key.Space);
+			InputManager.AddToButton ("Rave", Key.Space);
 		}
 
 		private void RenameButton ()
