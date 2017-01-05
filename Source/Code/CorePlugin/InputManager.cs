@@ -35,7 +35,9 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		public static bool RegisterButton (ButtonTuple newButton)
 		{
 			if (string.IsNullOrWhiteSpace (newButton?.ButtonName) || (newButton.KeyValues == null)) return false;
-			if (buttonDict.ContainsKey (newButton.ButtonName)) return false;
+			if (buttonDict.ContainsKey (newButton.ButtonName)) {
+				Log.Core.WriteWarning ($"Overwriting virtual button '{newButton.ButtonName}'");
+			}
 			buttonDict[newButton.ButtonName] = new VirtualButton (newButton.KeyValues);
 			SaveMapping ();
 			ButtonAdded?.Invoke (newButton);
