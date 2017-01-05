@@ -128,7 +128,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			throw new ArgumentException ($"The button named {name} does not exist.");
 		}
 
-		public static void SetSerializer (IMappingSerializer _serializer)
+		internal static void SetSerializer (IMappingSerializer _serializer)
 		{
 			serializer = _serializer;
 		}
