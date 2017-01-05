@@ -54,7 +54,6 @@ namespace MFEP.Duality.Plugins.InputPlugin.Test
 			RegisterButton ();
 			Assert.IsFalse (IsButtonPressed ("Button0"));
 			Assert.IsTrue (RegisterButton (new ButtonTuple ("Left", new[] { new KeyValue (Key.Left) })));
-			Assert.AreEqual (Buttons.Length, 4);
 			Assert.IsFalse (IsButtonPressed ("Left"));
 		}
 
@@ -63,7 +62,6 @@ namespace MFEP.Duality.Plugins.InputPlugin.Test
 		{
 			Assert.IsFalse (RemoveButton ("Nonsense"));
 			Assert.IsTrue (RemoveButton ("Up"));
-			Assert.AreEqual (Buttons.Length, 1);
 			Assert.Throws<ArgumentException> (() => { IsButtonPressed ("Up"); });
 		}
 

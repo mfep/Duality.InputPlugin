@@ -11,9 +11,14 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		[DontSerialize] private static Dictionary<string, VirtualButton> buttonDict = new Dictionary<string, VirtualButton> ();
 		[DontSerialize] private static IMappingSerializer serializer;
 
-		public static ButtonTuple[] Buttons
+		public static IEnumerable<ButtonTuple> Buttons
 		{
-			get { return buttonDict.Select (pair => new ButtonTuple (pair.Key, pair.Value.KeyVals)).ToArray (); }
+			get
+			{
+				foreach (var buttonPair in buttonDict) {
+					yield return new ButtonTuple (buttonPair.Key, buttonPair.Value.KeyVals);
+				}
+			}
 		}
 
 		public static event Action<ButtonTuple> ButtonAdded;
