@@ -3,7 +3,6 @@ using System.Linq;
 using Duality.Input;
 using NUnit.Framework;
 using static MFEP.Duality.Plugins.InputPlugin.InputManager;
-using ButtonTuple = System.Tuple<string, MFEP.Duality.Plugins.InputPlugin.KeyValue[]>;
 
 namespace MFEP.Duality.Plugins.InputPlugin.Test
 {
@@ -34,7 +33,7 @@ namespace MFEP.Duality.Plugins.InputPlugin.Test
 			Assert.IsTrue (AddKeyToButton ("Up", Key.A));
 			Assert.IsTrue (AddMouseButtonToButton ("Up", MouseButton.Extra2));
 			Assert.IsTrue (AddKeyValueToButton ("Up", new KeyValue (Key.Escape)));
-			Assert.AreEqual (Buttons.First (btn => btn.Item1 == "Up").Item2.Select (kv => kv.Index).ToArray (),
+			Assert.AreEqual (Buttons.First (btn => btn.ButtonName == "Up").KeyValues.Select (kv => kv.Index).ToArray (),
 				new[] { (int)Key.Up, (int)MouseButton.Left, (int)Key.A, (int)MouseButton.Extra2, (int)Key.Escape });
 		}
 

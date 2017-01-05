@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Duality;
 using Duality.Input;
-using ButtonTuple = System.Tuple<string, MFEP.Duality.Plugins.InputPlugin.KeyValue[]>;
 
 namespace MFEP.Duality.Plugins.InputPlugin
 {
@@ -33,9 +32,9 @@ namespace MFEP.Duality.Plugins.InputPlugin
 
 		public static bool RegisterButton (ButtonTuple newButton)
 		{
-			if (string.IsNullOrWhiteSpace (newButton?.Item1) || (newButton.Item2 == null)) return false;
-			if (buttonDict.ContainsKey (newButton.Item1)) return false;
-			buttonDict[newButton.Item1] = new VirtualButton (newButton.Item2);
+			if (string.IsNullOrWhiteSpace (newButton?.ButtonName) || (newButton.KeyValues == null)) return false;
+			if (buttonDict.ContainsKey (newButton.ButtonName)) return false;
+			buttonDict[newButton.ButtonName] = new VirtualButton (newButton.KeyValues);
 			SaveMapping ();
 			ButtonAdded?.Invoke (newButton);
 			return true;

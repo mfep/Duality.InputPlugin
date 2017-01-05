@@ -13,6 +13,8 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			foreach (var key in keyValues) Associate (key);
 		}
 
+		public KeyValue[] KeyVals => associatedKeyVals.ToArray ();
+
 		public bool IsPressed
 		{
 			get { return associatedKeyVals.Any (keyVal => keyVal.IsPressed); }
@@ -27,8 +29,6 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		{
 			get { return associatedKeyVals.Any (keyVal => keyVal.IsReleased); }
 		}
-
-		public KeyValue[] KeyVals => associatedKeyVals.ToArray ();
 
 		public bool Associate (KeyValue key)
 		{

@@ -1,7 +1,6 @@
 ﻿using Duality;
 using Duality.Editor;
 using Duality.Input;
-using ButtonTuple = System.Tuple<string, MFEP.Duality.Plugins.InputPlugin.KeyValue[]>;
 
 namespace MFEP.Duality.Plugins.InputPlugin.Example
 {

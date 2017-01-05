@@ -2,7 +2,6 @@
 using System.Windows.Forms;
 using MFEP.Duality.Plugins.InputPlugin;
 using WeifenLuo.WinFormsUI.Docking;
-using ButtonTuple = System.Tuple<string, MFEP.Duality.Plugins.InputPlugin.KeyValue[]>;
 
 namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 {

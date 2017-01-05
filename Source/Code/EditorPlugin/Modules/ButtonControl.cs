@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using MFEP.Duality.Plugins.InputPlugin;
-using ButtonTuple = System.Tuple<string, MFEP.Duality.Plugins.InputPlugin.KeyValue[]>;
 
 namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 {
@@ -15,10 +14,10 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 		public ButtonControl (ButtonTuple buttonTuple)
 		{
 			InitializeComponent ();
-			btnName = buttonTuple.Item1;
-			textBox1.Text = buttonTuple.Item1;
+			btnName = buttonTuple.ButtonName;
+			textBox1.Text = buttonTuple.ButtonName;
 			CreateAddKeybox ();
-			foreach (var keyValue in buttonTuple.Item2) CreateRemoveKeyBox (keyValue);
+			foreach (var keyValue in buttonTuple.KeyValues) CreateRemoveKeyBox (keyValue);
 			SubscribeToInputManager ();
 		}
 
