@@ -13,11 +13,8 @@ namespace MFEP.Duality.Plugins.InputPlugin
 
 		public static IEnumerable<ButtonTuple> Buttons
 		{
-			get
-			{
-				foreach (var buttonPair in buttonDict) {
-					yield return new ButtonTuple (buttonPair.Key, buttonPair.Value.KeyVals);
-				}
+			get {
+				return buttonDict.Select (buttonPair => new ButtonTuple (buttonPair.Key, buttonPair.Value.KeyVals));
 			}
 		}
 
