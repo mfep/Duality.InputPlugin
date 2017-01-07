@@ -45,7 +45,48 @@ using MFEP.Duality.Plugins.InputPlugin;
 ```
 
 ### Dyanmic input mapping
-When the keys associated to the Virtual Buttons change at runtime, it is the case of dynamic input mapping.
+When the keys associated to the Virtual Buttons change at runtime, it is the case of dynamic input mapping. This can also be done via the `InputManager` static class, with the following application programming interface. The `ButtonTuple` class contains the Virtual Button's name, and the `KeyValues` associated with it. The `KeyValue` struct itself can be casted to `Duality.Input.Key` or `Duality.Input.MouseButton` according to its `KeyType` property.
+
+``` csharp
+public static class InputManager
+{
+  public static IEnumerable<ButtonTuple> Buttons { get; }
+
+  public static event Action<ButtonTuple> ButtonAdded;
+  public static event Action<string> ButtonRemoved;
+  public static event Action<string, string> ButtonRenamed;
+  public static event Action<string, KeyValue> KeyAddedToButton;
+  public static event Action<string, KeyValue> KeyRemovedFromButton;
+
+  public static KeyValue[] GetKeysOfButton (string buttonName);
+
+  public static void RegisterButton ();
+
+  public static bool RegisterButton (ButtonTuple newButton);
+
+  public static bool RemoveButton (string buttonName);
+
+  public static bool AddToButton (string buttonName, KeyValue keyValue);
+
+  public static bool AddToButton (string buttonName, Key newKey);
+
+  public static bool AddToButton (string buttonName, MouseButton mouseButton);
+
+  public static bool RemoveFromButton (string buttonName, KeyValue keyValue);
+
+  public static bool RemoveFromButton (string buttonName, Key key);
+
+  public static bool RemoveFromButton (string buttonName, MouseButton mouseButton);
+
+  public static bool RenameButton (string originalName, string newName);
+
+  public static bool IsButtonPressed (string buttonName);
+
+  public static bool IsButtonHit (string buttonName);
+
+  public static bool IsButtonReleased (string buttonName);
+}
+```
 
 ## License
 The code is under MIT license, details in the license file.
