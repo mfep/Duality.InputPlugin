@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 using MFEP.Duality.Plugins.InputPlugin;
+using Duality.Editor.Controls.ToolStrip;
 using WeifenLuo.WinFormsUI.Docking;
-using ButtonTuple = System.Tuple<string, MFEP.Duality.Plugins.InputPlugin.KeyValue[]>;
 
 namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 {
@@ -11,6 +12,7 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 		public InputEditor ()
 		{
 			InitializeComponent ();
+			toolStrip.Renderer = new DualitorToolStripProfessionalRenderer ();
 			foreach (var buttonTuple in InputManager.Buttons) CreateButtonControl (buttonTuple);
 			SubscribeToInputManager ();
 		}
@@ -33,13 +35,22 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 				Dock = DockStyle.Top
 			};
 			virtualButtonsPanel.Controls.Add (buttonControl);
-			buttonControl.BringToFront ();
-			newButton.BringToFront ();
+			Focus ();
 		}
 
-		private void newButton_Click (object sender, EventArgs e)
+		private void addButton_Click(object sender, EventArgs e)
 		{
 			InputManager.RegisterButton ();
+		}
+
+		private void helpButton_Click(object sender, EventArgs e)
+		{
+			Process.Start ("https://github.com/mfep/Duality.InputPlugin");
+		}
+
+		private void issueButton_Click(object sender, EventArgs e)
+		{
+			Process.Start ("http://forum.adamslair.net/viewtopic.php?f=18&t=832");
 		}
 	}
 }

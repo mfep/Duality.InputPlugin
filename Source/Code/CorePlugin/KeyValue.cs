@@ -39,22 +39,16 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			return storeField;
 		}
 
-		public Key Key
+		public static explicit operator Key (KeyValue kv)
 		{
-			get
-			{
-				if (KeyType != KeyType.KeyboardType) throw new InvalidCastException ();
-				return (Key)storeField;
-			}
+			if (kv.KeyType != KeyType.KeyboardType) throw new InvalidCastException();
+			return (Key)kv.storeField;
 		}
 
-		public MouseButton MouseButton
+		public static explicit operator MouseButton (KeyValue kv)
 		{
-			get
-			{
-				if (KeyType != KeyType.MouseButtonType) throw new InvalidCastException ();
-				return (MouseButton)(storeField - mouseButtonOffset);
-			}
+			if (kv.KeyType != KeyType.MouseButtonType) throw new InvalidCastException();
+			return (MouseButton)(kv.storeField - mouseButtonOffset);
 		}
 
 		public int Index
@@ -78,9 +72,9 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			{
 				switch (KeyType) {
 					case KeyType.KeyboardType:
-						return DualityApp.Keyboard.KeyHit (Key);
+						return DualityApp.Keyboard.KeyHit ((Key)this);
 					case KeyType.MouseButtonType:
-						return DualityApp.Mouse.ButtonHit (MouseButton);
+						return DualityApp.Mouse.ButtonHit ((MouseButton)this);
 					default:
 						throw new ArgumentOutOfRangeException ();
 				}
@@ -93,9 +87,9 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			{
 				switch (KeyType) {
 					case KeyType.KeyboardType:
-						return DualityApp.Keyboard.KeyPressed (Key);
+						return DualityApp.Keyboard.KeyPressed ((Key)this);
 					case KeyType.MouseButtonType:
-						return DualityApp.Mouse.ButtonPressed (MouseButton);
+						return DualityApp.Mouse.ButtonPressed ((MouseButton)this);
 					default:
 						throw new ArgumentOutOfRangeException ();
 				}
@@ -108,9 +102,9 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			{
 				switch (KeyType) {
 					case KeyType.KeyboardType:
-						return DualityApp.Keyboard.KeyReleased (Key);
+						return DualityApp.Keyboard.KeyReleased ((Key)this);
 					case KeyType.MouseButtonType:
-						return DualityApp.Mouse.ButtonReleased (MouseButton);
+						return DualityApp.Mouse.ButtonReleased ((MouseButton)this);
 					default:
 						throw new ArgumentOutOfRangeException ();
 				}

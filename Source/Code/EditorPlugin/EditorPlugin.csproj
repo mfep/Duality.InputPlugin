@@ -150,6 +150,15 @@
   <ItemGroup>
     <None Include="Resources\mouse_pc.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mail_red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\keyboard_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\help.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>mkdir "$(SolutionDir)../../Plugins"

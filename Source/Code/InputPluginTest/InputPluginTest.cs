@@ -3,7 +3,6 @@ using System.Linq;
 using Duality.Input;
 using NUnit.Framework;
 using static MFEP.Duality.Plugins.InputPlugin.InputManager;
-using ButtonTuple = System.Tuple<string, MFEP.Duality.Plugins.InputPlugin.KeyValue[]>;
 
 namespace MFEP.Duality.Plugins.InputPlugin.Test
 {
@@ -29,12 +28,12 @@ namespace MFEP.Duality.Plugins.InputPlugin.Test
 		[Test]
 		public void AddToButtonTest ()
 		{
-			Assert.IsFalse (AddKeyToButton ("Nonsense", Key.Up));
-			Assert.IsFalse (AddKeyToButton ("Up", Key.Up));
-			Assert.IsTrue (AddKeyToButton ("Up", Key.A));
-			Assert.IsTrue (AddMouseButtonToButton ("Up", MouseButton.Extra2));
-			Assert.IsTrue (AddKeyValueToButton ("Up", new KeyValue (Key.Escape)));
-			Assert.AreEqual (Buttons.First (btn => btn.Item1 == "Up").Item2.Select (kv => kv.Index).ToArray (),
+			Assert.IsFalse (AddToButton ("Nonsense", Key.Up));
+			Assert.IsFalse (AddToButton ("Up", Key.Up));
+			Assert.IsTrue (AddToButton ("Up", Key.A));
+			Assert.IsTrue (AddToButton ("Up", MouseButton.Extra2));
+			Assert.IsTrue (AddToButton ("Up", new KeyValue (Key.Escape)));
+			Assert.AreEqual (GetKeysOfButton("Up").Select(vb => vb.Index),
 				new[] { (int)Key.Up, (int)MouseButton.Left, (int)Key.A, (int)MouseButton.Extra2, (int)Key.Escape });
 		}
 
@@ -55,7 +54,6 @@ namespace MFEP.Duality.Plugins.InputPlugin.Test
 			RegisterButton ();
 			Assert.IsFalse (IsButtonPressed ("Button0"));
 			Assert.IsTrue (RegisterButton (new ButtonTuple ("Left", new[] { new KeyValue (Key.Left) })));
-			Assert.AreEqual (Buttons.Length, 4);
 			Assert.IsFalse (IsButtonPressed ("Left"));
 		}
 
@@ -64,24 +62,23 @@ namespace MFEP.Duality.Plugins.InputPlugin.Test
 		{
 			Assert.IsFalse (RemoveButton ("Nonsense"));
 			Assert.IsTrue (RemoveButton ("Up"));
-			Assert.AreEqual (Buttons.Length, 1);
 			Assert.Throws<ArgumentException> (() => { IsButtonPressed ("Up"); });
 		}
 
 		[Test]
 		public void RemoveFromButtonTest ()
 		{
-			Assert.IsFalse (RemoveKeyFromButton ("Nonsense", Key.Escape));
-			Assert.IsFalse (RemoveMouseButtonFromButton ("Nonsense", MouseButton.Extra1));
-			Assert.IsFalse (RemoveKeyValueFromButton ("Nonsense", new KeyValue (Key.Up)));
+			Assert.IsFalse (RemoveFromButton ("Nonsense", Key.Escape));
+			Assert.IsFalse (RemoveFromButton ("Nonsense", MouseButton.Extra1));
+			Assert.IsFalse (RemoveFromButton ("Nonsense", new KeyValue (Key.Up)));
 
-			Assert.IsFalse (RemoveKeyFromButton ("Up", Key.Escape));
-			Assert.IsFalse (RemoveMouseButtonFromButton ("Up", MouseButton.Extra4));
-			Assert.IsFalse (RemoveKeyValueFromButton ("Up", new KeyValue (MouseButton.Extra4)));
+			Assert.IsFalse (RemoveFromButton ("Up", Key.Escape));
+			Assert.IsFalse (RemoveFromButton ("Up", MouseButton.Extra4));
+			Assert.IsFalse (RemoveFromButton ("Up", new KeyValue (MouseButton.Extra4)));
 
-			Assert.IsTrue (RemoveKeyFromButton ("Up", Key.Up));
-			Assert.IsTrue (RemoveMouseButtonFromButton ("Up", MouseButton.Left));
-			Assert.IsTrue (RemoveKeyValueFromButton ("Down", new KeyValue (Key.Down)));
+			Assert.IsTrue (RemoveFromButton ("Up", Key.Up));
+			Assert.IsTrue (RemoveFromButton ("Up", MouseButton.Left));
+			Assert.IsTrue (RemoveFromButton ("Down", new KeyValue (Key.Down)));
 		}
 
 		[Test]
