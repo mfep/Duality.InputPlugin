@@ -64,7 +64,7 @@
 			// addButton
 			// 
 			this.addButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.addButton.Image = global::MFEP.Duality.Editor.Plugins.InputPlugin.Properties.Resources.add;
+			this.addButton.Image = global::MFEP.Duality.Editor.Plugins.InputPlugin.Properties.Resources.keyboard_add;
 			this.addButton.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.addButton.Name = "addButton";
 			this.addButton.Size = new System.Drawing.Size(23, 22);
@@ -86,7 +86,7 @@
 			// 
 			this.helpButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
 			this.helpButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.helpButton.Image = global::MFEP.Duality.Editor.Plugins.InputPlugin.Properties.Resources.emotion_question;
+			this.helpButton.Image = global::MFEP.Duality.Editor.Plugins.InputPlugin.Properties.Resources.help;
 			this.helpButton.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.helpButton.Name = "helpButton";
 			this.helpButton.Size = new System.Drawing.Size(23, 22);
