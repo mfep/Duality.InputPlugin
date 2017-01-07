@@ -83,9 +83,29 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap emotion_question {
+            get {
+                object obj = ResourceManager.GetObject("emotion_question", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap keyboard {
             get {
                 object obj = ResourceManager.GetObject("keyboard", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap mail_red {
+            get {
+                object obj = ResourceManager.GetObject("mail_red", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
