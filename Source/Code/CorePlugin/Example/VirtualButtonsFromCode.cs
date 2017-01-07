@@ -38,8 +38,10 @@ namespace MFEP.Duality.Plugins.InputPlugin.Example
 
 		private void AddButtons ()
 		{
-			InputManager.RegisterButton (new ButtonTuple ("Eat", new[] { new KeyValue (Key.ControlLeft), new KeyValue (Key.ControlRight) }));
-			InputManager.RegisterButton (new ButtonTuple ("Sleep", new[] { new KeyValue (Key.AltLeft), new KeyValue (Key.AltRight) }));
+			InputManager.RegisterButton (new ButtonTuple ("Eat", Key.ControlLeft));
+			InputManager.AddToButton ("Eat", Key.ControlRight);
+			InputManager.RegisterButton (new ButtonTuple ("Sleep", Key.AltLeft));
+			InputManager.AddToButton ("Sleep", Key.AltRight);
 		}
 	}
 }
