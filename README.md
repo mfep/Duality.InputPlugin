@@ -27,8 +27,12 @@ With static input mapping the Virtual Buttons are not changed at runtime. This c
 6. Click the green `Add` button to assign the selected key to the VirtualButton.
 7. Repeat for all desired Virtual Buttons.
 
+![Static Mapping](https://github.com/mfep/Duality.InputPlugin/raw/master/readme_images/static.png)
+
 #### Using the Virtual Buttons in the game logic
 At first, a reference to the InputPlugin.core assembly has to be added to your game plugin project. It can be found at `{Project Directory}\Plugins\InputPlugin.core.dll`. In Visual Studio, it should look like this:
+
+![Reference in Visual Studio](https://github.com/mfep/Duality.InputPlugin/raw/master/readme_images/reference.png)
 
 In your code files, the state of the Virtual Buttons can be requested from `InputManager`:
 
