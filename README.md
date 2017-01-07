@@ -3,55 +3,50 @@ Keyboard abstraction plugin for Duality game engine
 
 [![Build status](https://ci.appveyor.com/api/projects/status/6slo8ymu84yvbbs3?svg=true)](https://ci.appveyor.com/project/mfep/duality-inputplugin)
 
-##Installing via NuGet package
-The ordinary way of installing Duality plugins. Unless you'd like to modify the code, you need this.
+## Plugin architecture
+The tool consists of two plugins, **InputPlugin (Core)** and **InputPlugin (Editor)**. The former contains the extended engine functionalty, which lets you tie multiple physical controls (mouse buttons and keyboard keys) to a so called Virtual Button, and use that in your game logic. All the operations are intended to proceed via the `InputManager` static class (see the usage example below).
+The Editor plugin provides a visual user interface for editing the Virtual Buttons in Dualitor. The binding is bi-directional, thus it is useful when debugging button changes at runtime too.
+The Virtual Button data is saved to the `keyMapping.xml` file.
 
+## Install
 1. In Dualitor open the package manager window from the `File` menu.
 2. Select the `Online repository` option from the combobox labeled `View`, and from the list choose `InputPlugin (Editor)`.
 3. Click `Install` then `Apply`. These operations will download the two (Editor and Core) plugins from nuget.org, and restart Dualitor with these changes.
 
-## Building from source
-1. Clone the repository
-2. Run DualityEditor.exe. It'll download several packages from the Duality NuGet repository.
-3. Don't open any Scene yet, nor run the game. First the plugins have to be built. Open the Visual Studio solution (second button on the Editor's toolstrip).
-4. In Visual Studio, first build the CorePlugin project, then the EditorPlugin project. This order is neccessary.
-5. Done. The Input Mapping menu is available under View on the menustrip.
+## Usage
+There are two distinct use cases with the plugin:
 
-##Usage
-Under `View` menu, there's a new entry called `Input Mapping`. It spawns a new editor window, which can be snapped, docked and positioned like any other. In that menu, you need to add and name the so called Virtual Buttons, then assign physical keys to them. Do this by selecting the key's name in the drop down list next to the green plus icon, then clicking the icon. The assigned keys can be removed by clicking the red minus icon, or they can be modified just by The plugin saves these changes automatically to the `keyMapping.xml` resource file, which you need to ship with the project. If the Virtual Buttons are created, you can refer to them in the code by their name. **Notice that first you need to add the assembly to the Visual Studio project as a reference.**
+### Static input mapping
+With static input mapping the Virtual Buttons are not changed at runtime. This case is common with smaller scoped projects, such as game jam entries. For these, the mapping should be defined entirely via the graphic user interface.
 
-Example:
+1. Open the Input Mapping editor from the `View` menu of Dualitor.
+2. Add a Virtual Button by clicking the `Add New Virtual Button` button on the toolstrip.
+3. Name the Virtual Button accordingly.
+4. Click the `Select input device` to toggle between mouse and keyboard keys.
+5. Select the desired mouse button/keyboard key from the dropdown list.
+6. Click the green `Add` button to assign the selected key to the VirtualButton.
+7. Repeat for all desired Virtual Buttons.
+
+#### Using the Virtual Buttons in the game logic
+At first, a reference to the InputPlugin.core assembly has to be added to your game plugin project. It can be found at `{Project Directory}\Plugins\InputPlugin.core.dll`. In Visual Studio, it should look like this:
+
+In your code files, the state of the Virtual Buttons can be requested from `InputManager`:
+
 ``` csharp
 using MFEP.Duality.Plugins.InputPlugin;
-
 ...
-
-Vector2 direction = Vector2.Zero;
-if (InputManager.IsButtonPressed("Right")) //Right is the Virtual Button's name
-{
-    direction += Vector2.UnitX;
-}
+  public void OnUpdate ()
+  {
+    if (InputManager.IsButtonPressed ("Left")) {
+      // do something
+    }
+  }
+...
 ```
 
-By version 1.0.3, you can add and remove VirtualButtons by script using the static `InputManager` class, and the changes appear in the editor window.  Example:
+### Dyanmic input mapping
+When the keys associated to the Virtual Buttons change at runtime, it is the case of dynamic input mapping.
 
-``` csharp
-VirtualButton button = new VirtualButton(nameString);
-button.AssociateKey(Duality.Input.Key.Right);
-button.AssociateKey(Duality.Input.Key.D);
-InputManager.RegisterButton(button);
-
-...
-
-InputManager.RemoveButton(button.Name);
-```
-
-##Known Issues
-
-* COMPLETED ~~At the moment, the user can assing new VirtualButtons to the InputManager via code. These changes do not reflect in the editor window. The user might need to do this (in game keybinding management for example), so it'd be nice to implement this.~~
-* FIXED ~~Multiple instances of the single key cannot be added to the same Virtual Button, but if the user changes an existing key, the program allows the same key. This leads to weird behaviour, thus needs to be fixed.~~
-
-##License
+## License
 The code is under MIT license, details in the license file.
 Icons used from the [fatcow.com](http://www.fatcow.com/free-icons) collection under [CC-BY-3.0 US](http://creativecommons.org/licenses/by/3.0/us/).
-![](http://i.imgur.com/gK4DzQo.png)
