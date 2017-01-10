@@ -34,7 +34,7 @@ At first, a reference to the InputPlugin.core assembly has to be added to your g
 
 ![Reference in Visual Studio](https://github.com/mfep/Duality.InputPlugin/raw/master/readme_images/reference.png)
 
-In your code files, the state of the Virtual Buttons can be requested from `InputManager`:
+In your code files, the state of the Virtual Buttons can be requested from `InputManager`. These functions follow Duality's native input naming scheme:
 
 ``` csharp
 using MFEP.Duality.Plugins.InputPlugin;
@@ -43,6 +43,12 @@ using MFEP.Duality.Plugins.InputPlugin;
   {
     if (InputManager.IsButtonPressed ("Left")) {
       // do something
+    }
+    if (InputManager.IsButtonHit ("Right")) {
+      // do something else
+    }
+    if (InputManager.IsButtonReleased ("Hop")) {
+      // hop!
     }
   }
 ...
