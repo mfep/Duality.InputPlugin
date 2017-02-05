@@ -10,21 +10,33 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		MouseButtonType = 1
 	}
 
+	/// <summary>
+	/// Handles different <see cref="InputPlugin.KeyType"/>s uniformly.
+	/// </summary>
 	public struct KeyValue
 	{
 		private const int mouseButtonOffset = 1000;
 		private readonly int storeField;
 
+		/// <summary>
+		/// Constructs a <see cref="KeyValue"/> from a <see cref="Key"/>.
+		/// </summary>
 		public KeyValue (Key key)
 		{
 			storeField = (int)key;
 		}
 
+		/// <summary>
+		/// Constructs a <see cref="KeyValue"/> from a <see cref="MouseButton"/>.
+		/// </summary>
 		public KeyValue (MouseButton mouseButton)
 		{
 			storeField = (int)mouseButton + mouseButtonOffset;
 		}
 
+		/// <summary>
+		/// The <see cref="InputPlugin.KeyType"/> of this <see cref="KeyValue"/>.
+		/// </summary>
 		public KeyType KeyType => storeField < mouseButtonOffset ? KeyType.KeyboardType : KeyType.MouseButtonType;
 
 		public override bool Equals (object obj)
@@ -51,6 +63,9 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			return (MouseButton)(kv.storeField - mouseButtonOffset);
 		}
 
+		/// <summary>
+		/// The index of the enum member in the original enum.
+		/// </summary>
 		public int Index
 		{
 			get
