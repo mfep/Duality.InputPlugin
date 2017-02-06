@@ -13,7 +13,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		public string ButtonName { get; }
 
 		/// <summary>
-		/// The array of <see cref="KezValue"/>s associated with <see cref="ButtonName"/>.
+		/// The array of <see cref="KeyValue"/>s associated with <see cref="ButtonName"/>.
 		/// </summary>
 		public KeyValue[] KeyValues { get; }
 
