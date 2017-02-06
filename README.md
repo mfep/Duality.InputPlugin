@@ -58,42 +58,143 @@ using MFEP.Duality.Plugins.InputPlugin;
 When the keys associated to the Virtual Buttons change at runtime, it is the case of dynamic input mapping. This can also be done via the `InputManager` static class, with the following application programming interface. The `ButtonTuple` class contains the Virtual Button's name, and the `KeyValues` associated with it. The `KeyValue` struct itself can be casted to `Duality.Input.Key` or `Duality.Input.MouseButton` according to its `KeyType` property.
 
 ``` csharp
+/// <summary>
+/// Manager class for every Virtual Button related operation, such as adding and removing buttons,
+/// associating keyboard keys and mouse buttons with them, renaming buttons, and getting their status.
+/// </summary>
 public static class InputManager
 {
-  public static IEnumerable<ButtonTuple> Buttons { get; }
+  /// <summary>
+  /// Enumerate through all the <see cref="ButtonTuple"/>s used by the game at the moment.
+  /// </summary>
+  public static IEnumerable<ButtonTuple> Buttons  {  get  }
 
+  /// <summary>
+  /// Called when a new Button is added to the <see cref="InputManager"/>.
+  /// </summary>
   public static event Action<ButtonTuple> ButtonAdded;
+
+  /// <summary>
+  /// Called when a currently associated Button has been removed from the <see cref="InputManager"/>.
+  /// </summary>
   public static event Action<string> ButtonRemoved;
+
+  /// <summary>
+  /// Called when a currently associated Button has been renamed.
+  /// </summary>
   public static event Action<string, string> ButtonRenamed;
+
+  /// <summary>
+  /// Called when a new <see cref="KeyValue"/> has been added to an existing Button.
+  /// </summary>
   public static event Action<string, KeyValue> KeyAddedToButton;
+
+  /// <summary>
+  /// Called when a <see cref="KeyValue"/> has been removed from an existing Button.
+  /// </summary>
   public static event Action<string, KeyValue> KeyRemovedFromButton;
 
+  /// <summary>
+  /// Get the <see cref="KeyValue"/>s associated with a particular Button identifier string.
+  /// </summary>
+  /// <param name="buttonName">The identifier string.</param>
+  /// <returns></returns>
   public static KeyValue[] GetKeysOfButton (string buttonName);
 
+  /// <summary>
+  /// Registers a new empty Virtual Button with a default name.
+  /// </summary>
   public static void RegisterButton ();
 
+  /// <summary>
+  /// Registers a new Virtual Button.
+  /// </summary>
+  /// <param name="newButton">The identifier string and <see cref="KeyValue"/>s of the new Button.</param>
+  /// <returns>If the registration was successful, the method returns true, otherwise false.</returns>
   public static bool RegisterButton (ButtonTuple newButton);
 
+  /// <summary>
+  /// Removes an existing Virtual Button from the <see cref="InputManager"/>.
+  /// </summary>
+  /// <param name="buttonName">The particular string identifier of the Button to remove.</param>
+  /// <returns>Returns true if the operation succeeded.</returns>
   public static bool RemoveButton (string buttonName);
 
+  /// <summary>
+  /// Associates a new <see cref="KeyValue"/> with an existing Virtual Button.
+  /// </summary>
+  /// <param name="buttonName">The string identifier of the Virtual Button.</param>
+  /// <param name="keyValue">The new <see cref="KeyValue"/> to associate.</param>
+  /// <returns>Returns true if the operation succeeded.</returns>
   public static bool AddToButton (string buttonName, KeyValue keyValue);
 
+  /// <summary>
+  /// Associates a new <see cref="Key"/> with an existing Virtual Button.
+  /// </summary>
+  /// <param name="buttonName">The string identifier of the Virtual Button.</param>
+  /// <param name="newKey">The new <see cref="Key"/> to associate.</param>
+  /// <returns>Returns true if the operation succeeded.</returns>
   public static bool AddToButton (string buttonName, Key newKey);
 
+  /// <summary>
+  /// Associates a new <see cref="MouseButton"/> with an existing Virtual Button.
+  /// </summary>
+  /// <param name="buttonName">The string identifier of the Virtual Button.</param>
+  /// <param name="mouseButton">The new <see cref="MouseButton"/> to associate.</param>
+  /// <returns>Returns true if the operation succeeded.</returns>
   public static bool AddToButton (string buttonName, MouseButton mouseButton);
 
+  /// <summary>
+  /// Removes a <see cref="KeyValue"/> from an existing Virtual Button.
+  /// </summary>
+  /// <param name="buttonName">The string identifier of the Virtual Button.</param>
+  /// <param name="keyValue">The <see cref="KeyValue"/> to remove.</param>
+  /// <returns>Returns true if the operation succeeded.</returns>
   public static bool RemoveFromButton (string buttonName, KeyValue keyValue);
 
+  /// <summary>
+  /// Removes a <see cref="Key"/> from an existing Virtual Button.
+  /// </summary>
+  /// <param name="buttonName">The string identifier of the Virtual Button.</param>
+  /// <param name="key">The <see cref="Key"/> to remove.</param>
+  /// <returns>Returns true if the operation succeeded.</returns>
   public static bool RemoveFromButton (string buttonName, Key key);
 
+  /// <summary>
+  /// Removes a <see cref="MouseButton"/> from an existing Virtual Button.
+  /// </summary>
+  /// <param name="buttonName">The string identifier of the Virtual Button.</param>
+  /// <param name="mouseButton">The <see cref="MouseButton"/> to remove.</param>
+  /// <returns>Returns true if the operation succeeded.</returns>
   public static bool RemoveFromButton (string buttonName, MouseButton mouseButton);
 
+  /// <summary>
+  /// Changes the string identifier of an existing Virtual Button.
+  /// </summary>
+  /// <param name="originalName">The original identifier.</param>
+  /// <param name="newName">The new identifier.</param>
+  /// <returns>Returns true if the operation succeeded.</returns>
   public static bool RenameButton (string originalName, string newName);
 
+  /// <summary>
+  /// Checks if any of the <see cref="KeyValue"/>s associated with a Virtual Button is pressed at the moment.
+  /// </summary>
+  /// <param name="buttonName">The string identifier of the Virtual Button.</param>
+  /// <returns>Returns true, if any of the <see cref="KeyValue"/>s is pressed.</returns>
   public static bool IsButtonPressed (string buttonName);
 
+  /// <summary>
+  /// Checks if any of the <see cref="KeyValue"/>s associated with a Virtual Button has been hit in the current frame.
+  /// </summary>
+  /// <param name="buttonName">The string identifier of the Virtual Button.</param>
+  /// <returns>Returns true, if any of the <see cref="KeyValue"/>s is hit.</returns>
   public static bool IsButtonHit (string buttonName);
 
+  /// <summary>
+  /// Checks if any of the <see cref="KeyValue"/>s associated with a Virtual Button is released in the current frame.
+  /// </summary>
+  /// <param name="buttonName">The string identifier of the Virtual Button.</param>
+  /// <returns>Returns true, if any of the <see cref="KeyValue"/>s is released.</returns>
   public static bool IsButtonReleased (string buttonName);
 }
 ```
