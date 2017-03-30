@@ -68,6 +68,7 @@
     <Compile Include="CorePlugin.cs" />
     <Compile Include="InputManager.cs" />
     <Compile Include="ResNames.cs" />
+    <Compile Include="VirtualAxis.cs" />
     <Compile Include="VirtualButton.cs" />
   </ItemGroup>
   <ItemGroup />

@@ -32,9 +32,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 
 		public bool Associate (KeyValue key)
 		{
-			if (associatedKeyVals.Contains (key)) return false;
-			associatedKeyVals.Add (key);
-			return true;
+			return associatedKeyVals.Add (key);
 		}
 
 		public bool Remove (KeyValue keyVal)
