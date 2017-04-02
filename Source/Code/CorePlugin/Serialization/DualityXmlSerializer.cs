@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Duality.Serialization;
 
-namespace MFEP.Duality.Plugins.InputPlugin
+namespace MFEP.Duality.Plugins.InputPlugin.Serialization
 {
 	internal class DualityXmlSerializer : IMappingSerializer
 	{

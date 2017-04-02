@@ -1,4 +1,5 @@
 ﻿using Duality;
+using MFEP.Duality.Plugins.InputPlugin.Serialization;
 
 namespace MFEP.Duality.Plugins.InputPlugin
 {
