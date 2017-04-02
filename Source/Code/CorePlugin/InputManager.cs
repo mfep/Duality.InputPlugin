@@ -21,7 +21,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		public static IEnumerable<ButtonTuple> Buttons
 		{
 			get {
-				return buttonDict.Select (buttonPair => new ButtonTuple (buttonPair.Key, buttonPair.Value.KeyVals));
+				return buttonDict.Select (buttonPair => new ButtonTuple (buttonPair.Key, buttonPair.Value.PositiveKeyVals, buttonPair.Value.NegativeKeyVals));
 			}
 		}
 
@@ -55,13 +55,13 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		/// </summary>
 		/// <param name="buttonName">The identifier string.</param>
 		/// <returns></returns>
-		public static KeyValue[] GetKeysOfButton (string buttonName)
+		public static KeyValue[] GetKeysOfButton (string buttonName, KeyRole role = KeyRole.Positive)
 		{
 			if (!buttonDict.ContainsKey (buttonName)) {
 				LogNonExistingButton (buttonName);
 				return null;
 			}
-			return buttonDict[buttonName].KeyVals;
+			return role == KeyRole.Positive ? buttonDict[buttonName].PositiveKeyVals : buttonDict[buttonName].NegativeKeyVals;
 		}
 
 		/// <summary>
@@ -82,11 +82,11 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		/// <returns>If the registration was successful, the method returns true, otherwise false.</returns>
 		public static bool RegisterButton (ButtonTuple newButton)
 		{
-			if (string.IsNullOrWhiteSpace (newButton?.ButtonName) || (newButton.KeyValues == null)) return false;
+			if (string.IsNullOrWhiteSpace (newButton?.ButtonName) || (newButton.PositiveKeys == null && newButton.NegativeKeys == null)) return false;
 			if (buttonDict.ContainsKey (newButton.ButtonName)) {
 				Log.Core.WriteWarning ($"Overwriting virtual button '{newButton.ButtonName}'");
 			}
-			buttonDict[newButton.ButtonName] = new VirtualButton (newButton.KeyValues);
+			buttonDict[newButton.ButtonName] = new VirtualButton (newButton.PositiveKeys, newButton.NegativeKeys);
 			SaveMapping ();
 			ButtonAdded?.Invoke (newButton);
 			return true;
@@ -115,13 +115,13 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		/// <param name="buttonName">The string identifier of the Virtual Button.</param>
 		/// <param name="keyValue">The new <see cref="KeyValue"/> to associate.</param>
 		/// <returns>Returns true if the operation succeeded.</returns>
-		public static bool AddToButton (string buttonName, KeyValue keyValue)
+		public static bool AddToButton (string buttonName, KeyValue keyValue, KeyRole role = KeyRole.Positive)
 		{
 			if (!buttonDict.ContainsKey (buttonName)) {
 				LogNonExistingButton (buttonName, "Cannot add key to button. ");
 				return false;
 			}
-			if (!buttonDict[buttonName].Associate (keyValue)) return false;
+			if (!buttonDict[buttonName].Associate (keyValue, role)) return false;
 			SaveMapping ();
 			KeyAddedToButton?.Invoke (buttonName, keyValue);
 			return true;
@@ -155,13 +155,13 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		/// <param name="buttonName">The string identifier of the Virtual Button.</param>
 		/// <param name="keyValue">The <see cref="KeyValue"/> to remove.</param>
 		/// <returns>Returns true if the operation succeeded.</returns>
-		public static bool RemoveFromButton (string buttonName, KeyValue keyValue)
+		public static bool RemoveFromButton (string buttonName, KeyValue keyValue, KeyRole role = KeyRole.Positive) // TODO consider checking against the same KeyValue being Positive and Negative at once
 		{
 			if (!buttonDict.ContainsKey (buttonName)) {
 				LogNonExistingButton (buttonName, "Cannot remove key from button. ");
 				return false;
 			}
-			if (!buttonDict[buttonName].Remove (keyValue)) return false;
+			if (!buttonDict[buttonName].Remove (keyValue, role)) return false;
 			SaveMapping ();
 			KeyRemovedFromButton?.Invoke (buttonName, keyValue);
 			return true;

@@ -5,39 +5,63 @@ namespace MFEP.Duality.Plugins.InputPlugin
 {
 	internal class VirtualButton
 	{
-		private readonly HashSet<KeyValue> associatedKeyVals = new HashSet<KeyValue> ();
+		private readonly HashSet<KeyValue> positiveKeyVals = new HashSet<KeyValue>();
+		private readonly HashSet<KeyValue> negativeKeyVals = new HashSet<KeyValue>();
 
-		public VirtualButton (KeyValue[] keyValues = null)
+		public VirtualButton (KeyValue[] positiveKeyValues = null, KeyValue[] negativeKeyValues = null)
 		{
-			if (keyValues == null) return;
-			foreach (var key in keyValues) Associate (key);
+			if (positiveKeyValues != null) {
+				foreach (var keyValue in positiveKeyValues) {
+					Associate (keyValue, KeyRole.Positive);
+				}
+			}
+			if (negativeKeyValues != null) {
+				foreach (var keyValue in negativeKeyValues) {
+					Associate (keyValue, KeyRole.Negative);
+				}
+			}
 		}
 
-		public KeyValue[] KeyVals => associatedKeyVals.ToArray ();
+		public KeyValue[] PositiveKeyVals => positiveKeyVals.ToArray ();
+		public KeyValue[] NegativeKeyVals => negativeKeyVals.ToArray ();
 
 		public bool IsPressed
 		{
-			get { return associatedKeyVals.Any (keyVal => keyVal.IsPressed); }
+			get { return positiveKeyVals.Union (negativeKeyVals).Any (keyVal => keyVal.IsPressed); }
 		}
 
 		public bool IsHit
 		{
-			get { return associatedKeyVals.Any (keyVal => keyVal.IsHit); }
+			get { return positiveKeyVals.Union(negativeKeyVals).Any (keyVal => keyVal.IsHit); }
 		}
 
 		public bool IsReleased
 		{
-			get { return associatedKeyVals.Any (keyVal => keyVal.IsReleased); }
+			get { return positiveKeyVals.Union(negativeKeyVals).Any (keyVal => keyVal.IsReleased); }
 		}
 
-		public bool Associate (KeyValue key)
+		public float Get()
 		{
-			return associatedKeyVals.Add (key);
+			var x = 0.0f;
+			if (positiveKeyVals.Any(keyVal => keyVal.IsPressed))
+			{
+				x += 1.0f;
+			}
+			if (negativeKeyVals.Any(keyVal => keyVal.IsPressed))
+			{
+				x -= 1.0f;
+			}
+			return x;
 		}
 
-		public bool Remove (KeyValue keyVal)
+		public bool Associate (KeyValue key, KeyRole role)
 		{
-			return associatedKeyVals.Remove (keyVal);
+			return role == KeyRole.Positive ? positiveKeyVals.Add (key) : negativeKeyVals.Add (key);
+		}
+
+		public bool Remove (KeyValue key, KeyRole role)
+		{
+			return role == KeyRole.Positive ? positiveKeyVals.Remove (key) : negativeKeyVals.Remove (key);
 		}
 	}
 }

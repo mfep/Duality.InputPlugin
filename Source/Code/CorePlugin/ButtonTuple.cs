@@ -1,4 +1,5 @@
-﻿using Duality.Input;
+﻿using System;
+using Duality.Input;
 
 namespace MFEP.Duality.Plugins.InputPlugin
 {
@@ -12,39 +13,52 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		/// </summary>
 		public string ButtonName { get; }
 
+		public KeyValue[] PositiveKeys { get; }
+		public KeyValue[] NegativeKeys { get; }
+
 		/// <summary>
 		/// The array of <see cref="KeyValue"/>s associated with <see cref="ButtonName"/>.
 		/// </summary>
-		public KeyValue[] KeyValues { get; }
+		[Obsolete]
+		public KeyValue[] KeyValues => PositiveKeys; // TODO consider joining positive and negative keys here
 
 		/// <summary>
-		/// Construct a <see cref="ButtonTuple"/> from an identifier string and an array of <see cref="KeyValues"/>.
+		/// Construct a <see cref="ButtonTuple"/> from an identifier string and an array of <see cref="KeyValue"/>s.
 		/// This alone does not register it to the <see cref="InputManager"/>. Use <see cref="InputManager.RegisterButton (ButtonTuple)"/> for that.
 		/// </summary>
-		public ButtonTuple (string buttonName, KeyValue[] keyValues)
+		public ButtonTuple (string buttonName, KeyValue[] positiveKeys = null, KeyValue[] negativeKeys = null)
 		{
 			ButtonName = buttonName;
-			KeyValues = keyValues;
+			PositiveKeys = positiveKeys;
+			NegativeKeys = negativeKeys;
 		}
 
 		/// <summary>
 		/// Construct a <see cref="ButtonTuple"/> from an identifier string and a <see cref="Key"/>.
 		/// This alone does not register it to the <see cref="InputManager"/>. Use <see cref="InputManager.RegisterButton (ButtonTuple)"/> for that.
 		/// </summary>
-		public ButtonTuple (string buttonName, Key key)
+		public ButtonTuple (string buttonName, Key key, KeyRole role = KeyRole.Positive)
 		{
 			ButtonName = buttonName;
-			KeyValues = new[] { new KeyValue (key) };
+			if (role == KeyRole.Positive) {
+				PositiveKeys = new[] { new KeyValue (key) };
+			} else {
+				NegativeKeys = new[] { new KeyValue(key) };
+			}
 		}
 
 		/// <summary>
 		/// Construct a <see cref="ButtonTuple"/> from an identifier string and a <see cref="MouseButton"/>.
 		/// This alone does not register it to the <see cref="InputManager"/>. Use <see cref="InputManager.RegisterButton (ButtonTuple)"/> for that.
 		/// </summary>
-		public ButtonTuple (string buttonName, MouseButton mouseButton)
+		public ButtonTuple (string buttonName, MouseButton mouseButton, KeyRole role = KeyRole.Positive)
 		{
 			ButtonName = buttonName;
-			KeyValues = new[] { new KeyValue (mouseButton) };
+			if (role == KeyRole.Positive) {
+				PositiveKeys = new[] { new KeyValue (mouseButton) };
+			} else {
+				NegativeKeys = new[] { new KeyValue (mouseButton) };
+			}
 		}
 	}
 }
