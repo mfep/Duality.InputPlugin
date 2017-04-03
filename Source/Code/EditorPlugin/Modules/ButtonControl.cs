@@ -59,7 +59,7 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 				return;
 
 			addKeyBox = new AddKeyBox { Dock = DockStyle.Top };
-			keysPanel.Controls.Add (addKeyBox);
+			positiveKeysPanel.Controls.Add (addKeyBox);
 			addKeyBox.BringToFront ();
 			addKeyBox.AddButtonClicked += AddKeyboxButtonClicked;
 		}
@@ -72,7 +72,7 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 		private void CreateRemoveKeyBox (KeyValue keyValue)
 		{
 			var removeKeyBox = new RemoveKeyBox (keyValue) { Dock = DockStyle.Top };
-			keysPanel.Controls.Add (removeKeyBox);
+			positiveKeysPanel.Controls.Add (removeKeyBox);
 			removeKeyBox.BringToFront ();
 			addKeyBox.BringToFront ();
 			removeKeyBox.RemoveButtonClicked += RemoveKeyBoxButtonClicked;

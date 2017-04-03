@@ -33,10 +33,17 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.textBox1 = new System.Windows.Forms.TextBox();
 			this.panel2 = new System.Windows.Forms.Panel();
-			this.keysPanel = new System.Windows.Forms.Panel();
+			this.positiveKeysPanel = new System.Windows.Forms.Panel();
 			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+			this.label2 = new System.Windows.Forms.Label();
+			this.positivePanel = new System.Windows.Forms.Panel();
+			this.negativePanel = new System.Windows.Forms.Panel();
+			this.label3 = new System.Windows.Forms.Label();
+			this.negativeKeysPanel = new System.Windows.Forms.Panel();
 			this.panel1.SuspendLayout();
 			this.panel2.SuspendLayout();
+			this.positivePanel.SuspendLayout();
+			this.negativePanel.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// panel1
@@ -90,24 +97,74 @@
 			this.panel2.AutoSize = true;
 			this.panel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-			this.panel2.Controls.Add(this.keysPanel);
+			this.panel2.Controls.Add(this.negativePanel);
+			this.panel2.Controls.Add(this.positivePanel);
 			this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel2.Location = new System.Drawing.Point(120, 6);
 			this.panel2.Name = "panel2";
 			this.panel2.Padding = new System.Windows.Forms.Padding(4);
-			this.panel2.Size = new System.Drawing.Size(276, 73);
+			this.panel2.Size = new System.Drawing.Size(8, 73);
 			this.panel2.TabIndex = 1;
 			// 
-			// keysPanel
+			// positiveKeysPanel
 			// 
-			this.keysPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.keysPanel.AutoSize = true;
-			this.keysPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.keysPanel.Location = new System.Drawing.Point(128, 7);
-			this.keysPanel.MinimumSize = new System.Drawing.Size(141, 0);
-			this.keysPanel.Name = "keysPanel";
-			this.keysPanel.Size = new System.Drawing.Size(141, 0);
-			this.keysPanel.TabIndex = 3;
+			this.positiveKeysPanel.AutoSize = true;
+			this.positiveKeysPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.positiveKeysPanel.Location = new System.Drawing.Point(3, 20);
+			this.positiveKeysPanel.MinimumSize = new System.Drawing.Size(141, 0);
+			this.positiveKeysPanel.Name = "positiveKeysPanel";
+			this.positiveKeysPanel.Size = new System.Drawing.Size(141, 0);
+			this.positiveKeysPanel.TabIndex = 3;
+			// 
+			// label2
+			// 
+			this.label2.AutoSize = true;
+			this.label2.Location = new System.Drawing.Point(3, 6);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(70, 13);
+			this.label2.TabIndex = 4;
+			this.label2.Text = "Positive Keys";
+			// 
+			// positivePanel
+			// 
+			this.positivePanel.AutoSize = true;
+			this.positivePanel.Controls.Add(this.label2);
+			this.positivePanel.Controls.Add(this.positiveKeysPanel);
+			this.positivePanel.Dock = System.Windows.Forms.DockStyle.Top;
+			this.positivePanel.Location = new System.Drawing.Point(4, 4);
+			this.positivePanel.Name = "positivePanel";
+			this.positivePanel.Size = new System.Drawing.Size(0, 23);
+			this.positivePanel.TabIndex = 5;
+			// 
+			// negativePanel
+			// 
+			this.negativePanel.AutoSize = true;
+			this.negativePanel.Controls.Add(this.label3);
+			this.negativePanel.Controls.Add(this.negativeKeysPanel);
+			this.negativePanel.Dock = System.Windows.Forms.DockStyle.Top;
+			this.negativePanel.Location = new System.Drawing.Point(4, 27);
+			this.negativePanel.Name = "negativePanel";
+			this.negativePanel.Size = new System.Drawing.Size(0, 23);
+			this.negativePanel.TabIndex = 6;
+			// 
+			// label3
+			// 
+			this.label3.AutoSize = true;
+			this.label3.Location = new System.Drawing.Point(3, 6);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(76, 13);
+			this.label3.TabIndex = 4;
+			this.label3.Text = "Negative Keys";
+			// 
+			// negativeKeysPanel
+			// 
+			this.negativeKeysPanel.AutoSize = true;
+			this.negativeKeysPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.negativeKeysPanel.Location = new System.Drawing.Point(3, 20);
+			this.negativeKeysPanel.MinimumSize = new System.Drawing.Size(141, 0);
+			this.negativeKeysPanel.Name = "negativeKeysPanel";
+			this.negativeKeysPanel.Size = new System.Drawing.Size(141, 0);
+			this.negativeKeysPanel.TabIndex = 3;
 			// 
 			// ButtonControl
 			// 
@@ -121,11 +178,15 @@
 			this.MinimumSize = new System.Drawing.Size(0, 85);
 			this.Name = "ButtonControl";
 			this.Padding = new System.Windows.Forms.Padding(6);
-			this.Size = new System.Drawing.Size(402, 85);
+			this.Size = new System.Drawing.Size(134, 85);
 			this.panel1.ResumeLayout(false);
 			this.panel1.PerformLayout();
 			this.panel2.ResumeLayout(false);
 			this.panel2.PerformLayout();
+			this.positivePanel.ResumeLayout(false);
+			this.positivePanel.PerformLayout();
+			this.negativePanel.ResumeLayout(false);
+			this.negativePanel.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -137,8 +198,13 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel keysPanel;
+        private System.Windows.Forms.Panel positiveKeysPanel;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button removeButton;
-    }
+		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.Panel positivePanel;
+		private System.Windows.Forms.Panel negativePanel;
+		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.Panel negativeKeysPanel;
+	}
 }
