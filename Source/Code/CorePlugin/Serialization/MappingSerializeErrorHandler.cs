@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Duality;
 using Duality.Serialization;
 
 namespace MFEP.Duality.Plugins.InputPlugin.Serialization
@@ -7,13 +8,12 @@ namespace MFEP.Duality.Plugins.InputPlugin.Serialization
 	{
 		public override void HandleError (SerializeError error)
 		{
-			var resolveMemberError = error as ResolveMemberError;
-			if (resolveMemberError != null) {
+			if (error is ResolveMemberError resolveMemberError) {
 				if (resolveMemberError.MemberId != @"F:MFEP.Duality.Plugins.InputPlugin.VirtualButton:associatedKeyVals") {
 					return;
 				}
-				var virtualButtonType = typeof(VirtualButton);
-				FieldInfo fieldInfo = virtualButtonType.GetTypeInfo ().GetDeclaredField ("positiveKeyVals");
+				Log.Core.Write ("Converting legacy VirtualButton format.");
+				FieldInfo fieldInfo = typeof(VirtualButton).GetTypeInfo ().GetDeclaredField ("positiveKeyVals");
 				resolveMemberError.ResolvedMember = fieldInfo;
 			}
 		}
