@@ -2,7 +2,7 @@
 {
 	public enum KeyRole
 	{
-		Positive,
-		Negative
+		Positive = 0,
+		Negative = 1
 	}
 }

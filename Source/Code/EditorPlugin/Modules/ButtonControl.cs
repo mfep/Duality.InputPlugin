@@ -8,7 +8,7 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 	internal partial class ButtonControl : UserControl
 	{
 		private readonly Dictionary<KeyValue, RemoveKeyBox> removeKeyBoxDict = new Dictionary<KeyValue, RemoveKeyBox> ();
-		private AddKeyBox addKeyBox;
+		private readonly AddKeyBox[] addKeyBoxes = new AddKeyBox[2];
 		private string btnName;
 
 		public ButtonControl (ButtonTuple buttonTuple)
@@ -16,8 +16,10 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 			InitializeComponent ();
 			btnName = buttonTuple.ButtonName;
 			textBox1.Text = buttonTuple.ButtonName;
-			CreateAddKeybox ();
-			foreach (var keyValue in buttonTuple.KeyValues) CreateRemoveKeyBox (keyValue);
+			CreateAddKeybox (KeyRole.Positive);
+			CreateAddKeybox (KeyRole.Negative);
+			foreach (var keyValue in buttonTuple.PositiveKeys) CreateRemoveKeyBox (keyValue, KeyRole.Positive);
+			foreach (var keyValue in buttonTuple.NegativeKeys) CreateRemoveKeyBox (keyValue, KeyRole.Negative);
 			SubscribeToInputManager ();
 		}
 
@@ -44,7 +46,7 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 
 		private void ManagerKeyAddedToButton (string name, KeyValue keyValue, KeyRole keyRole)
 		{
-			if (name == btnName) CreateRemoveKeyBox (keyValue);
+			if (name == btnName) CreateRemoveKeyBox (keyValue, keyRole);
 		}
 
 		private void ManagerButtonRemoved (string buttonName)
@@ -53,28 +55,33 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 				Dispose ();
 		}
 
-		private void CreateAddKeybox ()
+		private void CreateAddKeybox (KeyRole role)
 		{
-			if (addKeyBox != null)
-				return;
+			var addKeyBox = new AddKeyBox { Dock = DockStyle.Top };
 
-			addKeyBox = new AddKeyBox { Dock = DockStyle.Top };
-			positiveKeysPanel.Controls.Add (addKeyBox);
+			var parent = role == KeyRole.Positive ? positiveKeysPanel : negativeKeysPanel;
+			parent.Controls.Add (addKeyBox);
+
 			addKeyBox.BringToFront ();
-			addKeyBox.AddButtonClicked += AddKeyboxButtonClicked;
+			addKeyBox.AddButtonClicked += keyValue => { AddKeyboxButtonClicked (keyValue, role); };
+			addKeyBoxes[(int)role] = addKeyBox;
 		}
 
-		private void AddKeyboxButtonClicked (KeyValue keyValue)
+		private void AddKeyboxButtonClicked (KeyValue keyValue, KeyRole role)
 		{
-			InputManager.AddToButton (btnName, keyValue);
+			InputManager.AddToButton (btnName, keyValue, role);
 		}
 
-		private void CreateRemoveKeyBox (KeyValue keyValue)
+		private void CreateRemoveKeyBox (KeyValue keyValue, KeyRole role)
 		{
 			var removeKeyBox = new RemoveKeyBox (keyValue) { Dock = DockStyle.Top };
-			positiveKeysPanel.Controls.Add (removeKeyBox);
+
+			var parent = role == KeyRole.Positive ? positiveKeysPanel : negativeKeysPanel;
+			parent.Controls.Add (removeKeyBox);
+
 			removeKeyBox.BringToFront ();
-			addKeyBox.BringToFront ();
+			addKeyBoxes[(int)role].BringToFront ();
+
 			removeKeyBox.RemoveButtonClicked += RemoveKeyBoxButtonClicked;
 			removeKeyBoxDict[keyValue] = removeKeyBox;
 		}
