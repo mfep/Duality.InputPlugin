@@ -101,7 +101,6 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 		private void removeButton_Click (object sender, EventArgs e)
 		{
 			InputManager.RemoveButton (btnName);
-			Parent.Focus ();
 		}
 
 		private void textBox1_KeyPress (object sender, KeyPressEventArgs e)
