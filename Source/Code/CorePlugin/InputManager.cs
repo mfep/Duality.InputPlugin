@@ -44,7 +44,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		/// <summary>
 		/// Called when a new <see cref="KeyValue"/> has been added to an existing Button.
 		/// </summary>
-		public static event Action<string, KeyValue> KeyAddedToButton;
+		public static event Action<string, KeyValue, KeyRole> KeyAddedToButton; // TODO document breaking change
 
 		/// <summary>
 		/// Called when a <see cref="KeyValue"/> has been removed from an existing Button.
@@ -73,7 +73,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			var newName = GetUnusedButtonName ();
 			buttonDict[newName] = new VirtualButton ();
 			SaveMapping ();
-			ButtonAdded?.Invoke (new ButtonTuple (newName, new KeyValue[0]));
+			ButtonAdded?.Invoke (new ButtonTuple (newName, new KeyValue[0], new KeyValue[0]));
 		}
 
 		/// <summary>
@@ -124,7 +124,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			}
 			if (!buttonDict[buttonName].Associate (keyValue, role)) return false;
 			SaveMapping ();
-			KeyAddedToButton?.Invoke (buttonName, keyValue);
+			KeyAddedToButton?.Invoke (buttonName, keyValue, role);
 			return true;
 		}
 
@@ -156,13 +156,13 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		/// <param name="buttonName">The string identifier of the Virtual Button.</param>
 		/// <param name="keyValue">The <see cref="KeyValue"/> to remove.</param>
 		/// <returns>Returns true if the operation succeeded.</returns>
-		public static bool RemoveFromButton (string buttonName, KeyValue keyValue, KeyRole role = KeyRole.Positive) // TODO consider checking against the same KeyValue being Positive and Negative at once
+		public static bool RemoveFromButton (string buttonName, KeyValue keyValue)
 		{
 			if (!buttonDict.ContainsKey (buttonName)) {
 				LogNonExistingButton (buttonName, "Cannot remove key from button. ");
 				return false;
 			}
-			if (!buttonDict[buttonName].Remove (keyValue, role)) return false;
+			if (!buttonDict[buttonName].Remove (keyValue)) return false;
 			SaveMapping ();
 			KeyRemovedFromButton?.Invoke (buttonName, keyValue);
 			return true;

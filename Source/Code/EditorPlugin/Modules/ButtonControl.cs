@@ -42,7 +42,7 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 			if (name == btnName) removeKeyBoxDict[keyValue].Dispose ();
 		}
 
-		private void ManagerKeyAddedToButton (string name, KeyValue keyValue)
+		private void ManagerKeyAddedToButton (string name, KeyValue keyValue, KeyRole keyRole)
 		{
 			if (name == btnName) CreateRemoveKeyBox (keyValue);
 		}

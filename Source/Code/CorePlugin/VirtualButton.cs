@@ -56,12 +56,15 @@ namespace MFEP.Duality.Plugins.InputPlugin
 
 		public bool Associate (KeyValue key, KeyRole role)
 		{
+			if (positiveKeyVals.Contains (key) || negativeKeyVals.Contains (key)) {
+				return false; // TODO unit test this
+			}
 			return role == KeyRole.Positive ? positiveKeyVals.Add (key) : negativeKeyVals.Add (key);
 		}
 
-		public bool Remove (KeyValue key, KeyRole role)
+		public bool Remove (KeyValue key)
 		{
-			return role == KeyRole.Positive ? positiveKeyVals.Remove (key) : negativeKeyVals.Remove (key);
+			return positiveKeyVals.Remove (key) || negativeKeyVals.Remove (key);
 		}
 	}
 }
