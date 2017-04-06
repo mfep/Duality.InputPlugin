@@ -3,6 +3,7 @@ using System.Linq;
 using Duality.Input;
 using NUnit.Framework;
 using static MFEP.Duality.Plugins.InputPlugin.InputManager;
+using static MFEP.Duality.Plugins.InputPlugin.KeyRole;
 
 namespace MFEP.Duality.Plugins.InputPlugin.Test
 {
@@ -30,11 +31,15 @@ namespace MFEP.Duality.Plugins.InputPlugin.Test
 		{
 			Assert.IsFalse (AddToButton ("Nonsense", Key.Up));
 			Assert.IsFalse (AddToButton ("Up", Key.Up));
+			Assert.IsFalse (AddToButton ("Up", Key.Up, Negative));
 			Assert.IsTrue (AddToButton ("Up", Key.A));
 			Assert.IsTrue (AddToButton ("Up", MouseButton.Extra2));
 			Assert.IsTrue (AddToButton ("Up", new KeyValue (Key.Escape)));
-			Assert.AreEqual (GetKeysOfButton("Up").Select(vb => vb.Index),
+			Assert.IsTrue (AddToButton ("Up", Key.Down, Negative));
+			Assert.AreEqual (GetKeysOfButton("Up", Positive).Select(vb => vb.Index),
 				new[] { (int)Key.Up, (int)MouseButton.Left, (int)Key.A, (int)MouseButton.Extra2, (int)Key.Escape });
+			Assert.AreEqual (GetKeysOfButton("Up", Negative).Select(vb => vb.Index),
+				new[] { (int)Key.Down });
 		}
 
 		[Test]
@@ -49,11 +54,17 @@ namespace MFEP.Duality.Plugins.InputPlugin.Test
 		}
 
 		[Test]
+		public void GetTest ()
+		{
+			Assert.AreEqual (GetAxis ("Up"), 0.0f);
+		}
+
+		[Test]
 		public void RegisterButtonTest ()
 		{
 			RegisterButton ();
 			Assert.IsFalse (IsButtonPressed ("Button0"));
-			Assert.IsTrue (RegisterButton (new ButtonTuple ("Left", new[] { new KeyValue (Key.Left) })));
+			Assert.IsTrue (RegisterButton (new ButtonTuple ("Left", new[] { new KeyValue (Key.Left), new KeyValue(Key.Right) })));
 			Assert.IsFalse (IsButtonPressed ("Left"));
 		}
 

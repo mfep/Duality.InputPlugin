@@ -24,6 +24,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 
 		public KeyValue[] PositiveKeyVals => positiveKeyVals.ToArray ();
 		public KeyValue[] NegativeKeyVals => negativeKeyVals.ToArray ();
+		internal KeyValue[] AllKeyVals => positiveKeyVals.Union (negativeKeyVals).ToArray ();
 
 		public bool IsPressed
 		{

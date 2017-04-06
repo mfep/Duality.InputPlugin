@@ -51,12 +51,21 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		/// </summary>
 		public static event Action<string, KeyValue> KeyRemovedFromButton;
 
+		public static KeyValue[] GetKeysOfButton(string buttonName)
+		{
+			if (!buttonDict.ContainsKey(buttonName)) {
+				LogNonExistingButton(buttonName);
+				return null;
+			}
+			return buttonDict[buttonName].AllKeyVals;
+		}
+
 		/// <summary>
 		/// Get the <see cref="KeyValue"/>s associated with a particular Button identifier string.
 		/// </summary>
 		/// <param name="buttonName">The identifier string.</param>
 		/// <returns></returns>
-		public static KeyValue[] GetKeysOfButton (string buttonName, KeyRole role = KeyRole.Positive)
+		public static KeyValue[] GetKeysOfButton (string buttonName, KeyRole role)
 		{
 			if (!buttonDict.ContainsKey (buttonName)) {
 				LogNonExistingButton (buttonName);
@@ -134,9 +143,9 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		/// <param name="buttonName">The string identifier of the Virtual Button.</param>
 		/// <param name="newKey">The new <see cref="Key"/> to associate.</param>
 		/// <returns>Returns true if the operation succeeded.</returns>
-		public static bool AddToButton (string buttonName, Key newKey)
+		public static bool AddToButton (string buttonName, Key newKey, KeyRole role = KeyRole.Positive)
 		{
-			return AddToButton (buttonName, new KeyValue (newKey));
+			return AddToButton (buttonName, new KeyValue (newKey), role);
 		}
 
 		/// <summary>
@@ -145,9 +154,9 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		/// <param name="buttonName">The string identifier of the Virtual Button.</param>
 		/// <param name="mouseButton">The new <see cref="MouseButton"/> to associate.</param>
 		/// <returns>Returns true if the operation succeeded.</returns>
-		public static bool AddToButton (string buttonName, MouseButton mouseButton)
+		public static bool AddToButton (string buttonName, MouseButton mouseButton, KeyRole role = KeyRole.Positive)
 		{
-			return AddToButton (buttonName, new KeyValue (mouseButton));
+			return AddToButton (buttonName, new KeyValue (mouseButton), role);
 		}
 
 		/// <summary>
@@ -241,6 +250,12 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		{
 			if (buttonDict.ContainsKey (buttonName)) return buttonDict[buttonName].IsReleased;
 			throw new ArgumentException ($"The button named {buttonName} does not exist.");
+		}
+
+		public static float GetAxis (string buttonName)
+		{
+			if (buttonDict.ContainsKey(buttonName)) return buttonDict[buttonName].Get ();
+			throw new ArgumentException($"The button named {buttonName} does not exist.");
 		}
 
 		internal static void SetSerializer (IMappingSerializer _serializer)
