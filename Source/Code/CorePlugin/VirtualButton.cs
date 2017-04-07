@@ -44,12 +44,10 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		public float Get()
 		{
 			var x = 0.0f;
-			if (positiveKeyVals.Any(keyVal => keyVal.IsPressed))
-			{
+			if (positiveKeyVals.Any(keyVal => keyVal.IsPressed)) {
 				x += 1.0f;
 			}
-			if (negativeKeyVals.Any(keyVal => keyVal.IsPressed))
-			{
+			if (negativeKeyVals.Any(keyVal => keyVal.IsPressed)) {
 				x -= 1.0f;
 			}
 			return x;
@@ -58,7 +56,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		public bool Associate (KeyValue key, KeyRole role)
 		{
 			if (positiveKeyVals.Contains (key) || negativeKeyVals.Contains (key)) {
-				return false; // TODO unit test this
+				return false;
 			}
 			return role == KeyRole.Positive ? positiveKeyVals.Add (key) : negativeKeyVals.Add (key);
 		}
