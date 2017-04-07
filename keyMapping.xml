@@ -1,8 +1,8 @@
 ﻿<root dataType="Struct" type="System.Collections.Generic.Dictionary`2[[System.String],[MFEP.Duality.Plugins.InputPlugin.VirtualButton]]" id="129723834" surrogate="true">
   <header />
   <body>
-    <Left dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.VirtualButton" id="427169525">
-      <associatedKeyVals dataType="Struct" type="System.Collections.Generic.HashSet`1[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]" id="1100841590">
+    <Horizontal dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.VirtualButton" id="427169525">
+      <negativeKeyVals dataType="Struct" type="System.Collections.Generic.HashSet`1[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]" id="1100841590">
         <m_buckets dataType="Array" type="System.Int32[]" id="2824927200">0, 3, 2</m_buckets>
         <m_comparer dataType="Struct" type="System.Collections.Generic.ObjectEqualityComparer`1[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]" id="3573126030" />
         <m_count dataType="Int">3</m_count>
@@ -32,18 +32,16 @@
             </value>
           </item>
         </m_slots>
-        <m_version dataType="Int">9</m_version>
-      </associatedKeyVals>
-    </Left>
-    <Right dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.VirtualButton" id="2035693768">
-      <associatedKeyVals dataType="Struct" type="System.Collections.Generic.HashSet`1[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]" id="2696347487">
-        <m_buckets dataType="Array" type="System.Int32[]" id="1485019246">3, 0, 2</m_buckets>
-        <m_comparer dataType="ObjectRef">3573126030</m_comparer>
+        <m_version dataType="Int">3</m_version>
+      </negativeKeyVals>
+      <positiveKeyVals dataType="Struct" type="System.Collections.Generic.HashSet`1[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]" id="649525530">
+        <m_buckets dataType="Array" type="System.Int32[]" id="411997508">3, 0, 2</m_buckets>
+        <m_comparer dataType="Struct" type="System.Collections.Generic.ObjectEqualityComparer`1[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]" id="1885627030" />
         <m_count dataType="Int">3</m_count>
         <m_freeList dataType="Int">-1</m_freeList>
         <m_lastIndex dataType="Int">3</m_lastIndex>
         <m_siInfo />
-        <m_slots dataType="Array" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]][]" id="1014616010">
+        <m_slots dataType="Array" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]][]" id="766962944">
           <item dataType="Struct" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]">
             <hashCode dataType="Int">48</hashCode>
             <next dataType="Int">-1</next>
@@ -66,45 +64,18 @@
             </value>
           </item>
         </m_slots>
-        <m_version dataType="Int">5</m_version>
-      </associatedKeyVals>
-    </Right>
-    <Up dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.VirtualButton" id="876525375">
-      <associatedKeyVals dataType="Struct" type="System.Collections.Generic.HashSet`1[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]" id="295733828">
-        <m_buckets dataType="Array" type="System.Int32[]" id="2142472772">2, 0, 0</m_buckets>
+        <m_version dataType="Int">15</m_version>
+      </positiveKeyVals>
+    </Horizontal>
+    <Vertical dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.VirtualButton" id="2035693768">
+      <negativeKeyVals dataType="Struct" type="System.Collections.Generic.HashSet`1[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]" id="2696347487">
+        <m_buckets dataType="Array" type="System.Int32[]" id="1485019246">0, 1, 2</m_buckets>
         <m_comparer dataType="ObjectRef">3573126030</m_comparer>
         <m_count dataType="Int">2</m_count>
         <m_freeList dataType="Int">-1</m_freeList>
         <m_lastIndex dataType="Int">2</m_lastIndex>
         <m_siInfo />
-        <m_slots dataType="Array" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]][]" id="538290838" length="3">
-          <item dataType="Struct" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]">
-            <hashCode dataType="Int">45</hashCode>
-            <next dataType="Int">-1</next>
-            <value dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.KeyValue">
-              <storeField dataType="Int">45</storeField>
-            </value>
-          </item>
-          <item dataType="Struct" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]">
-            <hashCode dataType="Int">105</hashCode>
-            <next dataType="Int">0</next>
-            <value dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.KeyValue">
-              <storeField dataType="Int">105</storeField>
-            </value>
-          </item>
-        </m_slots>
-        <m_version dataType="Int">2</m_version>
-      </associatedKeyVals>
-    </Up>
-    <Down dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.VirtualButton" id="2716248726">
-      <associatedKeyVals dataType="Struct" type="System.Collections.Generic.HashSet`1[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]" id="3244550529">
-        <m_buckets dataType="Array" type="System.Int32[]" id="1003990830">0, 1, 2</m_buckets>
-        <m_comparer dataType="ObjectRef">3573126030</m_comparer>
-        <m_count dataType="Int">2</m_count>
-        <m_freeList dataType="Int">-1</m_freeList>
-        <m_lastIndex dataType="Int">2</m_lastIndex>
-        <m_siInfo />
-        <m_slots dataType="Array" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]][]" id="2498410698" length="3">
+        <m_slots dataType="Array" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]][]" id="1014616010" length="3">
           <item dataType="Struct" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]">
             <hashCode dataType="Int">46</hashCode>
             <next dataType="Int">-1</next>
@@ -120,9 +91,34 @@
             </value>
           </item>
         </m_slots>
-        <m_version dataType="Int">10</m_version>
-      </associatedKeyVals>
-    </Down>
+        <m_version dataType="Int">2</m_version>
+      </negativeKeyVals>
+      <positiveKeyVals dataType="Struct" type="System.Collections.Generic.HashSet`1[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]" id="847900448">
+        <m_buckets dataType="Array" type="System.Int32[]" id="855378517">2, 0, 0</m_buckets>
+        <m_comparer dataType="ObjectRef">1885627030</m_comparer>
+        <m_count dataType="Int">2</m_count>
+        <m_freeList dataType="Int">-1</m_freeList>
+        <m_lastIndex dataType="Int">2</m_lastIndex>
+        <m_siInfo />
+        <m_slots dataType="Array" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]][]" id="1844585800" length="3">
+          <item dataType="Struct" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]">
+            <hashCode dataType="Int">45</hashCode>
+            <next dataType="Int">-1</next>
+            <value dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.KeyValue">
+              <storeField dataType="Int">45</storeField>
+            </value>
+          </item>
+          <item dataType="Struct" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]">
+            <hashCode dataType="Int">105</hashCode>
+            <next dataType="Int">0</next>
+            <value dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.KeyValue">
+              <storeField dataType="Int">105</storeField>
+            </value>
+          </item>
+        </m_slots>
+        <m_version dataType="Int">14</m_version>
+      </positiveKeyVals>
+    </Vertical>
   </body>
 </root>
 <!-- XmlFormatterBase Document Separator -->
