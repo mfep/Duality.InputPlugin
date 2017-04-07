@@ -8,7 +8,8 @@ namespace MFEP.Duality.Plugins.InputPlugin.Serialization
 	{
 		public override void HandleError (SerializeError error)
 		{
-			if (error is ResolveMemberError resolveMemberError) {
+			var resolveMemberError = error as ResolveMemberError;
+			if (resolveMemberError != null) {
 				if (resolveMemberError.MemberId != @"F:MFEP.Duality.Plugins.InputPlugin.VirtualButton:associatedKeyVals") {
 					return;
 				}
