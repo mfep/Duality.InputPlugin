@@ -51,6 +51,10 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		/// </summary>
 		public static event Action<string, KeyValue> KeyRemovedFromButton;
 
+		public static event Action<string, float> ButtonRiseTimeChanged;
+
+		public static event Action<string, float> ButtonDeadZoneChanged; // TODO consider uniform event structure
+
 		public static KeyValue[] GetKeysOfButton(string buttonName)
 		{
 			if (!buttonDict.ContainsKey(buttonName)) {
@@ -217,6 +221,27 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			SaveMapping ();
 			ButtonRenamed?.Invoke (originalName, newName);
 			return true;
+		}
+
+		public static void SetButtonRiseTime (string buttonName, float value)
+		{
+			if (!buttonDict.ContainsKey (buttonName)) {
+				LogNonExistingButton (buttonName);
+				return;
+			}
+			buttonDict[buttonName].RiseTime = value; // TODO argument check
+			ButtonRiseTimeChanged?.Invoke (buttonName, value);
+		}
+
+		public static void SetButtonDeadZone (string buttonName, float value)
+		{
+			if (!buttonDict.ContainsKey(buttonName))
+			{
+				LogNonExistingButton(buttonName);
+				return;
+			}
+			buttonDict[buttonName].DeadZone = value; // TODO argument check
+			ButtonDeadZoneChanged?.Invoke (buttonName, value);
 		}
 
 		/// <summary>
