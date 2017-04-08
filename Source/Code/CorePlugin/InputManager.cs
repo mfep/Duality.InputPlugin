@@ -13,6 +13,8 @@ namespace MFEP.Duality.Plugins.InputPlugin
 	/// </summary>
 	public static class InputManager
 	{
+		public delegate void ButtonEventHandler (ButtonEventArgs args);
+
 		[DontSerialize] private static Dictionary<string, VirtualButton> buttonDict = new Dictionary<string, VirtualButton> ();
 		[DontSerialize] private static IMappingSerializer serializer;
 
@@ -26,34 +28,32 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			}
 		}
 
+		public static event ButtonEventHandler ButtonEvent;
+
 		/// <summary>
 		/// Called when a new Button is added to the <see cref="InputManager"/>.
 		/// </summary>
-		public static event Action<ButtonTuple> ButtonAdded;
+		[Obsolete] public static event Action<ButtonTuple> ButtonAdded;
 
 		/// <summary>
 		/// Called when a currently associated Button has been removed from the <see cref="InputManager"/>.
 		/// </summary>
-		public static event Action<string> ButtonRemoved;
+		[Obsolete] public static event Action<string> ButtonRemoved;
 
 		/// <summary>
 		/// Called when a currently associated Button has been renamed.
 		/// </summary>
-		public static event Action<string, string> ButtonRenamed;
+		[Obsolete] public static event Action<string, string> ButtonRenamed;
 
 		/// <summary>
 		/// Called when a new <see cref="KeyValue"/> has been added to an existing Button.
 		/// </summary>
-		public static event Action<string, KeyValue, KeyRole> KeyAddedToButton; // TODO document breaking change
+		[Obsolete] public static event Action<string, KeyValue, KeyRole> KeyAddedToButton; // TODO document breaking change
 
 		/// <summary>
 		/// Called when a <see cref="KeyValue"/> has been removed from an existing Button.
 		/// </summary>
-		public static event Action<string, KeyValue> KeyRemovedFromButton;
-
-		public static event Action<string, float> ButtonRiseTimeChanged;
-
-		public static event Action<string, float> ButtonDeadZoneChanged; // TODO consider uniform event structure
+		[Obsolete] public static event Action<string, KeyValue> KeyRemovedFromButton;
 
 		public static KeyValue[] GetKeysOfButton(string buttonName)
 		{
@@ -87,6 +87,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			buttonDict[newName] = new VirtualButton ();
 			SaveMapping ();
 			ButtonAdded?.Invoke (new ButtonTuple (newName, new KeyValue[0], new KeyValue[0]));
+			OnButtonEvent (new AddButtonEventArgs (newName, new KeyValue[0], new KeyValue[0]));
 		}
 
 		/// <summary>
@@ -103,6 +104,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			buttonDict[newButton.ButtonName] = new VirtualButton (newButton.PositiveKeys, newButton.NegativeKeys);
 			SaveMapping ();
 			ButtonAdded?.Invoke (newButton);
+			OnButtonEvent (new AddButtonEventArgs (newButton.ButtonName, newButton.PositiveKeys, newButton.NegativeKeys));
 			return true;
 		}
 
@@ -120,6 +122,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			buttonDict.Remove (buttonName);
 			SaveMapping ();
 			ButtonRemoved?.Invoke (buttonName);
+			OnButtonEvent (new RemoveButtonEventArgs (buttonName));
 			return true;
 		}
 
@@ -138,6 +141,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			if (!buttonDict[buttonName].Associate (keyValue, role)) return false;
 			SaveMapping ();
 			KeyAddedToButton?.Invoke (buttonName, keyValue, role);
+			OnButtonEvent (new AddKeyToButtonEventArgs (buttonName, keyValue, role));
 			return true;
 		}
 
@@ -178,6 +182,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			if (!buttonDict[buttonName].Remove (keyValue)) return false;
 			SaveMapping ();
 			KeyRemovedFromButton?.Invoke (buttonName, keyValue);
+			OnButtonEvent (new RemoveKeyFromButtonEventArgs (buttonName, keyValue));
 			return true;
 		}
 
@@ -220,6 +225,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			buttonDict[newName] = button;
 			SaveMapping ();
 			ButtonRenamed?.Invoke (originalName, newName);
+			OnButtonEvent (new ButtonRenamedEventArgs (newName, originalName));
 			return true;
 		}
 
@@ -230,7 +236,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 				return;
 			}
 			buttonDict[buttonName].RiseTime = value; // TODO argument check
-			ButtonRiseTimeChanged?.Invoke (buttonName, value);
+			OnButtonEvent (new ButtonRiseTimeChangedEventArgs (buttonName, value));
 		}
 
 		public static void SetButtonDeadZone (string buttonName, float value)
@@ -241,7 +247,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 				return;
 			}
 			buttonDict[buttonName].DeadZone = value; // TODO argument check
-			ButtonDeadZoneChanged?.Invoke (buttonName, value);
+			OnButtonEvent (new ButtonDeadZoneChangedEventArgs (buttonName, value));
 		}
 
 		/// <summary>
@@ -323,6 +329,11 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		private static void LogNonExistingButton (string name, string addition = "")
 		{
 			Log.Game.WriteError ($"{addition}The button named '{name}' does not exist.");
+		}
+
+		private static void OnButtonEvent (ButtonEventArgs args)
+		{
+			ButtonEvent?.Invoke (args);
 		}
 	}
 }
