@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ButtonTuple.cs" />
+    <Compile Include="Example\CurrentValueDisplayComponent.cs" />
     <Compile Include="Serialization\DualityXmlSerializer.cs" />
     <Compile Include="Example\MovementComponent.cs" />
     <Compile Include="Example\VirtualButtonsFromCode.cs" />
