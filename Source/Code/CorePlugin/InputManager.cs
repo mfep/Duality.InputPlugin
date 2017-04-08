@@ -273,8 +273,18 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			Log.Core.Write ("Loading input mapping.");
 			buttonDict = serializer?.LoadMapping () as Dictionary<string, VirtualButton>;
 			if (buttonDict != null) return;
+			Log.Core.WriteWarning("Input mapping not found. Creating empty.");
 			buttonDict = new Dictionary<string, VirtualButton> ();
-			Log.Core.WriteWarning ("Input mapping not found. Creating empty.");
+			foreach (var virtualButtonPair in buttonDict) {
+				virtualButtonPair.Value.CalculateData ();
+			}
+		}
+
+		internal static void UpdateButtons (float dt)
+		{
+			foreach (var buttonPair in buttonDict) {
+				buttonPair.Value.Update (dt);
+			}
 		}
 
 		private static string GetUnusedButtonName ()

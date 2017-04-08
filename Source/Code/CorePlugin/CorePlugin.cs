@@ -17,5 +17,11 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			base.OnDisposePlugin ();
 			InputManager.SaveMapping ();
 		}
+
+		protected override void OnBeforeUpdate ()
+		{
+			base.OnBeforeUpdate ();
+			InputManager.UpdateButtons (Time.TimeMult * Time.SPFMult);
+		}
 	}
 }

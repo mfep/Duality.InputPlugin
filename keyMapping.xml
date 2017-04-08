@@ -2,6 +2,7 @@
   <header />
   <body>
     <Horizontal dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.VirtualButton" id="427169525">
+      <deadZone dataType="Float">0.01</deadZone>
       <negativeKeyVals dataType="Struct" type="System.Collections.Generic.HashSet`1[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]" id="1100841590">
         <m_buckets dataType="Array" type="System.Int32[]" id="2824927200">0, 3, 2</m_buckets>
         <m_comparer dataType="Struct" type="System.Collections.Generic.ObjectEqualityComparer`1[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]" id="3573126030" />
@@ -66,8 +67,10 @@
         </m_slots>
         <m_version dataType="Int">15</m_version>
       </positiveKeyVals>
+      <riseTime dataType="Float">1</riseTime>
     </Horizontal>
     <Vertical dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.VirtualButton" id="2035693768">
+      <deadZone dataType="Float">0.01</deadZone>
       <negativeKeyVals dataType="Struct" type="System.Collections.Generic.HashSet`1[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]" id="2696347487">
         <m_buckets dataType="Array" type="System.Int32[]" id="1485019246">0, 1, 2</m_buckets>
         <m_comparer dataType="ObjectRef">3573126030</m_comparer>
@@ -118,6 +121,7 @@
         </m_slots>
         <m_version dataType="Int">14</m_version>
       </positiveKeyVals>
+      <riseTime dataType="Float">1</riseTime>
     </Vertical>
   </body>
 </root>
