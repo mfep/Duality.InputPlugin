@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Duality;
 using MFEP.Duality.Plugins.InputPlugin;
 
 namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
@@ -25,10 +26,26 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 
 		private void SubscribeToInputManager ()
 		{
-			InputManager.ButtonRemoved += ManagerButtonRemoved;
-			InputManager.KeyAddedToButton += ManagerKeyAddedToButton;
-			InputManager.KeyRemovedFromButton += ManagerKeyRemovedFromButton;
-			InputManager.ButtonRenamed += ManagerButtonRenamed;
+			InputManager.ButtonsChanged += buttonArgs =>
+			{
+				switch (buttonArgs) {
+					case RemoveButtonEventArgs removeButtonArgs:
+						ManagerButtonRemoved (removeButtonArgs.ButtonName);
+						break;
+					case ButtonRenamedEventArgs renamedButtonArgs:
+						ManagerButtonRenamed (renamedButtonArgs.OldName, renamedButtonArgs.ButtonName);
+						break;
+					case AddKeyToButtonEventArgs addKeyArgs:
+						ManagerKeyAddedToButton (addKeyArgs.ButtonName, addKeyArgs.NewKeyValue, addKeyArgs.NewKeyRole);
+						break;
+					case RemoveKeyFromButtonEventArgs removeKeyArgs:
+						ManagerKeyRemovedFromButton (removeKeyArgs.ButtonName, removeKeyArgs.RemovedKeyValue);
+						break;
+					default:
+						Log.Editor.WriteError ("Unexpected button event.");
+						break;
+				}
+			};
 		}
 
 		private void ManagerButtonRenamed (string origName, string newName)

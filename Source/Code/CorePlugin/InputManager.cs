@@ -28,7 +28,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			}
 		}
 
-		public static event ButtonEventHandler ButtonEvent;
+		public static event ButtonEventHandler ButtonsChanged;
 
 		/// <summary>
 		/// Called when a new Button is added to the <see cref="InputManager"/>.
@@ -333,7 +333,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 
 		private static void OnButtonEvent (ButtonEventArgs args)
 		{
-			ButtonEvent?.Invoke (args);
+			ButtonsChanged?.Invoke (args);
 		}
 	}
 }
