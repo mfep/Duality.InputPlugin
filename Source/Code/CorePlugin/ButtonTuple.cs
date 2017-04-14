@@ -13,8 +13,8 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		/// </summary>
 		public string ButtonName { get; }
 
-		public KeyValue[] PositiveKeys { get; }
-		public KeyValue[] NegativeKeys { get; }
+		public KeyValue[] PositiveKeys { get; } = new KeyValue[0];
+		public KeyValue[] NegativeKeys { get; } = new KeyValue[0];
 		public float RiseTime { get; set; }
 
 		/// <summary>
@@ -30,8 +30,12 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		public ButtonTuple (string buttonName, KeyValue[] positiveKeys = null, KeyValue[] negativeKeys = null)
 		{
 			ButtonName = buttonName;
-			PositiveKeys = positiveKeys;
-			NegativeKeys = negativeKeys;
+			if (positiveKeys != null) {
+				PositiveKeys = positiveKeys;
+			}
+			if (negativeKeys != null) {
+				NegativeKeys = negativeKeys;
+			}
 		}
 
 		/// <summary>
