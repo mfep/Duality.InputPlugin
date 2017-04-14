@@ -9,11 +9,11 @@ namespace MFEP.Duality.Plugins.InputPlugin.Example
 	{
 		public void OnUpdate ()
 		{
-			if (DualityApp.Keyboard[Key.Number1]) AddButtons ();
-			if (DualityApp.Keyboard[Key.Number2]) RemoveButton ();
-			if (DualityApp.Keyboard[Key.Number3]) RenameButton ();
-			if (DualityApp.Keyboard[Key.Number4]) AddKeys ();
-			if (DualityApp.Keyboard[Key.Number5]) RemoveKeys ();
+			if (DualityApp.Keyboard.KeyHit (Key.Number1)) AddButtons ();
+			if (DualityApp.Keyboard.KeyHit (Key.Number2)) RemoveButton ();
+			if (DualityApp.Keyboard.KeyHit (Key.Number3)) RenameButton ();
+			if (DualityApp.Keyboard.KeyHit (Key.Number4)) AddKeys ();
+			if (DualityApp.Keyboard.KeyHit (Key.Number5)) RemoveKeys ();
 		}
 
 		private void RemoveKeys ()
