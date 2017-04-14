@@ -93,10 +93,11 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		public static void RegisterButton ()
 		{
 			var newName = GetUnusedButtonName ();
-			buttonDict[newName] = new VirtualButton ();
+			buttonDict[newName] = VirtualButton.GetDefault ();
 			SaveMapping ();
-			ButtonAdded?.Invoke (new ButtonTuple (newName, new KeyValue[0], new KeyValue[0]));
-			OnButtonEvent (new AddButtonEventArgs (newName, new KeyValue[0], new KeyValue[0]));
+			var buttonTuple = new ButtonTuple (newName, buttonDict[newName]);
+			ButtonAdded?.Invoke (buttonTuple);
+			OnButtonEvent (new AddButtonEventArgs (newName, buttonTuple));
 		}
 
 		/// <summary>
@@ -113,7 +114,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			buttonDict[newButton.ButtonName] = new VirtualButton (newButton.PositiveKeys, newButton.NegativeKeys);
 			SaveMapping ();
 			ButtonAdded?.Invoke (newButton);
-			OnButtonEvent (new AddButtonEventArgs (newButton.ButtonName, newButton.PositiveKeys, newButton.NegativeKeys));
+			OnButtonEvent (new AddButtonEventArgs (newButton.ButtonName, newButton));
 			return true;
 		}
 
@@ -245,6 +246,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 				return;
 			}
 			buttonDict[buttonName].RiseTime = value; // TODO argument check
+			SaveMapping ();
 			OnButtonEvent (new ButtonRiseTimeChangedEventArgs (buttonName, value));
 		}
 
@@ -256,6 +258,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 				return;
 			}
 			buttonDict[buttonName].DeadZone = value; // TODO argument check
+			SaveMapping ();
 			OnButtonEvent (new ButtonDeadZoneChangedEventArgs (buttonName, value));
 		}
 
@@ -312,9 +315,10 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		{
 			Log.Core.Write ("Loading input mapping.");
 			buttonDict = serializer?.LoadMapping () as Dictionary<string, VirtualButton>;
-			if (buttonDict != null) return;
-			Log.Core.WriteWarning("Input mapping not found. Creating empty.");
-			buttonDict = new Dictionary<string, VirtualButton> ();
+			if (buttonDict == null) {
+				Log.Core.WriteWarning ("Input mapping not found. Creating empty.");
+				buttonDict = new Dictionary<string, VirtualButton> ();
+			}
 			foreach (var virtualButtonPair in buttonDict) {
 				virtualButtonPair.Value.CalculateData ();
 			}

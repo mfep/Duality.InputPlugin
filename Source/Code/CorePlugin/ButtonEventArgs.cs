@@ -14,14 +14,12 @@ namespace MFEP.Duality.Plugins.InputPlugin
 
 	public class AddButtonEventArgs : ButtonEventArgs
 	{
-		public AddButtonEventArgs (string buttonName, KeyValue[] positiveKeyValues, KeyValue[] negativeKeyValues) : base (buttonName)
+		public AddButtonEventArgs (string buttonName, ButtonTuple buttonTuple) : base (buttonName)
 		{
-			PositiveKeyValues = positiveKeyValues;
-			NegativeKeyValues = negativeKeyValues;
+			ButtonTuple = buttonTuple;
 		}
 
-		public KeyValue[] PositiveKeyValues { get; }
-		public KeyValue[] NegativeKeyValues { get; }
+		public ButtonTuple ButtonTuple { get; }
 	}
 
 	public class RemoveButtonEventArgs : ButtonEventArgs

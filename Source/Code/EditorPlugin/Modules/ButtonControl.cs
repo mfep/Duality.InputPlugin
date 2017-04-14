@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Duality;
 using MFEP.Duality.Plugins.InputPlugin;
 
 namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
@@ -16,11 +15,12 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 		{
 			InitializeComponent ();
 			btnName = buttonTuple.ButtonName;
-			textBox1.Text = buttonTuple.ButtonName;
+			nameTextBox.Text = buttonTuple.ButtonName;
 			CreateAddKeybox (KeyRole.Positive);
 			CreateAddKeybox (KeyRole.Negative);
 			foreach (var keyValue in buttonTuple.PositiveKeys) CreateRemoveKeyBox (keyValue, KeyRole.Positive);
 			foreach (var keyValue in buttonTuple.NegativeKeys) CreateRemoveKeyBox (keyValue, KeyRole.Negative);
+			riseTimeTextBox.Text = buttonTuple.RiseTime.ToString ();
 			SubscribeToInputManager ();
 		}
 
@@ -41,8 +41,8 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 					case RemoveKeyFromButtonEventArgs removeKeyArgs:
 						ManagerKeyRemovedFromButton (removeKeyArgs.ButtonName, removeKeyArgs.RemovedKeyValue);
 						break;
-					default:
-						Log.Editor.WriteError ("Unexpected button event.");
+					case ButtonRiseTimeChangedEventArgs riseTimeChangedArgs:
+						ManagerRiseTimeChanged (riseTimeChangedArgs.ButtonName, riseTimeChangedArgs.NewRiseTime);
 						break;
 				}
 			};
@@ -52,7 +52,7 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 		{
 			if (origName == btnName) {
 				btnName = newName;
-				textBox1.Text = newName;
+				nameTextBox.Text = newName;
 			}
 		}
 
@@ -70,6 +70,13 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 		{
 			if (buttonName == btnName)
 				Dispose ();
+		}
+
+		private void ManagerRiseTimeChanged (string name, float value)
+		{
+			if (btnName == name) {
+				riseTimeTextBox.Text = value.ToString ();
+			}
 		}
 
 		private void CreateAddKeybox (KeyRole role)
@@ -110,9 +117,9 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 
 		private void textBox1_Leave (object sender, EventArgs e)
 		{
-			if (btnName == textBox1.Text)
+			if (btnName == nameTextBox.Text)
 				return;
-			if (!InputManager.RenameButton (btnName, textBox1.Text)) textBox1.Text = btnName;
+			if (!InputManager.RenameButton (btnName, nameTextBox.Text)) nameTextBox.Text = btnName;
 		}
 
 		private void removeButton_Click (object sender, EventArgs e)
@@ -123,6 +130,20 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 		private void textBox1_KeyPress (object sender, KeyPressEventArgs e)
 		{
 			if (e.KeyChar == (char)Keys.Return) Parent.Focus ();
+		}
+
+		private void riseTimeTextBox_Validating (object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			try {
+				var value = Convert.ToSingle (riseTimeTextBox.Text);
+				if (value <= 0.0f) {
+					throw new ArgumentOutOfRangeException ();
+				}
+				InputManager.SetButtonRiseTime (btnName, value);
+			}
+			catch (Exception) {
+				riseTimeTextBox.Text = InputManager.GetButton (btnName).RiseTime.ToString ();
+			}
 		}
 	}
 }

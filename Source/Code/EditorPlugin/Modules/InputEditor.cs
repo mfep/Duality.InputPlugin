@@ -22,7 +22,7 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 			InputManager.ButtonsChanged += args =>
 			{
 				if (args is AddButtonEventArgs addArgs) {
-					CreateButtonControl (new ButtonTuple (addArgs.ButtonName, addArgs.PositiveKeyValues, addArgs.NegativeKeyValues));
+					CreateButtonControl (addArgs.ButtonTuple);
 				}
 			};
 		}
