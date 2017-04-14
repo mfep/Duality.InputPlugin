@@ -110,6 +110,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			if (string.IsNullOrWhiteSpace (newButton?.ButtonName) || (newButton.PositiveKeys == null && newButton.NegativeKeys == null)) return false;
 			if (buttonDict.ContainsKey (newButton.ButtonName)) {
 				Log.Core.WriteWarning ($"Overwriting virtual button '{newButton.ButtonName}'");
+				RemoveButton (newButton.ButtonName);
 			}
 			buttonDict[newButton.ButtonName] = new VirtualButton (newButton.PositiveKeys, newButton.NegativeKeys);
 			SaveMapping ();
