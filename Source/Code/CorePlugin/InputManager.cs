@@ -24,7 +24,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		public static IEnumerable<ButtonTuple> Buttons
 		{
 			get {
-				return buttonDict.Select (buttonPair => new ButtonTuple (buttonPair.Key, buttonPair.Value.PositiveKeyVals, buttonPair.Value.NegativeKeyVals));
+				return buttonDict.Select (buttonPair => new ButtonTuple (buttonPair.Key, buttonPair.Value));
 			}
 		}
 
@@ -76,6 +76,15 @@ namespace MFEP.Duality.Plugins.InputPlugin
 				return null;
 			}
 			return role == KeyRole.Positive ? buttonDict[buttonName].PositiveKeyVals : buttonDict[buttonName].NegativeKeyVals;
+		}
+
+		public static ButtonTuple GetButton (string buttonName)
+		{
+			if (!buttonDict.ContainsKey(buttonName)) {
+				LogNonExistingButton(buttonName);
+				return null;
+			}
+			return new ButtonTuple (buttonName, buttonDict[buttonName]);
 		}
 
 		/// <summary>
