@@ -8,7 +8,8 @@ namespace MFEP.Duality.Plugins.InputPlugin
 	{
 		KeyboardType      = 0,
 		MouseButtonType   = 1,
-		GamepadButtonType = 2
+		GamepadButtonType = 2,
+		Last = GamepadButtonType
 	}
 
 	/// <summary>

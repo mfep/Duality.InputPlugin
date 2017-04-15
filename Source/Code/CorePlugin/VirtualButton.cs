@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Duality;
 
@@ -29,7 +30,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 
 		public float RiseTime
 		{
-			get { return riseTime; }
+			get => riseTime;
 			set { riseTime = value;
 				incrementPerSecond = 1.0f / value; }
 		}
@@ -94,7 +95,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 				targ -= 1.0f;
 			}
 			float newValue = currentValue + MathF.Sign(targ - currentValue) * incrementPerSecond * dt;
-			if (targ == 0.0f && currentValue * newValue < 0.0f) {
+			if (Math.Abs (targ) < 0.001f && currentValue * newValue < 0.0f) {
 				newValue = 0.0f;
 			}
 			currentValue = MathF.Clamp (newValue, -1.0f, 1.0f);

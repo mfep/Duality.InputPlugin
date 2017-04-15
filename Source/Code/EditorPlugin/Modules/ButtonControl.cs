@@ -20,7 +20,7 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 			CreateAddKeybox (KeyRole.Negative);
 			foreach (var keyValue in buttonTuple.PositiveKeys) CreateRemoveKeyBox (keyValue, KeyRole.Positive);
 			foreach (var keyValue in buttonTuple.NegativeKeys) CreateRemoveKeyBox (keyValue, KeyRole.Negative);
-			riseTimeTextBox.Text = buttonTuple.RiseTime.ToString ();
+			riseTimeTextBox.Text = buttonTuple.RiseTime.ToString ("G");
 			SubscribeToInputManager ();
 		}
 
@@ -75,7 +75,7 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 		private void ManagerRiseTimeChanged (string name, float value)
 		{
 			if (btnName == name) {
-				riseTimeTextBox.Text = value.ToString ();
+				riseTimeTextBox.Text = value.ToString ("G");
 			}
 		}
 

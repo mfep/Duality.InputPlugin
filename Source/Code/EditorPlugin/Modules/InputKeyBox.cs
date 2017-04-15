@@ -1,6 +1,8 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
+using Duality;
 using Duality.Input;
 using MFEP.Duality.Editor.Plugins.InputPlugin.Properties;
 using MFEP.Duality.Plugins.InputPlugin;
@@ -14,7 +16,6 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 		protected InputKeyBox ()
 		{
 			InitializeComponent ();
-
 			UpdateControls ();
 		}
 
@@ -23,7 +24,16 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 			get
 			{
 				var selectedItem = comboBox.SelectedItem;
-				return selectedKeyType == KeyType.KeyboardType ? new KeyValue ((Key)selectedItem) : new KeyValue ((MouseButton)selectedItem);
+				switch (selectedKeyType) {
+					case KeyType.KeyboardType:
+						return new KeyValue ((Key)selectedItem);
+					case KeyType.MouseButtonType:
+						return new KeyValue ((MouseButton)selectedItem);
+					case KeyType.GamepadButtonType:
+						return new KeyValue ((GamepadButton)selectedItem);
+					default:
+						throw new InvalidEnumArgumentException ();
+				}
 			}
 		}
 
@@ -49,6 +59,12 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 					KeyTypeBtn.Image = Resources.mouse_pc;
 					toolTip1.SetToolTip(comboBox, "Physical button on the mouse");
 					break;
+				case KeyType.GamepadButtonType:
+					var gamepadButtons = Enum.GetValues (typeof(GamepadButton)).Cast<GamepadButton> ().ToList ();
+					comboBox.DataSource = gamepadButtons;
+					KeyTypeBtn.Image = Resources.controller;
+					toolTip1.SetToolTip (comboBox, "Physical button on a gamepad");
+					break;
 				default:
 					throw new ArgumentOutOfRangeException ();
 			}
@@ -56,7 +72,10 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 
 		private void SelectNextKeyType ()
 		{
-			selectedKeyType = selectedKeyType == KeyType.KeyboardType ? KeyType.MouseButtonType : KeyType.KeyboardType;
+			selectedKeyType = selectedKeyType + 1;
+			if (selectedKeyType > KeyType.Last) {
+				selectedKeyType = 0;
+			}
 			UpdateControls ();
 		}
 
