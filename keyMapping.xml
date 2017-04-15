@@ -121,7 +121,7 @@
         </m_slots>
         <m_version dataType="Int">14</m_version>
       </positiveKeyVals>
-      <riseTime dataType="Float">1</riseTime>
+      <riseTime dataType="Float">0.2</riseTime>
     </Vertical>
   </body>
 </root>
