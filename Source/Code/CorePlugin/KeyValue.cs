@@ -6,8 +6,9 @@ namespace MFEP.Duality.Plugins.InputPlugin
 {
 	public enum KeyType
 	{
-		KeyboardType = 0,
-		MouseButtonType = 1
+		KeyboardType      = 0,
+		MouseButtonType   = 1,
+		GamepadButtonType = 2
 	}
 
 	/// <summary>
@@ -15,7 +16,8 @@ namespace MFEP.Duality.Plugins.InputPlugin
 	/// </summary>
 	public struct KeyValue
 	{
-		private const int mouseButtonOffset = 1000;
+		private const int mouseButtonOffset   = 1000;
+		private const int gamepadButtonOffset = 2000;
 		private readonly int storeField;
 
 		/// <summary>
@@ -34,16 +36,30 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			storeField = (int)mouseButton + mouseButtonOffset;
 		}
 
+		public KeyValue (GamepadButton gamepadButton)
+		{
+			storeField = (int)gamepadButton + gamepadButtonOffset;
+		}
+
 		/// <summary>
 		/// The <see cref="InputPlugin.KeyType"/> of this <see cref="KeyValue"/>.
 		/// </summary>
-		public KeyType KeyType => storeField < mouseButtonOffset ? KeyType.KeyboardType : KeyType.MouseButtonType;
+		public KeyType KeyType
+		{
+			get {
+				if (storeField < mouseButtonOffset) {
+					return KeyType.KeyboardType;
+				}
+				if (storeField < gamepadButtonOffset) {
+					return KeyType.MouseButtonType;
+				}
+				return KeyType.GamepadButtonType;
+			}
+		}
 
 		public override bool Equals (object obj)
 		{
-			if (obj is KeyValue)
-				return storeField == ((KeyValue)obj).storeField;
-			return false;
+			return storeField == (obj as KeyValue?)?.storeField;
 		}
 
 		public override int GetHashCode ()
@@ -53,14 +69,20 @@ namespace MFEP.Duality.Plugins.InputPlugin
 
 		public static explicit operator Key (KeyValue kv)
 		{
-			if (kv.KeyType != KeyType.KeyboardType) throw new InvalidCastException();
+			if (kv.KeyType != KeyType.KeyboardType) throw new InvalidCastException ();
 			return (Key)kv.storeField;
 		}
 
 		public static explicit operator MouseButton (KeyValue kv)
 		{
-			if (kv.KeyType != KeyType.MouseButtonType) throw new InvalidCastException();
+			if (kv.KeyType != KeyType.MouseButtonType) throw new InvalidCastException ();
 			return (MouseButton)(kv.storeField - mouseButtonOffset);
+		}
+
+		public static explicit operator GamepadButton (KeyValue kv)
+		{
+			if (kv.KeyType != KeyType.GamepadButtonType) throw new InvalidCastException ();
+			return (GamepadButton)(kv.storeField - gamepadButtonOffset);
 		}
 
 		/// <summary>
@@ -68,13 +90,14 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		/// </summary>
 		public int Index
 		{
-			get
-			{
+			get {
 				switch (KeyType) {
 					case KeyType.KeyboardType:
 						return storeField;
 					case KeyType.MouseButtonType:
 						return storeField - mouseButtonOffset;
+					case KeyType.GamepadButtonType:
+						return storeField - gamepadButtonOffset;
 					default:
 						throw new ArgumentOutOfRangeException ();
 				}
@@ -83,13 +106,14 @@ namespace MFEP.Duality.Plugins.InputPlugin
 
 		internal bool IsHit
 		{
-			get
-			{
+			get {
 				switch (KeyType) {
 					case KeyType.KeyboardType:
 						return DualityApp.Keyboard.KeyHit ((Key)this);
 					case KeyType.MouseButtonType:
 						return DualityApp.Mouse.ButtonHit ((MouseButton)this);
+					case KeyType.GamepadButtonType:
+						return DualityApp.Gamepads[0].ButtonHit ((GamepadButton)this);
 					default:
 						throw new ArgumentOutOfRangeException ();
 				}
@@ -98,13 +122,14 @@ namespace MFEP.Duality.Plugins.InputPlugin
 
 		internal bool IsPressed
 		{
-			get
-			{
+			get {
 				switch (KeyType) {
 					case KeyType.KeyboardType:
 						return DualityApp.Keyboard.KeyPressed ((Key)this);
 					case KeyType.MouseButtonType:
 						return DualityApp.Mouse.ButtonPressed ((MouseButton)this);
+					case KeyType.GamepadButtonType:
+						return DualityApp.Gamepads[0].ButtonPressed ((GamepadButton)this);
 					default:
 						throw new ArgumentOutOfRangeException ();
 				}
@@ -113,13 +138,14 @@ namespace MFEP.Duality.Plugins.InputPlugin
 
 		internal bool IsReleased
 		{
-			get
-			{
+			get {
 				switch (KeyType) {
 					case KeyType.KeyboardType:
 						return DualityApp.Keyboard.KeyReleased ((Key)this);
 					case KeyType.MouseButtonType:
 						return DualityApp.Mouse.ButtonReleased ((MouseButton)this);
+					case KeyType.GamepadButtonType:
+						return DualityApp.Gamepads[0].ButtonReleased ((GamepadButton)this);
 					default:
 						throw new ArgumentOutOfRangeException ();
 				}
