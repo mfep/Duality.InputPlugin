@@ -142,7 +142,7 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 				InputManager.SetButtonRiseTime (btnName, value);
 			}
 			catch (Exception) {
-				riseTimeTextBox.Text = InputManager.GetButton (btnName).RiseTime.ToString ();
+				riseTimeTextBox.Text = InputManager.GetButton (btnName).RiseTime.ToString ("G");
 			}
 		}
 	}
