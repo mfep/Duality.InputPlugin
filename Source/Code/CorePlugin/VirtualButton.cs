@@ -88,9 +88,9 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		internal void Update (float dt)
 		{
 			float targ = 0.0f;
-			targ += positiveKeyVals.Select (keyVal => keyVal.Get ()).Max ();
-			targ -= negativeKeyVals.Select (keyVal => keyVal.Get ()).Max ();
-			
+			targ += positiveKeyVals.Select (keyVal => keyVal.Get ()).OrderByDescending (MathF.Abs).First ();
+			targ -= negativeKeyVals.Select (keyVal => keyVal.Get ()).OrderByDescending (MathF.Abs).First ();
+
 			float newValue = currentValue + MathF.Sign(targ - currentValue) * incrementPerSecond * dt;
 			if (Math.Abs (targ) < 0.001f && currentValue * newValue < 0.0f) {
 				newValue = 0.0f;
