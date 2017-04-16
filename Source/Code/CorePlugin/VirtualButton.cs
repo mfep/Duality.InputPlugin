@@ -67,7 +67,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			get { return positiveKeyVals.Union (negativeKeyVals).Any (keyVal => keyVal.IsReleased); }
 		}
 
-		public float Get()
+		public float Get ()
 		{
 			return currentValue;
 		}
@@ -88,12 +88,9 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		internal void Update (float dt)
 		{
 			float targ = 0.0f;
-			if (positiveKeyVals.Any (keyVal => keyVal.IsPressed)) {
-				targ += 1.0f;
-			}
-			if (negativeKeyVals.Any (keyVal => keyVal.IsPressed)) {
-				targ -= 1.0f;
-			}
+			targ += positiveKeyVals.Select (keyVal => keyVal.Get ()).Max ();
+			targ -= negativeKeyVals.Select (keyVal => keyVal.Get ()).Max ();
+			
 			float newValue = currentValue + MathF.Sign(targ - currentValue) * incrementPerSecond * dt;
 			if (Math.Abs (targ) < 0.001f && currentValue * newValue < 0.0f) {
 				newValue = 0.0f;

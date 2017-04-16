@@ -9,7 +9,8 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		KeyboardType      = 0,
 		MouseButtonType   = 1,
 		GamepadButtonType = 2,
-		Last = GamepadButtonType
+		GamepadAxisType   = 3,
+		Last = GamepadAxisType
 	}
 
 	/// <summary>
@@ -19,6 +20,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 	{
 		private const int mouseButtonOffset   = 1000;
 		private const int gamepadButtonOffset = 2000;
+		private const int gamepadAxisOffset   = 3000;
 		private readonly int storeField;
 
 		/// <summary>
@@ -42,6 +44,11 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			storeField = (int)gamepadButton + gamepadButtonOffset;
 		}
 
+		public KeyValue (GamepadAxis gamepadAxis)
+		{
+			storeField = (int)gamepadAxis + gamepadAxisOffset;
+		}
+
 		/// <summary>
 		/// The <see cref="InputPlugin.KeyType"/> of this <see cref="KeyValue"/>.
 		/// </summary>
@@ -54,7 +61,10 @@ namespace MFEP.Duality.Plugins.InputPlugin
 				if (storeField < gamepadButtonOffset) {
 					return KeyType.MouseButtonType;
 				}
-				return KeyType.GamepadButtonType;
+				if (storeField < gamepadAxisOffset) {
+					return KeyType.GamepadButtonType;
+				}
+				return KeyType.GamepadAxisType;
 			}
 		}
 
@@ -86,6 +96,12 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			return (GamepadButton)(kv.storeField - gamepadButtonOffset);
 		}
 
+		public static explicit operator GamepadAxis (KeyValue kv)
+		{
+			if (kv.KeyType != KeyType.GamepadAxisType) throw new InvalidCastException ();
+			return (GamepadAxis)(kv.storeField - gamepadAxisOffset);
+		}
+
 		/// <summary>
 		/// The index of the enum member in the original enum.
 		/// </summary>
@@ -99,6 +115,8 @@ namespace MFEP.Duality.Plugins.InputPlugin
 						return storeField - mouseButtonOffset;
 					case KeyType.GamepadButtonType:
 						return storeField - gamepadButtonOffset;
+					case KeyType.GamepadAxisType:
+						return storeField - gamepadAxisOffset;
 					default:
 						throw new ArgumentOutOfRangeException ();
 				}
@@ -115,6 +133,8 @@ namespace MFEP.Duality.Plugins.InputPlugin
 						return DualityApp.Mouse.ButtonHit ((MouseButton)this);
 					case KeyType.GamepadButtonType:
 						return DualityApp.Gamepads[0].ButtonHit ((GamepadButton)this);
+					case KeyType.GamepadAxisType:
+						return false;
 					default:
 						throw new ArgumentOutOfRangeException ();
 				}
@@ -131,6 +151,8 @@ namespace MFEP.Duality.Plugins.InputPlugin
 						return DualityApp.Mouse.ButtonPressed ((MouseButton)this);
 					case KeyType.GamepadButtonType:
 						return DualityApp.Gamepads[0].ButtonPressed ((GamepadButton)this);
+					case KeyType.GamepadAxisType:
+						return MathF.Abs (DualityApp.Gamepads[0].AxisValue ((GamepadAxis)this)) > 0.0f; // TODO deadzone
 					default:
 						throw new ArgumentOutOfRangeException ();
 				}
@@ -147,9 +169,25 @@ namespace MFEP.Duality.Plugins.InputPlugin
 						return DualityApp.Mouse.ButtonReleased ((MouseButton)this);
 					case KeyType.GamepadButtonType:
 						return DualityApp.Gamepads[0].ButtonReleased ((GamepadButton)this);
+					case KeyType.GamepadAxisType:
+						return false;
 					default:
 						throw new ArgumentOutOfRangeException ();
 				}
+			}
+		}
+
+		internal float Get ()
+		{
+			switch (KeyType) {
+				case KeyType.KeyboardType:
+				case KeyType.MouseButtonType:
+				case KeyType.GamepadButtonType:
+					return IsPressed ? 1.0f : 0.0f;
+				case KeyType.GamepadAxisType:
+					return DualityApp.Gamepads[0].AxisValue ((GamepadAxis)this);
+				default:
+					throw new ArgumentOutOfRangeException ();
 			}
 		}
 	}
