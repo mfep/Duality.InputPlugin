@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Duality;
 using MFEP.Duality.Plugins.InputPlugin;
 
 namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
@@ -21,6 +22,7 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 			foreach (var keyValue in buttonTuple.PositiveKeys) CreateRemoveKeyBox (keyValue, KeyRole.Positive);
 			foreach (var keyValue in buttonTuple.NegativeKeys) CreateRemoveKeyBox (keyValue, KeyRole.Negative);
 			riseTimeTextBox.Text = buttonTuple.RiseTime.ToString ("G");
+			deadZoneTextBox.Text = buttonTuple.DeadZone.ToString ("G");
 			SubscribeToInputManager ();
 		}
 
@@ -134,15 +136,34 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 
 		private void riseTimeTextBox_Validating (object sender, System.ComponentModel.CancelEventArgs e)
 		{
+			var riseValue = InputManager.GetButton (btnName).RiseTime;
+			if (ValidateFloatTextBox (riseTimeTextBox, ref riseValue, new Range (float.Epsilon, float.MaxValue))) {
+				InputManager.SetButtonRiseTime (btnName, riseValue);
+			}
+		}
+
+		private void deadZoneTextBox_Validating (object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			var deadZoneValue = InputManager.GetButton (btnName).DeadZone;
+			if (ValidateFloatTextBox (deadZoneTextBox, ref deadZoneValue, new Range (0.0f, 1.0f))) {
+				InputManager.SetButtonDeadZone (btnName, deadZoneValue);
+			}
+		}
+
+		private bool ValidateFloatTextBox (TextBox textBox, ref float value, Range range)
+		{
 			try {
-				var value = Convert.ToSingle (riseTimeTextBox.Text);
-				if (value <= 0.0f) {
+				value = Convert.ToSingle (textBox.Text);
+				if (!range.Contains (value)) {
 					throw new ArgumentOutOfRangeException ();
 				}
-				InputManager.SetButtonRiseTime (btnName, value);
+				return true;
 			}
 			catch (Exception) {
-				riseTimeTextBox.Text = InputManager.GetButton (btnName).RiseTime.ToString ("G");
+				return false;
+			}
+			finally {
+				textBox.Text = value.ToString ("G");
 			}
 		}
 	}

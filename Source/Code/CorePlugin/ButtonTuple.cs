@@ -16,6 +16,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		public KeyValue[] PositiveKeys { get; } = new KeyValue[0];
 		public KeyValue[] NegativeKeys { get; } = new KeyValue[0];
 		public float RiseTime { get; set; }
+		public float DeadZone { get; set; }
 
 		/// <summary>
 		/// The array of <see cref="KeyValue"/>s associated with <see cref="ButtonName"/>.
@@ -72,6 +73,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			PositiveKeys = button.PositiveKeyVals;
 			NegativeKeys = button.NegativeKeyVals;
 			RiseTime = button.RiseTime;
+			DeadZone = button.DeadZone;
 		}
 	}
 }

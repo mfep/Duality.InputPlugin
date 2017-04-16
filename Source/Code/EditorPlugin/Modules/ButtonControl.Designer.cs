@@ -42,6 +42,8 @@
 			this.label2 = new System.Windows.Forms.Label();
 			this.positiveKeysPanel = new System.Windows.Forms.Panel();
 			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+			this.deadZoneLabel = new System.Windows.Forms.Label();
+			this.deadZoneTextBox = new System.Windows.Forms.TextBox();
 			this.panel1.SuspendLayout();
 			this.panel2.SuspendLayout();
 			this.negativePanel.SuspendLayout();
@@ -54,7 +56,9 @@
 			this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
 			this.panel1.Controls.Add(this.riseTimeTextBox);
+			this.panel1.Controls.Add(this.deadZoneTextBox);
 			this.panel1.Controls.Add(this.riseTimeLabel);
+			this.panel1.Controls.Add(this.deadZoneLabel);
 			this.panel1.Controls.Add(this.removeButton);
 			this.panel1.Controls.Add(this.nameLabel);
 			this.panel1.Controls.Add(this.nameTextBox);
@@ -192,6 +196,23 @@
 			this.positiveKeysPanel.Size = new System.Drawing.Size(141, 0);
 			this.positiveKeysPanel.TabIndex = 3;
 			// 
+			// deadZoneLabel
+			// 
+			this.deadZoneLabel.AutoSize = true;
+			this.deadZoneLabel.Location = new System.Drawing.Point(7, 71);
+			this.deadZoneLabel.Name = "deadZoneLabel";
+			this.deadZoneLabel.Size = new System.Drawing.Size(36, 13);
+			this.deadZoneLabel.TabIndex = 5;
+			this.deadZoneLabel.Text = "Dead:";
+			// 
+			// deadZoneTextBox
+			// 
+			this.deadZoneTextBox.Location = new System.Drawing.Point(44, 68);
+			this.deadZoneTextBox.Name = "deadZoneTextBox";
+			this.deadZoneTextBox.Size = new System.Drawing.Size(63, 20);
+			this.deadZoneTextBox.TabIndex = 6;
+			this.deadZoneTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.deadZoneTextBox_Validating);
+			// 
 			// ButtonControl
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -234,5 +255,7 @@
 		private System.Windows.Forms.Panel negativeKeysPanel;
 		private System.Windows.Forms.Label riseTimeLabel;
 		private System.Windows.Forms.TextBox riseTimeTextBox;
+		private System.Windows.Forms.TextBox deadZoneTextBox;
+		private System.Windows.Forms.Label deadZoneLabel;
 	}
 }
