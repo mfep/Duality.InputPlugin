@@ -95,8 +95,8 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			targ -= negativeKeyVals.Select (keyVal => keyVal.Get (deadZone)).OrderByDescending (MathF.Abs).First ();
 
 			float newValue = currentValue + MathF.Sign(targ - currentValue) * incrementPerSecond * dt;
-			if (Math.Abs (targ) < 0.001f && currentValue * newValue < 0.0f) {
-				newValue = 0.0f;
+			if ((currentValue - targ) * (newValue - targ) < 0.0f) {
+				newValue = targ;
 			}
 			currentValue = MathF.Clamp (newValue, -1.0f, 1.0f);
 		}
