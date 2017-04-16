@@ -31,6 +31,8 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 						return new KeyValue ((MouseButton)selectedItem);
 					case KeyType.GamepadButtonType:
 						return new KeyValue ((GamepadButton)selectedItem);
+					case KeyType.GamepadAxisType:
+						return new KeyValue ((GamepadAxis)selectedItem);
 					default:
 						throw new InvalidEnumArgumentException ();
 				}
@@ -64,6 +66,12 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 					comboBox.DataSource = gamepadButtons;
 					KeyTypeBtn.Image = Resources.controller;
 					toolTip1.SetToolTip (comboBox, "Physical button on a gamepad");
+					break;
+				case KeyType.GamepadAxisType:
+					var gamepadAxes = Enum.GetValues (typeof(GamepadAxis)).Cast<GamepadAxis> ().ToList ();
+					comboBox.DataSource = gamepadAxes;
+					KeyTypeBtn.Image = Resources.joystick;
+					toolTip1.SetToolTip (comboBox, "Analog control on a gamepad");
 					break;
 				default:
 					throw new ArgumentOutOfRangeException ();
