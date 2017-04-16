@@ -141,24 +141,6 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			}
 		}
 
-		internal bool IsPressed
-		{
-			get {
-				switch (KeyType) {
-					case KeyType.KeyboardType:
-						return DualityApp.Keyboard.KeyPressed ((Key)this);
-					case KeyType.MouseButtonType:
-						return DualityApp.Mouse.ButtonPressed ((MouseButton)this);
-					case KeyType.GamepadButtonType:
-						return DualityApp.Gamepads[0].ButtonPressed ((GamepadButton)this);
-					case KeyType.GamepadAxisType:
-						return MathF.Abs (DualityApp.Gamepads[0].AxisValue ((GamepadAxis)this)) > 0.0f; // TODO deadzone
-					default:
-						throw new ArgumentOutOfRangeException ();
-				}
-			}
-		}
-
 		internal bool IsReleased
 		{
 			get {
@@ -177,18 +159,39 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			}
 		}
 
-		internal float Get ()
+		internal bool IsPressed (float deadZone)
+		{
+			switch (KeyType) {
+				case KeyType.KeyboardType:
+					return DualityApp.Keyboard.KeyPressed ((Key)this);
+				case KeyType.MouseButtonType:
+					return DualityApp.Mouse.ButtonPressed ((MouseButton)this);
+				case KeyType.GamepadButtonType:
+					return DualityApp.Gamepads[0].ButtonPressed ((GamepadButton)this);
+				case KeyType.GamepadAxisType:
+					return MathF.Abs (DualityApp.Gamepads[0].AxisValue ((GamepadAxis)this)) > deadZone;
+				default:
+					throw new ArgumentOutOfRangeException ();
+			}
+		}
+
+		internal float Get (float deadZone)
 		{
 			switch (KeyType) {
 				case KeyType.KeyboardType:
 				case KeyType.MouseButtonType:
 				case KeyType.GamepadButtonType:
-					return IsPressed ? 1.0f : 0.0f;
+					return IsPressed (deadZone) ? 1.0f : 0.0f;
 				case KeyType.GamepadAxisType:
-					return DualityApp.Gamepads[0].AxisValue ((GamepadAxis)this);
+					return ClampWithDeadZone (DualityApp.Gamepads[0].AxisValue ((GamepadAxis)this), deadZone);
 				default:
 					throw new ArgumentOutOfRangeException ();
 			}
+		}
+
+		private static float ClampWithDeadZone (float x, float deadZone)
+		{
+			return MathF.Abs (x) < deadZone ? 0.0f : x;
 		}
 	}
 }

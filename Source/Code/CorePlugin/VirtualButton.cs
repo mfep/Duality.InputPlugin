@@ -10,7 +10,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		private readonly HashSet<KeyValue> positiveKeyVals = new HashSet<KeyValue> ();
 		private readonly HashSet<KeyValue> negativeKeyVals = new HashSet<KeyValue> ();
 		private float riseTime;
-		private float deadZone; // yet unused
+		private float deadZone;
 		[DontSerialize] private float incrementPerSecond;
 		[DontSerialize] private float currentValue;
 
@@ -47,14 +47,17 @@ namespace MFEP.Duality.Plugins.InputPlugin
 
 		public static VirtualButton GetDefault ()
 		{
-			var btn = new VirtualButton ();
-			btn.RiseTime = 0.0001f;
+			var btn = new VirtualButton
+			{
+				RiseTime = 0.0001f,
+				DeadZone = 0.3f
+			};
 			return btn;
 		}
 
 		public bool IsPressed
 		{
-			get { return positiveKeyVals.Union (negativeKeyVals).Any (keyVal => keyVal.IsPressed); }
+			get { return positiveKeyVals.Union (negativeKeyVals).Any (keyVal => keyVal.IsPressed (deadZone)); }
 		}
 
 		public bool IsHit
@@ -88,8 +91,8 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		internal void Update (float dt)
 		{
 			float targ = 0.0f;
-			targ += positiveKeyVals.Select (keyVal => keyVal.Get ()).OrderByDescending (MathF.Abs).First ();
-			targ -= negativeKeyVals.Select (keyVal => keyVal.Get ()).OrderByDescending (MathF.Abs).First ();
+			targ += positiveKeyVals.Select (keyVal => keyVal.Get (deadZone)).OrderByDescending (MathF.Abs).First ();
+			targ -= negativeKeyVals.Select (keyVal => keyVal.Get (deadZone)).OrderByDescending (MathF.Abs).First ();
 
 			float newValue = currentValue + MathF.Sign(targ - currentValue) * incrementPerSecond * dt;
 			if (Math.Abs (targ) < 0.001f && currentValue * newValue < 0.0f) {
