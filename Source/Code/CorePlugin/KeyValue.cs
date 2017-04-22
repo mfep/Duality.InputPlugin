@@ -13,180 +13,181 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		Last = GamepadAxisType
 	}
 
-	/// <summary>
-	/// Handles different <see cref="InputPlugin.KeyType"/>s uniformly.
-	/// </summary>
-	public struct KeyValue
+	public abstract class KeyValue
 	{
-		private const int mouseButtonOffset   = 1000;
-		private const int gamepadButtonOffset = 2000;
-		private const int gamepadAxisOffset   = 3000;
-		private readonly int storeField;
+		public abstract KeyType KeyType { get; }
+		public abstract int Index { get; }
+		internal abstract bool IsHit { get; }
+		internal abstract bool IsReleased { get; }
+		internal abstract bool IsPressed (float deadZone);
 
-		/// <summary>
-		/// Constructs a <see cref="KeyValue"/> from a <see cref="Key"/>.
-		/// </summary>
-		public KeyValue (Key key)
+		internal virtual float GetAxis (float deadZone)
 		{
-			storeField = (int)key;
+			return IsPressed (deadZone) ? 1.0f : 0.0f;
 		}
 
-		/// <summary>
-		/// Constructs a <see cref="KeyValue"/> from a <see cref="MouseButton"/>.
-		/// </summary>
-		public KeyValue (MouseButton mouseButton)
+		public static explicit operator KeyValue (Key key)
 		{
-			storeField = (int)mouseButton + mouseButtonOffset;
+			return new KeyboardKeyValue (key);
 		}
 
-		public KeyValue (GamepadButton gamepadButton)
+		public static explicit operator Key (KeyValue keyValue)
 		{
-			storeField = (int)gamepadButton + gamepadButtonOffset;
+			if (keyValue.KeyType != KeyType.KeyboardType) throw new InvalidCastException ();
+			return (Key)keyValue.Index;
 		}
 
-		public KeyValue (GamepadAxis gamepadAxis)
+		public static explicit operator KeyValue (MouseButton mouseButton)
 		{
-			storeField = (int)gamepadAxis + gamepadAxisOffset;
+			return new MouseKeyValue (mouseButton);
 		}
 
-		/// <summary>
-		/// The <see cref="InputPlugin.KeyType"/> of this <see cref="KeyValue"/>.
-		/// </summary>
-		public KeyType KeyType
+		public static explicit operator MouseButton (KeyValue keyValue)
 		{
-			get {
-				if (storeField < mouseButtonOffset) {
-					return KeyType.KeyboardType;
-				}
-				if (storeField < gamepadButtonOffset) {
-					return KeyType.MouseButtonType;
-				}
-				if (storeField < gamepadAxisOffset) {
-					return KeyType.GamepadButtonType;
-				}
-				return KeyType.GamepadAxisType;
-			}
+			if (keyValue.KeyType != KeyType.MouseButtonType) throw new InvalidCastException ();
+			return (MouseButton)keyValue.Index;
+		}
+
+		public static explicit operator KeyValue (GamepadButton gamepadButton)
+		{
+			return new GamepadButtonKeyValue (gamepadButton);
+		}
+
+		public static explicit operator GamepadButton (KeyValue keyValue)
+		{
+			if (keyValue.KeyType != KeyType.GamepadButtonType) throw new InvalidCastException ();
+			return (GamepadButton)keyValue.Index;
+		}
+
+		public static explicit operator KeyValue (GamepadAxis gamepadAxis)
+		{
+			return new GamepadAxisKeyValue (gamepadAxis);
+		}
+
+		public static explicit operator GamepadAxis (KeyValue keyValue)
+		{
+			if (keyValue.KeyType != KeyType.GamepadAxisType) throw new InvalidCastException ();
+			return (GamepadAxis)keyValue.Index;
+		}
+	}
+
+	internal class KeyboardKeyValue : KeyValue
+	{
+		private readonly Key _key;
+
+		public KeyboardKeyValue (Key key)
+		{
+			_key = key;
 		}
 
 		public override bool Equals (object obj)
 		{
-			return storeField == (obj as KeyValue?)?.storeField;
+			if (obj is KeyboardKeyValue keyboardKeyValue) {
+				return _key == keyboardKeyValue._key;
+			}
+			return false;
 		}
 
 		public override int GetHashCode ()
 		{
-			return storeField;
+			return (int)_key;
 		}
 
-		public static explicit operator Key (KeyValue kv)
+		public override KeyType KeyType => KeyType.KeyboardType;
+		public override int Index => (int)_key;
+		internal override bool IsHit => DualityApp.Keyboard.KeyHit (_key);
+		internal override bool IsReleased => DualityApp.Keyboard.KeyReleased (_key);
+		internal override bool IsPressed (float deadZone) => DualityApp.Keyboard.KeyPressed (_key);
+	}
+
+	internal class MouseKeyValue : KeyValue
+	{
+		private readonly MouseButton _mouseButton;
+
+		public MouseKeyValue (MouseButton mouseButton)
 		{
-			if (kv.KeyType != KeyType.KeyboardType) throw new InvalidCastException ();
-			return (Key)kv.storeField;
+			_mouseButton = mouseButton;
 		}
 
-		public static explicit operator MouseButton (KeyValue kv)
+		public override bool Equals (object obj)
 		{
-			if (kv.KeyType != KeyType.MouseButtonType) throw new InvalidCastException ();
-			return (MouseButton)(kv.storeField - mouseButtonOffset);
-		}
-
-		public static explicit operator GamepadButton (KeyValue kv)
-		{
-			if (kv.KeyType != KeyType.GamepadButtonType) throw new InvalidCastException ();
-			return (GamepadButton)(kv.storeField - gamepadButtonOffset);
-		}
-
-		public static explicit operator GamepadAxis (KeyValue kv)
-		{
-			if (kv.KeyType != KeyType.GamepadAxisType) throw new InvalidCastException ();
-			return (GamepadAxis)(kv.storeField - gamepadAxisOffset);
-		}
-
-		/// <summary>
-		/// The index of the enum member in the original enum.
-		/// </summary>
-		public int Index
-		{
-			get {
-				switch (KeyType) {
-					case KeyType.KeyboardType:
-						return storeField;
-					case KeyType.MouseButtonType:
-						return storeField - mouseButtonOffset;
-					case KeyType.GamepadButtonType:
-						return storeField - gamepadButtonOffset;
-					case KeyType.GamepadAxisType:
-						return storeField - gamepadAxisOffset;
-					default:
-						throw new ArgumentOutOfRangeException ();
-				}
+			if (obj is MouseKeyValue mouseKeyValue) {
+				return _mouseButton == mouseKeyValue._mouseButton;
 			}
+			return false;
 		}
 
-		internal bool IsHit
+		public override int GetHashCode ()
 		{
-			get {
-				switch (KeyType) {
-					case KeyType.KeyboardType:
-						return DualityApp.Keyboard.KeyHit ((Key)this);
-					case KeyType.MouseButtonType:
-						return DualityApp.Mouse.ButtonHit ((MouseButton)this);
-					case KeyType.GamepadButtonType:
-						return DualityApp.Gamepads[0].ButtonHit ((GamepadButton)this);
-					case KeyType.GamepadAxisType:
-						return false;
-					default:
-						throw new ArgumentOutOfRangeException ();
-				}
-			}
+			return (int)_mouseButton;
 		}
 
-		internal bool IsReleased
+		public override KeyType KeyType => KeyType.MouseButtonType;
+		public override int Index => (int)_mouseButton;
+		internal override bool IsHit => DualityApp.Mouse.ButtonHit (_mouseButton);
+		internal override bool IsReleased => DualityApp.Mouse.ButtonReleased (_mouseButton);
+		internal override bool IsPressed (float deadZone) => DualityApp.Mouse.ButtonPressed (_mouseButton);
+	}
+
+	internal class GamepadButtonKeyValue : KeyValue
+	{
+		private readonly GamepadButton _gamepadButton;
+
+		public GamepadButtonKeyValue (GamepadButton gamepadButton)
 		{
-			get {
-				switch (KeyType) {
-					case KeyType.KeyboardType:
-						return DualityApp.Keyboard.KeyReleased ((Key)this);
-					case KeyType.MouseButtonType:
-						return DualityApp.Mouse.ButtonReleased ((MouseButton)this);
-					case KeyType.GamepadButtonType:
-						return DualityApp.Gamepads[0].ButtonReleased ((GamepadButton)this);
-					case KeyType.GamepadAxisType:
-						return false;
-					default:
-						throw new ArgumentOutOfRangeException ();
-				}
-			}
+			_gamepadButton = gamepadButton;
 		}
 
-		internal bool IsPressed (float deadZone)
+		public override bool Equals (object obj)
 		{
-			switch (KeyType) {
-				case KeyType.KeyboardType:
-					return DualityApp.Keyboard.KeyPressed ((Key)this);
-				case KeyType.MouseButtonType:
-					return DualityApp.Mouse.ButtonPressed ((MouseButton)this);
-				case KeyType.GamepadButtonType:
-					return DualityApp.Gamepads[0].ButtonPressed ((GamepadButton)this);
-				case KeyType.GamepadAxisType:
-					return MathF.Abs (DualityApp.Gamepads[0].AxisValue ((GamepadAxis)this)) > deadZone;
-				default:
-					throw new ArgumentOutOfRangeException ();
+			if (obj is GamepadButtonKeyValue gamepadButtonKeyValue) {
+				return _gamepadButton == gamepadButtonKeyValue._gamepadButton;
 			}
+			return false;
 		}
 
-		internal float Get (float deadZone)
+		public override int GetHashCode ()
 		{
-			switch (KeyType) {
-				case KeyType.KeyboardType:
-				case KeyType.MouseButtonType:
-				case KeyType.GamepadButtonType:
-					return IsPressed (deadZone) ? 1.0f : 0.0f;
-				case KeyType.GamepadAxisType:
-					return ClampWithDeadZone (DualityApp.Gamepads[0].AxisValue ((GamepadAxis)this), deadZone);
-				default:
-					throw new ArgumentOutOfRangeException ();
+			return (int)_gamepadButton;
+		}
+
+		public override KeyType KeyType => KeyType.GamepadButtonType;
+		public override int Index => (int)_gamepadButton;
+		internal override bool IsHit => DualityApp.Gamepads[0].ButtonHit (_gamepadButton);
+		internal override bool IsReleased => DualityApp.Gamepads[0].ButtonReleased (_gamepadButton);
+		internal override bool IsPressed (float deadZone) => DualityApp.Gamepads[0].ButtonPressed (_gamepadButton);
+	}
+
+	internal class GamepadAxisKeyValue : KeyValue
+	{
+		private readonly GamepadAxis _gamepadAxis;
+
+		public GamepadAxisKeyValue (GamepadAxis gamepadAxis)
+		{
+			_gamepadAxis = gamepadAxis;
+		}
+
+		public override bool Equals (object obj)
+		{
+			if (obj is GamepadAxisKeyValue gamepadAxisKeyValue) {
+				return _gamepadAxis == gamepadAxisKeyValue._gamepadAxis;
 			}
+			return false;
+		}
+
+		public override int GetHashCode ()
+		{
+			return (int)_gamepadAxis;
+		}
+
+		public override KeyType KeyType => KeyType.GamepadAxisType;
+		public override int Index => (int)_gamepadAxis;
+		internal override bool IsHit => false;
+		internal override bool IsReleased => false;
+		internal override bool IsPressed (float deadZone) => MathF.Abs (DualityApp.Gamepads[0].AxisValue (_gamepadAxis)) > deadZone;
+		internal override float GetAxis (float deadZone)
+		{
+			return ClampWithDeadZone (DualityApp.Gamepads[0].AxisValue (_gamepadAxis), deadZone);
 		}
 
 		private static float ClampWithDeadZone (float x, float deadZone)

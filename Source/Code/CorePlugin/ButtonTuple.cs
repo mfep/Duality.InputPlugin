@@ -39,31 +39,14 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			}
 		}
 
-		/// <summary>
-		/// Construct a <see cref="ButtonTuple"/> from an identifier string and a <see cref="Key"/>.
-		/// This alone does not register it to the <see cref="InputManager"/>. Use <see cref="InputManager.RegisterButton (ButtonTuple)"/> for that.
-		/// </summary>
-		public ButtonTuple (string buttonName, Key key, KeyRole role = KeyRole.Positive)
+		public ButtonTuple (string buttonName, KeyValue positiveKeyValue = null, KeyValue negativeKeyValue = null)
 		{
 			ButtonName = buttonName;
-			if (role == KeyRole.Positive) {
-				PositiveKeys = new[] { new KeyValue (key) };
-			} else {
-				NegativeKeys = new[] { new KeyValue(key) };
+			if (positiveKeyValue != null) {
+				PositiveKeys = new[] { positiveKeyValue };
 			}
-		}
-
-		/// <summary>
-		/// Construct a <see cref="ButtonTuple"/> from an identifier string and a <see cref="MouseButton"/>.
-		/// This alone does not register it to the <see cref="InputManager"/>. Use <see cref="InputManager.RegisterButton (ButtonTuple)"/> for that.
-		/// </summary>
-		public ButtonTuple (string buttonName, MouseButton mouseButton, KeyRole role = KeyRole.Positive)
-		{
-			ButtonName = buttonName;
-			if (role == KeyRole.Positive) {
-				PositiveKeys = new[] { new KeyValue (mouseButton) };
-			} else {
-				NegativeKeys = new[] { new KeyValue (mouseButton) };
+			if (negativeKeyValue != null) {
+				NegativeKeys = new[] { negativeKeyValue };
 			}
 		}
 

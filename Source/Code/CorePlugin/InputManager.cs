@@ -166,7 +166,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		/// <returns>Returns true if the operation succeeded.</returns>
 		public static bool AddToButton (string buttonName, Key newKey, KeyRole role = KeyRole.Positive)
 		{
-			return AddToButton (buttonName, new KeyValue (newKey), role);
+			return AddToButton (buttonName, (KeyValue)newKey, role);
 		}
 
 		/// <summary>
@@ -177,7 +177,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		/// <returns>Returns true if the operation succeeded.</returns>
 		public static bool AddToButton (string buttonName, MouseButton mouseButton, KeyRole role = KeyRole.Positive)
 		{
-			return AddToButton (buttonName, new KeyValue (mouseButton), role);
+			return AddToButton (buttonName, (KeyValue)mouseButton, role);
 		}
 
 		/// <summary>
@@ -207,7 +207,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		/// <returns>Returns true if the operation succeeded.</returns>
 		public static bool RemoveFromButton (string buttonName, Key key)
 		{
-			return RemoveFromButton (buttonName, new KeyValue (key));
+			return RemoveFromButton (buttonName, (KeyValue)key);
 		}
 
 		/// <summary>
@@ -218,7 +218,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		/// <returns>Returns true if the operation succeeded.</returns>
 		public static bool RemoveFromButton (string buttonName, MouseButton mouseButton)
 		{
-			return RemoveFromButton (buttonName, new KeyValue (mouseButton));
+			return RemoveFromButton (buttonName, (KeyValue)mouseButton);
 		}
 
 		/// <summary>

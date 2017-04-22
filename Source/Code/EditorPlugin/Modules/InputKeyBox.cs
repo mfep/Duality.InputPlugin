@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using Duality;
@@ -26,15 +25,15 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin.Modules
 				var selectedItem = comboBox.SelectedItem;
 				switch (selectedKeyType) {
 					case KeyType.KeyboardType:
-						return new KeyValue ((Key)selectedItem);
+						return (KeyValue)(Key)selectedItem;
 					case KeyType.MouseButtonType:
-						return new KeyValue ((MouseButton)selectedItem);
+						return (KeyValue)(MouseButton)selectedItem;
 					case KeyType.GamepadButtonType:
-						return new KeyValue ((GamepadButton)selectedItem);
+						return (KeyValue)(GamepadButton)selectedItem;
 					case KeyType.GamepadAxisType:
-						return new KeyValue ((GamepadAxis)selectedItem);
+						return (KeyValue)(GamepadAxis)selectedItem;
 					default:
-						throw new InvalidEnumArgumentException ();
+						throw new ArgumentOutOfRangeException ();
 				}
 			}
 		}

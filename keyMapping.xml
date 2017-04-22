@@ -4,7 +4,7 @@
     <Horizontal dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.VirtualButton" id="427169525">
       <deadZone dataType="Float">0.3</deadZone>
       <negativeKeyVals dataType="Struct" type="System.Collections.Generic.HashSet`1[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]" id="1100841590">
-        <m_buckets dataType="Array" type="System.Int32[]" id="2824927200">0, 0, 4, 0, 0, 1, 3</m_buckets>
+        <m_buckets dataType="Array" type="System.Int32[]" id="2824927200">3, 0, 0, 0, 4, 2, 1</m_buckets>
         <m_comparer dataType="Struct" type="System.Collections.Generic.ObjectEqualityComparer`1[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]" id="3573126030" />
         <m_count dataType="Int">4</m_count>
         <m_freeList dataType="Int">-1</m_freeList>
@@ -12,88 +12,88 @@
         <m_siInfo />
         <m_slots dataType="Array" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]][]" id="117753596" length="7">
           <item dataType="Struct" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]">
-            <hashCode dataType="Int">47</hashCode>
-            <next dataType="Int">-1</next>
-            <value dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.KeyValue">
-              <storeField dataType="Int">47</storeField>
-            </value>
-          </item>
-          <item dataType="Struct" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]">
             <hashCode dataType="Int">83</hashCode>
             <next dataType="Int">-1</next>
-            <value dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.KeyValue">
-              <storeField dataType="Int">83</storeField>
+            <value dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.KeyboardKeyValue" id="180971396">
+              <_key dataType="Enum" type="Duality.Input.Key" name="A" value="83" />
             </value>
           </item>
           <item dataType="Struct" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]">
-            <hashCode dataType="Int">1000</hashCode>
-            <next dataType="Int">1</next>
-            <value dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.KeyValue">
-              <storeField dataType="Int">1000</storeField>
-            </value>
-          </item>
-          <item dataType="Struct" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]">
-            <hashCode dataType="Int">2004</hashCode>
+            <hashCode dataType="Int">47</hashCode>
             <next dataType="Int">-1</next>
-            <value dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.KeyValue">
-              <storeField dataType="Int">2004</storeField>
+            <value dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.KeyboardKeyValue" id="4277521558">
+              <_key dataType="Enum" type="Duality.Input.Key" name="Left" value="47" />
+            </value>
+          </item>
+          <item dataType="Struct" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]">
+            <hashCode dataType="Int">0</hashCode>
+            <next dataType="Int">-1</next>
+            <value dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.MouseKeyValue" id="4095268160">
+              <_mouseButton dataType="Enum" type="Duality.Input.MouseButton" name="Left" value="0" />
+            </value>
+          </item>
+          <item dataType="Struct" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]">
+            <hashCode dataType="Int">4</hashCode>
+            <next dataType="Int">-1</next>
+            <value dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.GamepadButtonKeyValue" id="327118498">
+              <_gamepadButton dataType="Enum" type="Duality.GamepadButton" name="DPadLeft" value="4" />
             </value>
           </item>
         </m_slots>
         <m_version dataType="Int">4</m_version>
       </negativeKeyVals>
       <positiveKeyVals dataType="Struct" type="System.Collections.Generic.HashSet`1[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]" id="649525530">
-        <m_buckets dataType="Array" type="System.Int32[]" id="411997508">0, 3, 2, 4, 0, 5, 1</m_buckets>
-        <m_comparer dataType="Struct" type="System.Collections.Generic.ObjectEqualityComparer`1[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]" id="1885627030" />
+        <m_buckets dataType="Array" type="System.Int32[]" id="411997508">0, 5, 3, 0, 0, 4, 2</m_buckets>
+        <m_comparer dataType="ObjectRef">3573126030</m_comparer>
         <m_count dataType="Int">5</m_count>
         <m_freeList dataType="Int">-1</m_freeList>
         <m_lastIndex dataType="Int">5</m_lastIndex>
         <m_siInfo />
-        <m_slots dataType="Array" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]][]" id="766962944" length="7">
-          <item dataType="Struct" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]">
-            <hashCode dataType="Int">48</hashCode>
-            <next dataType="Int">-1</next>
-            <value dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.KeyValue">
-              <storeField dataType="Int">48</storeField>
-            </value>
-          </item>
+        <m_slots dataType="Array" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]][]" id="1885627030" length="7">
           <item dataType="Struct" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]">
             <hashCode dataType="Int">86</hashCode>
             <next dataType="Int">-1</next>
-            <value dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.KeyValue">
-              <storeField dataType="Int">86</storeField>
+            <value dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.KeyboardKeyValue" id="2506437326">
+              <_key dataType="Enum" type="Duality.Input.Key" name="D" value="86" />
             </value>
           </item>
           <item dataType="Struct" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]">
-            <hashCode dataType="Int">1002</hashCode>
+            <hashCode dataType="Int">48</hashCode>
             <next dataType="Int">-1</next>
-            <value dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.KeyValue">
-              <storeField dataType="Int">1002</storeField>
+            <value dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.KeyboardKeyValue" id="2366735178">
+              <_key dataType="Enum" type="Duality.Input.Key" name="Right" value="48" />
             </value>
           </item>
           <item dataType="Struct" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]">
-            <hashCode dataType="Int">2005</hashCode>
-            <next dataType="Int">-1</next>
-            <value dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.KeyValue">
-              <storeField dataType="Int">2005</storeField>
+            <hashCode dataType="Int">2</hashCode>
+            <next dataType="Int">0</next>
+            <value dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.MouseKeyValue" id="1442541694">
+              <_mouseButton dataType="Enum" type="Duality.Input.MouseButton" name="Right" value="2" />
             </value>
           </item>
           <item dataType="Struct" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]">
-            <hashCode dataType="Int">3001</hashCode>
+            <hashCode dataType="Int">5</hashCode>
             <next dataType="Int">-1</next>
-            <value dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.KeyValue">
-              <storeField dataType="Int">3001</storeField>
+            <value dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.GamepadButtonKeyValue" id="713485146">
+              <_gamepadButton dataType="Enum" type="Duality.GamepadButton" name="DPadRight" value="5" />
+            </value>
+          </item>
+          <item dataType="Struct" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]">
+            <hashCode dataType="Int">1</hashCode>
+            <next dataType="Int">-1</next>
+            <value dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.GamepadAxisKeyValue" id="1634746798">
+              <_gamepadAxis dataType="Enum" type="Duality.Input.GamepadAxis" name="LeftThumbstickX" value="1" />
             </value>
           </item>
         </m_slots>
-        <m_version dataType="Int">19</m_version>
+        <m_version dataType="Int">5</m_version>
       </positiveKeyVals>
-      <riseTime dataType="Float">1</riseTime>
+      <riseTime dataType="Float">0.03</riseTime>
     </Horizontal>
     <Vertical dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.VirtualButton" id="2035693768">
       <deadZone dataType="Float">0.3</deadZone>
       <negativeKeyVals dataType="Struct" type="System.Collections.Generic.HashSet`1[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]" id="2696347487">
-        <m_buckets dataType="Array" type="System.Int32[]" id="1485019246">0, 0, 0, 2, 1, 3, 4</m_buckets>
+        <m_buckets dataType="Array" type="System.Int32[]" id="1485019246">3, 0, 4, 1, 2, 0, 0</m_buckets>
         <m_comparer dataType="ObjectRef">3573126030</m_comparer>
         <m_count dataType="Int">4</m_count>
         <m_freeList dataType="Int">-1</m_freeList>
@@ -101,79 +101,69 @@
         <m_siInfo />
         <m_slots dataType="Array" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]][]" id="1014616010" length="7">
           <item dataType="Struct" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]">
-            <hashCode dataType="Int">46</hashCode>
-            <next dataType="Int">-1</next>
-            <value dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.KeyValue">
-              <storeField dataType="Int">46</storeField>
-            </value>
-          </item>
-          <item dataType="Struct" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]">
             <hashCode dataType="Int">101</hashCode>
             <next dataType="Int">-1</next>
-            <value dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.KeyValue">
-              <storeField dataType="Int">101</storeField>
+            <value dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.KeyboardKeyValue" id="276532928">
+              <_key dataType="Enum" type="Duality.Input.Key" name="S" value="101" />
             </value>
           </item>
           <item dataType="Struct" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]">
-            <hashCode dataType="Int">2007</hashCode>
+            <hashCode dataType="Int">46</hashCode>
             <next dataType="Int">-1</next>
-            <value dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.KeyValue">
-              <storeField dataType="Int">2007</storeField>
+            <value dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.KeyboardKeyValue" id="3035386446">
+              <_key dataType="Enum" type="Duality.Input.Key" name="Down" value="46" />
             </value>
           </item>
           <item dataType="Struct" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]">
-            <hashCode dataType="Int">3002</hashCode>
+            <hashCode dataType="Int">7</hashCode>
             <next dataType="Int">-1</next>
-            <value dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.KeyValue">
-              <storeField dataType="Int">3002</storeField>
+            <value dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.GamepadButtonKeyValue" id="2006425180">
+              <_gamepadButton dataType="Enum" type="Duality.GamepadButton" name="DPadDown" value="7" />
+            </value>
+          </item>
+          <item dataType="Struct" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]">
+            <hashCode dataType="Int">2</hashCode>
+            <next dataType="Int">-1</next>
+            <value dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.GamepadAxisKeyValue" id="2384079954">
+              <_gamepadAxis dataType="Enum" type="Duality.Input.GamepadAxis" name="LeftThumbstickY" value="2" />
             </value>
           </item>
         </m_slots>
         <m_version dataType="Int">4</m_version>
       </negativeKeyVals>
       <positiveKeyVals dataType="Struct" type="System.Collections.Generic.HashSet`1[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]" id="847900448">
-        <m_buckets dataType="Array" type="System.Int32[]" id="855378517">2, 0, 0, 1, 3, 0, 0</m_buckets>
-        <m_comparer dataType="ObjectRef">1885627030</m_comparer>
+        <m_buckets dataType="Array" type="System.Int32[]" id="855378517">3, 0, 0</m_buckets>
+        <m_comparer dataType="ObjectRef">3573126030</m_comparer>
         <m_count dataType="Int">3</m_count>
-        <m_freeList dataType="Int">4</m_freeList>
-        <m_lastIndex dataType="Int">5</m_lastIndex>
+        <m_freeList dataType="Int">-1</m_freeList>
+        <m_lastIndex dataType="Int">3</m_lastIndex>
         <m_siInfo />
-        <m_slots dataType="Array" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]][]" id="1844585800" length="7">
-          <item dataType="Struct" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]">
-            <hashCode dataType="Int">45</hashCode>
-            <next dataType="Int">-1</next>
-            <value dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.KeyValue">
-              <storeField dataType="Int">45</storeField>
-            </value>
-          </item>
+        <m_slots dataType="Array" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]][]" id="1844585800">
           <item dataType="Struct" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]">
             <hashCode dataType="Int">105</hashCode>
             <next dataType="Int">-1</next>
-            <value dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.KeyValue">
-              <storeField dataType="Int">105</storeField>
+            <value dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.KeyboardKeyValue" id="2366899861">
+              <_key dataType="Enum" type="Duality.Input.Key" name="W" value="105" />
             </value>
           </item>
           <item dataType="Struct" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]">
-            <hashCode dataType="Int">2006</hashCode>
-            <next dataType="Int">-1</next>
-            <value dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.KeyValue">
-              <storeField dataType="Int">2006</storeField>
+            <hashCode dataType="Int">45</hashCode>
+            <next dataType="Int">0</next>
+            <value dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.KeyboardKeyValue" id="1977042632">
+              <_key dataType="Enum" type="Duality.Input.Key" name="Up" value="45" />
             </value>
           </item>
           <item dataType="Struct" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]">
-            <hashCode dataType="Int">-1</hashCode>
-            <next dataType="Int">-1</next>
-            <value dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.KeyValue" />
-          </item>
-          <item dataType="Struct" type="System.Collections.Generic.HashSet`1+Slot[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]">
-            <hashCode dataType="Int">-1</hashCode>
-            <next dataType="Int">3</next>
-            <value dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.KeyValue" />
+            <hashCode dataType="Int">6</hashCode>
+            <next dataType="Int">1</next>
+            <value dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.GamepadButtonKeyValue" id="3714829727">
+              <_gamepadButton dataType="Enum" type="Duality.GamepadButton" name="DPadUp" value="6" />
+            </value>
           </item>
         </m_slots>
-        <m_version dataType="Int">23</m_version>
+        <m_version dataType="Int">3</m_version>
       </positiveKeyVals>
-      <riseTime dataType="Float">0.2</riseTime>
+      <riseTime dataType="Float">0.3</riseTime>
     </Vertical>
   </body>
 </root>

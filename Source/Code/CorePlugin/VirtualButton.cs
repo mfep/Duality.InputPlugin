@@ -91,10 +91,10 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		{
 			float targ = 0.0f;
 			if (positiveKeyVals.Count > 0) {
-				targ += positiveKeyVals.Select (keyVal => keyVal.Get (deadZone)).OrderByDescending (MathF.Abs).First ();
+				targ += positiveKeyVals.Select (keyVal => keyVal.GetAxis (deadZone)).OrderByDescending (MathF.Abs).First ();
 			}
 			if (negativeKeyVals.Count > 0) {
-				targ -= negativeKeyVals.Select (keyVal => keyVal.Get (deadZone)).OrderByDescending (MathF.Abs).First ();
+				targ -= negativeKeyVals.Select (keyVal => keyVal.GetAxis (deadZone)).OrderByDescending (MathF.Abs).First ();
 			}
 
 			float newValue = currentValue + MathF.Sign(targ - currentValue) * incrementPerSecond * dt;
