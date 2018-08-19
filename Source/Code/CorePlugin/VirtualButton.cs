@@ -23,48 +23,32 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		public List<KeyValue> PositiveKeys { get => positiveKeyVals; set => positiveKeyVals = value; }
 		public List<KeyValue> NegativeKeys { get => negativeKeyVals; set => negativeKeyVals = value; }
 
-		internal KeyValue[] AllKeyVals => positiveKeyVals.Union (negativeKeyVals).ToArray ();
+		internal bool IsPressed =>
+			positiveKeyVals?.Union (negativeKeyVals).Any (keyVal => keyVal.IsPressed (DeadZone)) ?? false;
 
-		internal bool IsPressed
-		{
-			get { return positiveKeyVals.Union (negativeKeyVals).Any (keyVal => keyVal.IsPressed (DeadZone)); }
-		}
+		internal bool IsHit =>
+			positiveKeyVals?.Union (negativeKeyVals).Any (keyVal => keyVal.IsHit) ?? false;
 
-		internal bool IsHit
-		{
-			get { return positiveKeyVals.Union (negativeKeyVals).Any (keyVal => keyVal.IsHit); }
-		}
+		internal bool IsReleased =>
+			positiveKeyVals?.Union (negativeKeyVals).Any (keyVal => keyVal.IsReleased) ?? false;
 
-		internal bool IsReleased
-		{
-			get { return positiveKeyVals.Union (negativeKeyVals).Any (keyVal => keyVal.IsReleased); }
-		}
-
-		internal float Get ()
-		{
-			return currentValue;
-		}
+		internal float Value => currentValue;
 
 		internal void Update (float dt)
 		{
-			float targ = 0.0f;
-			if (positiveKeyVals.Count > 0) {
+			var targ = 0.0f;
+			if (positiveKeyVals != null && positiveKeyVals.Count > 0) {
 				targ += positiveKeyVals.Select (keyVal => keyVal.GetAxis (DeadZone)).OrderByDescending (MathF.Abs).First ();
 			}
-			if (negativeKeyVals.Count > 0) {
+			if (negativeKeyVals != null && negativeKeyVals.Count > 0) {
 				targ -= negativeKeyVals.Select (keyVal => keyVal.GetAxis (DeadZone)).OrderByDescending (MathF.Abs).First ();
 			}
 
-			float newValue = currentValue + MathF.Sign(targ - currentValue) * incrementPerSecond * dt;
+			var newValue = currentValue + MathF.Sign(targ - currentValue) * incrementPerSecond * dt;
 			if ((currentValue - targ) * (newValue - targ) < 0.0f) {
 				newValue = targ;
 			}
 			currentValue = MathF.Clamp (newValue, -1.0f, 1.0f);
-		}
-
-		internal void CalculateData ()
-		{
-			incrementPerSecond = 1.0f / riseTime;
 		}
 	}
 }

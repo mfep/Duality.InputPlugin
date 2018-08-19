@@ -50,7 +50,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 
 		public static float GetAxis (string buttonName)
 		{
-			if (buttonDict.ContainsKey(buttonName)) return buttonDict[buttonName].Get ();
+			if (buttonDict.ContainsKey(buttonName)) return buttonDict[buttonName].Value;
 			throw new ArgumentException($"The button named {buttonName} does not exist.");
 		}
 
