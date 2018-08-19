@@ -8,8 +8,9 @@ namespace MFEP.Duality.Plugins.InputPlugin
 	{
 		private List<KeyValue> positiveKeyVals;
 		private List<KeyValue> negativeKeyVals;
-		private float riseTime;
-		private float incrementPerSecond;
+		private float riseTime = 0.01f;
+		private float incrementPerSecond = 100.0f;
+		private float deadZone = 0.3f;
 		[DontSerialize] private float currentValue;
 
 		public float RiseTime
@@ -19,12 +20,21 @@ namespace MFEP.Duality.Plugins.InputPlugin
 				incrementPerSecond = 1.0f / value; }
 		}
 
-		public float DeadZone { get; set; }
+		public float DeadZone
+		{
+			get {
+				return deadZone;
+			}
+			set {
+				deadZone = MathF.Clamp01 (deadZone);
+			}
+		}
+
 		public List<KeyValue> PositiveKeys { get => positiveKeyVals; set => positiveKeyVals = value; }
 		public List<KeyValue> NegativeKeys { get => negativeKeyVals; set => negativeKeyVals = value; }
 
 		internal bool IsPressed =>
-			positiveKeyVals?.Union (negativeKeyVals).Any (keyVal => keyVal.IsPressed (DeadZone)) ?? false;
+			positiveKeyVals?.Union (negativeKeyVals).Any (keyVal => keyVal.IsPressed (deadZone)) ?? false;
 
 		internal bool IsHit =>
 			positiveKeyVals?.Union (negativeKeyVals).Any (keyVal => keyVal.IsHit) ?? false;
@@ -38,10 +48,10 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		{
 			var targ = 0.0f;
 			if (positiveKeyVals != null && positiveKeyVals.Count > 0) {
-				targ += positiveKeyVals.Select (keyVal => keyVal?.GetAxis (DeadZone) ?? 0.0f).OrderByDescending (MathF.Abs).First ();
+				targ += positiveKeyVals.Select (keyVal => keyVal?.GetAxis (deadZone) ?? 0.0f).OrderByDescending (MathF.Abs).First ();
 			}
 			if (negativeKeyVals != null && negativeKeyVals.Count > 0) {
-				targ -= negativeKeyVals.Select (keyVal => keyVal?.GetAxis (DeadZone) ?? 0.0f).OrderByDescending (MathF.Abs).First ();
+				targ -= negativeKeyVals.Select (keyVal => keyVal?.GetAxis (deadZone) ?? 0.0f).OrderByDescending (MathF.Abs).First ();
 			}
 
 			var newValue = currentValue + MathF.Sign(targ - currentValue) * incrementPerSecond * dt;
