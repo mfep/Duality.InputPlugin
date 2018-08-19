@@ -58,8 +58,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Example\CurrentValueDisplayComponent.cs" />
-    <None Include="Example\MovementComponent.cs" />
+    <Compile Include="Example\CurrentValueDisplayComponent.cs" />
+    <Compile Include="Example\MovementComponent.cs" />
     <None Include="Example\VirtualButtonsFromCode.cs" />
     <Compile Include="InputManagerExtensions.cs" />
     <Compile Include="InputMapping.cs" />

@@ -1,26 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using Duality;
+using Duality.Editor;
 
 namespace MFEP.Duality.Plugins.InputPlugin
 {
-	/// <summary>
-	/// Manager class for every Virtual Button related operation, such as adding and removing buttons,
-	/// associating keyboard keys and mouse buttons with them, renaming buttons, and getting their status.
-	/// </summary>
+	[EditorHintCategory (ResNames.EditorCategory)]
 	public class InputManager : Component, ICmpInitializable
 	{
-		[DontSerialize] private Dictionary<string, VirtualButton> buttonDict;
+		private Dictionary<string, VirtualButton> ButtonDict => inputMapping.Res.ButtonDict;
 		private ContentRef<InputMapping> inputMapping;
 
-		public ContentRef<InputMapping> InputMapping 
-		{
-			get => inputMapping;
-			set {
-				inputMapping = value;
-				buttonDict = inputMapping.Res.ButtonDict;
-			}
-		}
+		public ContentRef<InputMapping> InputMapping { get => inputMapping; set => inputMapping = value; }
 
 		void ICmpInitializable.OnInit (InitContext context)
 		{
@@ -44,7 +35,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		/// <returns>Returns true, if any of the <see cref="KeyValue"/>s is pressed.</returns>
 		public bool IsButtonPressed (string buttonName)
 		{
-			if (buttonDict.ContainsKey (buttonName)) return buttonDict[buttonName].IsPressed;
+			if (ButtonDict.ContainsKey (buttonName)) return ButtonDict[buttonName]?.IsPressed ?? throw new NullReferenceException ("VirtualButton dictionary value is null!");
 			throw new ArgumentException ($"The button named {buttonName} does not exist.");
 		}
 
@@ -55,7 +46,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		/// <returns>Returns true, if any of the <see cref="KeyValue"/>s is hit.</returns>
 		public bool IsButtonHit (string buttonName)
 		{
-			if (buttonDict.ContainsKey (buttonName)) return buttonDict[buttonName].IsHit;
+			if (ButtonDict.ContainsKey (buttonName)) return ButtonDict[buttonName]?.IsHit ?? throw new NullReferenceException ("VirtualButton dictionary value is null!"); ;
 			throw new ArgumentException ($"The button named {buttonName} does not exist.");
 		}
 
@@ -66,23 +57,23 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		/// <returns>Returns true, if any of the <see cref="KeyValue"/>s is released.</returns>
 		public bool IsButtonReleased (string buttonName)
 		{
-			if (buttonDict.ContainsKey (buttonName)) return buttonDict[buttonName].IsReleased;
+			if (ButtonDict.ContainsKey (buttonName)) return ButtonDict[buttonName]?.IsReleased ?? throw new NullReferenceException ("VirtualButton dictionary value is null!"); ;
 			throw new ArgumentException ($"The button named {buttonName} does not exist.");
 		}
 
 		public float GetAxis (string buttonName)
 		{
-			if (buttonDict.ContainsKey(buttonName)) return buttonDict[buttonName].Value;
+			if (ButtonDict.ContainsKey(buttonName)) return ButtonDict[buttonName]?.Value ?? throw new NullReferenceException ("VirtualButton dictionary value is null!"); ;
 			throw new ArgumentException($"The button named {buttonName} does not exist.");
 		}
 
 		internal void UpdateButtons (float dt)
 		{
-			if (buttonDict == null) {
+			if (ButtonDict == null) {
 				return;
 			}
-			foreach (var buttonPair in buttonDict) {
-				buttonPair.Value.Update (dt);
+			foreach (var buttonPair in ButtonDict) {
+				buttonPair.Value?.Update (dt);
 			}
 		}
 	}

@@ -9,7 +9,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		private List<KeyValue> positiveKeyVals;
 		private List<KeyValue> negativeKeyVals;
 		private float riseTime;
-		[DontSerialize] private float incrementPerSecond;
+		private float incrementPerSecond;
 		[DontSerialize] private float currentValue;
 
 		public float RiseTime
@@ -38,10 +38,10 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		{
 			var targ = 0.0f;
 			if (positiveKeyVals != null && positiveKeyVals.Count > 0) {
-				targ += positiveKeyVals.Select (keyVal => keyVal.GetAxis (DeadZone)).OrderByDescending (MathF.Abs).First ();
+				targ += positiveKeyVals.Select (keyVal => keyVal?.GetAxis (DeadZone) ?? 0.0f).OrderByDescending (MathF.Abs).First ();
 			}
 			if (negativeKeyVals != null && negativeKeyVals.Count > 0) {
-				targ -= negativeKeyVals.Select (keyVal => keyVal.GetAxis (DeadZone)).OrderByDescending (MathF.Abs).First ();
+				targ -= negativeKeyVals.Select (keyVal => keyVal?.GetAxis (DeadZone) ?? 0.0f).OrderByDescending (MathF.Abs).First ();
 			}
 
 			var newValue = currentValue + MathF.Sign(targ - currentValue) * incrementPerSecond * dt;

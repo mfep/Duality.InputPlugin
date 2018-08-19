@@ -11,8 +11,8 @@ namespace MFEP.Duality.Plugins.InputPlugin.Example
 		public void OnUpdate ()
 		{
 			var direction = Vector2.Zero;
-			direction += InputManager.GetAxis ("Horizontal") * Vector2.UnitX;
-			direction -= InputManager.GetAxis ("Vertical") * Vector2.UnitY;
+			direction += this.InputManager ().GetAxis ("Horizontal") * Vector2.UnitX;
+			direction -= this.InputManager ().GetAxis ("Vertical") * Vector2.UnitY;
 			GameObj.Transform.MoveByAbs (direction * MovementSpeed * Time.TimeMult);
 		}
 	}

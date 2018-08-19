@@ -30,7 +30,7 @@ namespace MFEP.Duality.Plugins.InputPlugin.Example
 		{
 			if (String.IsNullOrWhiteSpace (ButtonName)) return;
 
-			float buttonValue = InputManager.GetAxis (ButtonName);
+			float buttonValue = this.InputManager ().GetAxis (ButtonName);
 			float newH = buttonValue * originalRect.H;
 			Rect newRect = new Rect(originalRect.X, originalRect.Y, originalRect.W, newH);
 			spriteRenderer.Rect = newRect;
