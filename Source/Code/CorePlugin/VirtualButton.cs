@@ -4,27 +4,13 @@ using Duality;
 
 namespace MFEP.Duality.Plugins.InputPlugin
 {
-	internal class VirtualButton
+	public class VirtualButton
 	{
-		private readonly HashSet<KeyValue> positiveKeyVals = new HashSet<KeyValue> ();
-		private readonly HashSet<KeyValue> negativeKeyVals = new HashSet<KeyValue> ();
+		private List<KeyValue> positiveKeyVals;
+		private List<KeyValue> negativeKeyVals;
 		private float riseTime;
 		[DontSerialize] private float incrementPerSecond;
 		[DontSerialize] private float currentValue;
-
-		public VirtualButton (KeyValue[] positiveKeyValues = null, KeyValue[] negativeKeyValues = null)
-		{
-			if (positiveKeyValues != null) {
-				foreach (var keyValue in positiveKeyValues) {
-					Associate (keyValue, KeyRole.Positive);
-				}
-			}
-			if (negativeKeyValues != null) {
-				foreach (var keyValue in negativeKeyValues) {
-					Associate (keyValue, KeyRole.Negative);
-				}
-			}
-		}
 
 		public float RiseTime
 		{
@@ -34,52 +20,29 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		}
 
 		public float DeadZone { get; set; }
+		public List<KeyValue> PositiveKeys { get => positiveKeyVals; set => positiveKeyVals = value; }
+		public List<KeyValue> NegativeKeys { get => negativeKeyVals; set => negativeKeyVals = value; }
 
-		public KeyValue[] PositiveKeyVals => positiveKeyVals.ToArray ();
-		public KeyValue[] NegativeKeyVals => negativeKeyVals.ToArray ();
 		internal KeyValue[] AllKeyVals => positiveKeyVals.Union (negativeKeyVals).ToArray ();
 
-		public static VirtualButton GetDefault ()
-		{
-			var btn = new VirtualButton
-			{
-				RiseTime = 0.0001f,
-				DeadZone = 0.3f
-			};
-			return btn;
-		}
-
-		public bool IsPressed
+		internal bool IsPressed
 		{
 			get { return positiveKeyVals.Union (negativeKeyVals).Any (keyVal => keyVal.IsPressed (DeadZone)); }
 		}
 
-		public bool IsHit
+		internal bool IsHit
 		{
 			get { return positiveKeyVals.Union (negativeKeyVals).Any (keyVal => keyVal.IsHit); }
 		}
 
-		public bool IsReleased
+		internal bool IsReleased
 		{
 			get { return positiveKeyVals.Union (negativeKeyVals).Any (keyVal => keyVal.IsReleased); }
 		}
 
-		public float Get ()
+		internal float Get ()
 		{
 			return currentValue;
-		}
-
-		public bool Associate (KeyValue key, KeyRole role)
-		{
-			if (positiveKeyVals.Contains (key) || negativeKeyVals.Contains (key)) {
-				return false;
-			}
-			return role == KeyRole.Positive ? positiveKeyVals.Add (key) : negativeKeyVals.Add (key);
-		}
-
-		public bool Remove (KeyValue key)
-		{
-			return positiveKeyVals.Remove (key) || negativeKeyVals.Remove (key);
 		}
 
 		internal void Update (float dt)
