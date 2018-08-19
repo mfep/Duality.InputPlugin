@@ -12,6 +12,8 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin
 	{
 		public override string Id => "InputEditorPlugin";
 
+		private static InputEditor inputEditor;
+
 		protected override void InitPlugin (MainForm main)
 		{
 			base.InitPlugin (main);
@@ -26,14 +28,18 @@ namespace MFEP.Duality.Editor.Plugins.InputPlugin
 
 		private void RequestInputEditor ()
 		{
-			var inputEditor = new InputEditor ();
+			inputEditor = new InputEditor ();
 			inputEditor.FormClosed += (sender, e) => { inputEditor = null; };
 			inputEditor.Show (DualityEditorApp.MainForm.MainDockPanel);
 		}
 
 		private void menuItem_Click (object sender, EventArgs e)
 		{
-			RequestInputEditor ();
+			if (inputEditor == null) {
+				RequestInputEditor ();
+			} else {
+				inputEditor.Focus ();
+			}
 		}
 	}
 }
