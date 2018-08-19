@@ -59,14 +59,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Example\CurrentValueDisplayComponent.cs" />
-    <None Include="ButtonEventArgs.cs" />
     <None Include="Example\MovementComponent.cs" />
     <None Include="Example\VirtualButtonsFromCode.cs" />
     <Compile Include="InputMapping.cs" />
     <Compile Include="KeyValue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CorePlugin.cs" />
-    <None Include="InputManager.cs" />
+    <Compile Include="InputManager.cs" />
     <Compile Include="ResNames.cs" />
     <Compile Include="VirtualButton.cs" />
   </ItemGroup>
