@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Duality;
+using Duality.Editor;
 
 namespace MFEP.Duality.Plugins.InputPlugin
 {
@@ -13,6 +14,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		private float deadZone = 0.3f;
 		[DontSerialize] private float currentValue;
 
+		[EditorHintRange(0.0f, 15.0f)]
 		public float RiseTime
 		{
 			get => riseTime;
@@ -20,6 +22,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 				incrementPerSecond = 1.0f / value; }
 		}
 
+		[EditorHintRange(0.0f, 1.0f)]
 		public float DeadZone
 		{
 			get {
