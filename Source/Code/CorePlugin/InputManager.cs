@@ -6,6 +6,7 @@ using Duality.Editor;
 namespace MFEP.Duality.Plugins.InputPlugin
 {
 	[EditorHintCategory (ResNames.EditorCategory)]
+	[EditorHintImage(ResNames.IconResource)]
 	public class InputManager : Component, ICmpInitializable
 	{
 		private Dictionary<string, VirtualButton> ButtonDict => inputMapping.Res.ButtonDict;
