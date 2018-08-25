@@ -14,6 +14,9 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		private float deadZone = 0.3f;
 		[DontSerialize] private float currentValue;
 
+		/// <summary>
+		/// Time in seconds that the axis value needs to reach maximum after a key has been hit.
+		/// </summary>
 		[EditorHintRange(0.0f, 15.0f)]
 		public float RiseTime
 		{
@@ -22,6 +25,9 @@ namespace MFEP.Duality.Plugins.InputPlugin
 				incrementPerSecond = 1.0f / value; }
 		}
 
+		/// <summary>
+		/// Below this value the input received from an analog controller is registered as 0. 
+		/// </summary>
 		[EditorHintRange(0.0f, 1.0f)]
 		public float DeadZone
 		{
@@ -29,7 +35,7 @@ namespace MFEP.Duality.Plugins.InputPlugin
 				return deadZone;
 			}
 			set {
-				deadZone = MathF.Clamp01 (deadZone);
+				deadZone = MathF.Clamp01 (value);
 			}
 		}
 

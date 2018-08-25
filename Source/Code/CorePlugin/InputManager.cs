@@ -5,6 +5,9 @@ using Duality.Editor;
 
 namespace MFEP.Duality.Plugins.InputPlugin
 {
+	/// <summary>
+	/// Tracks the status of the <see cref="VirtualButton"/>s described in the referenced <see cref="InputMapping"/>.
+	/// </summary>
 	[EditorHintCategory (ResNames.EditorCategory)]
 	[EditorHintImage(ResNames.IconResource)]
 	public class InputManager : Component, ICmpInitializable
@@ -12,6 +15,9 @@ namespace MFEP.Duality.Plugins.InputPlugin
 		private Dictionary<string, VirtualButton> ButtonDict => inputMapping.Res.ButtonDict;
 		private ContentRef<InputMapping> inputMapping;
 
+		/// <summary>
+		/// The <see cref="InputMapping"/> used by this <see cref="InputManager"/>.
+		/// </summary>
 		public ContentRef<InputMapping> InputMapping { get => inputMapping; set => inputMapping = value; }
 
 		void ICmpInitializable.OnInit (InitContext context)
@@ -62,6 +68,10 @@ namespace MFEP.Duality.Plugins.InputPlugin
 			throw new ArgumentException ($"The button named {buttonName} does not exist.");
 		}
 
+		/// <summary>
+		/// Returns the axis value of the <see cref="VirtualButton"/> with the given name.
+		/// This is affected by the RiseTime and DeadZone of the button.
+		/// </summary>
 		public float GetAxis (string buttonName)
 		{
 			if (ButtonDict.ContainsKey(buttonName)) return ButtonDict[buttonName]?.Value ?? throw new NullReferenceException ("VirtualButton dictionary value is null!"); ;

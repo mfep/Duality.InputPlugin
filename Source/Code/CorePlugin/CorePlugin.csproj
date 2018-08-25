@@ -4,11 +4,13 @@
     <StartAction>Program</StartAction>
     <StartProgram>$(SolutionDir)..\..\DualityLauncher.exe</StartProgram>
     <StartWorkingDirectory>$(SolutionDir)..\..</StartWorkingDirectory>
+    <DocumentationFile>InputPlugin.core.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <StartAction>Program</StartAction>
     <StartProgram>$(SolutionDir)..\..\DualityLauncher.exe</StartProgram>
     <StartWorkingDirectory>$(SolutionDir)..\..</StartWorkingDirectory>
+    <DocumentationFile>InputPlugin.core.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
