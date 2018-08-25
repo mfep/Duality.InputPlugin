@@ -4,7 +4,7 @@
     <header />
     <body>
       <Vertical dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.VirtualButton" id="1100841590">
-        <_x003C_DeadZone_x003E_k__BackingField dataType="Float">0.3</_x003C_DeadZone_x003E_k__BackingField>
+        <deadZone dataType="Float">0.3</deadZone>
         <incrementPerSecond dataType="Float">3.33333325</incrementPerSecond>
         <negativeKeyVals dataType="Struct" type="System.Collections.Generic.List`1[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]" id="2824927200">
           <_items dataType="Array" type="MFEP.Duality.Plugins.InputPlugin.KeyValue[]" id="3329633244">
@@ -40,7 +40,7 @@
         <riseTime dataType="Float">0.3</riseTime>
       </Vertical>
       <Horizontal dataType="Struct" type="MFEP.Duality.Plugins.InputPlugin.VirtualButton" id="649525530">
-        <_x003C_DeadZone_x003E_k__BackingField dataType="Float">0.3</_x003C_DeadZone_x003E_k__BackingField>
+        <deadZone dataType="Float">0.3</deadZone>
         <incrementPerSecond dataType="Float">50</incrementPerSecond>
         <negativeKeyVals dataType="Struct" type="System.Collections.Generic.List`1[[MFEP.Duality.Plugins.InputPlugin.KeyValue]]" id="411997508">
           <_items dataType="Array" type="MFEP.Duality.Plugins.InputPlugin.KeyValue[]" id="3760513604" length="4">
