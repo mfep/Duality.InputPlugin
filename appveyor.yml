@@ -4,7 +4,9 @@ configuration: Release
 before_build:
   - nuget restore Source\Code\ProjectPlugins.sln
 
+image: Visual Studio 2017
+  
 build:
   project: Source\Code\ProjectPlugins.sln
   verbosity: minimal
-  #publish_nuget: true
+  publish_nuget: true
