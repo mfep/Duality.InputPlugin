@@ -5,7 +5,7 @@ using Duality.Editor;
 
 namespace mfep.Duality.Plugins.InputPlugin.Example
 {
-	[EditorHintCategory (ResNames.EditorCategory)]
+	[EditorHintCategory (ResNames.ExamplesEditorCategory)]
 	[RequiredComponent (typeof(SpriteRenderer))]
 	public class CurrentValueDisplayComponent : Component, ICmpInitializable, ICmpUpdatable
 	{
