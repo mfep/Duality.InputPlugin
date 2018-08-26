@@ -12,6 +12,7 @@ namespace mfep.Duality.Plugins.InputPlugin
 		private float riseTime = 0.01f;
 		private float incrementPerSecond = 100.0f;
 		private float deadZone = 0.3f;
+		private bool directionSnap = false;
 		[DontSerialize] private float currentValue;
 
 		/// <summary>
@@ -31,12 +32,17 @@ namespace mfep.Duality.Plugins.InputPlugin
 		[EditorHintRange(0.0f, 1.0f)]
 		public float DeadZone
 		{
-			get {
-				return deadZone;
-			}
-			set {
-				deadZone = MathF.Clamp01 (value);
-			}
+			get => deadZone;
+			set => deadZone = MathF.Clamp01 (value);
+		}
+
+		/// <summary>
+		/// When true, change in input direction immediately sets the current value to 0.
+		/// </summary>
+		public bool DirectionSnap
+		{
+			get => directionSnap;
+			set => directionSnap = value;
 		}
 
 		public List<AbstractKey> PositiveKeys { get => positiveKeyVals; set => positiveKeyVals = value; }
@@ -55,17 +61,20 @@ namespace mfep.Duality.Plugins.InputPlugin
 
 		internal void Update (float dt)
 		{
-			var targ = 0.0f;
+			var target = 0.0f;
 			if (positiveKeyVals != null && positiveKeyVals.Count > 0) {
-				targ += positiveKeyVals.Select (keyVal => keyVal?.GetAxis (deadZone) ?? 0.0f).OrderByDescending (MathF.Abs).First ();
+				target += positiveKeyVals.Select (keyVal => keyVal?.GetAxis (deadZone) ?? 0.0f).OrderByDescending (MathF.Abs).First ();
 			}
 			if (negativeKeyVals != null && negativeKeyVals.Count > 0) {
-				targ -= negativeKeyVals.Select (keyVal => keyVal?.GetAxis (deadZone) ?? 0.0f).OrderByDescending (MathF.Abs).First ();
+				target -= negativeKeyVals.Select (keyVal => keyVal?.GetAxis (deadZone) ?? 0.0f).OrderByDescending (MathF.Abs).First ();
 			}
 
-			var newValue = currentValue + MathF.Sign(targ - currentValue) * incrementPerSecond * dt;
-			if ((currentValue - targ) * (newValue - targ) < 0.0f) {
-				newValue = targ;
+			var newValue = currentValue + MathF.Sign (target - currentValue) * incrementPerSecond * dt;
+			if ((currentValue - target) * (newValue - target) < 0.0f) {
+				newValue = target;
+			}
+			if (directionSnap && newValue * target < 0.0f) {
+				newValue = 0.0f;
 			}
 			currentValue = MathF.Clamp (newValue, -1.0f, 1.0f);
 		}

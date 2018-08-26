@@ -5,6 +5,7 @@
     <body>
       <Vertical dataType="Struct" type="mfep.Duality.Plugins.InputPlugin.VirtualButton" id="1100841590">
         <deadZone dataType="Float">0.3</deadZone>
+        <directionSnap dataType="Bool">true</directionSnap>
         <incrementPerSecond dataType="Float">3.33333325</incrementPerSecond>
         <negativeKeyVals dataType="Struct" type="System.Collections.Generic.List`1[[mfep.Duality.Plugins.InputPlugin.AbstractKey]]" id="2824927200">
           <_items dataType="Array" type="mfep.Duality.Plugins.InputPlugin.AbstractKey[]" id="3329633244">
@@ -41,6 +42,7 @@
       </Vertical>
       <Horizontal dataType="Struct" type="mfep.Duality.Plugins.InputPlugin.VirtualButton" id="649525530">
         <deadZone dataType="Float">0.3</deadZone>
+        <directionSnap dataType="Bool">true</directionSnap>
         <incrementPerSecond dataType="Float">50</incrementPerSecond>
         <negativeKeyVals dataType="Struct" type="System.Collections.Generic.List`1[[mfep.Duality.Plugins.InputPlugin.AbstractKey]]" id="411997508">
           <_items dataType="Array" type="mfep.Duality.Plugins.InputPlugin.AbstractKey[]" id="3760513604">
