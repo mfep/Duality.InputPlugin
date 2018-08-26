@@ -2,7 +2,7 @@
 using Duality;
 using Duality.Input;
 
-namespace MFEP.Duality.Plugins.InputPlugin
+namespace mfep.Duality.Plugins.InputPlugin
 {
 	public abstract class KeyValue
 	{

@@ -1,6 +1,6 @@
 ﻿using Duality;
 
-namespace MFEP.Duality.Plugins.InputPlugin
+namespace mfep.Duality.Plugins.InputPlugin
 {
 	public static class InputManagerExtensions
 	{

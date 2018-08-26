@@ -1,8 +1,8 @@
 ﻿using Duality;
 using Duality.Resources;
-//using MFEP.Duality.Plugins.InputPlugin.Serialization;
+//using mfep.Duality.Plugins.InputPlugin.Serialization;
 
-namespace MFEP.Duality.Plugins.InputPlugin
+namespace mfep.Duality.Plugins.InputPlugin
 {
 	public class InputPluginCorePlugin : CorePlugin
 	{

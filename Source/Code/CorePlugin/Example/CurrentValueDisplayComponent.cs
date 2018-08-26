@@ -3,7 +3,7 @@ using Duality;
 using Duality.Components.Renderers;
 using Duality.Editor;
 
-namespace MFEP.Duality.Plugins.InputPlugin.Example
+namespace mfep.Duality.Plugins.InputPlugin.Example
 {
 	[EditorHintCategory (ResNames.EditorCategory)]
 	[RequiredComponent (typeof(SpriteRenderer))]

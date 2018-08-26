@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Duality;
 using Duality.Editor;
 
-namespace MFEP.Duality.Plugins.InputPlugin
+namespace mfep.Duality.Plugins.InputPlugin
 {
 	/// <summary>
 	/// Tracks the status of the <see cref="VirtualButton"/>s described in the referenced <see cref="InputMapping"/>.

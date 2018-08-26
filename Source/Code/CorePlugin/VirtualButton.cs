@@ -3,7 +3,7 @@ using System.Linq;
 using Duality;
 using Duality.Editor;
 
-namespace MFEP.Duality.Plugins.InputPlugin
+namespace mfep.Duality.Plugins.InputPlugin
 {
 	public class VirtualButton
 	{

@@ -37,7 +37,7 @@ At first, a reference to the InputPlugin.core assembly has to be added to your g
 In your code files, the state of the Virtual Buttons can be requested from `InputManager`. These functions follow Duality's native input naming scheme:
 
 ``` csharp
-using MFEP.Duality.Plugins.InputPlugin;
+using mfep.Duality.Plugins.InputPlugin;
 ...
   public void OnUpdate ()
   {

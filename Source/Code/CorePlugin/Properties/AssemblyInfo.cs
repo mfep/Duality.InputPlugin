@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly: AssemblyTitle ("MFEP.Duality.Plugins.InputPlugin")]
+[assembly: AssemblyTitle ("mfep.Duality.Plugins.InputPlugin")]
 [assembly: AssemblyDescription ("")]
 [assembly: AssemblyConfiguration ("")]
 [assembly: AssemblyCompany ("")]
-[assembly: AssemblyProduct ("MFEP.Duality.Plugins.InputPlugin")]
+[assembly: AssemblyProduct ("mfep.Duality.Plugins.InputPlugin")]
 [assembly: AssemblyCopyright ("Copyright © Lőrinc Serfőző  2016")]
 [assembly: AssemblyTrademark ("")]
 [assembly: AssemblyCulture ("")]

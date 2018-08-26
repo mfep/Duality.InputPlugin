@@ -2,7 +2,7 @@
 using Duality;
 using Duality.Editor;
 
-namespace MFEP.Duality.Plugins.InputPlugin
+namespace mfep.Duality.Plugins.InputPlugin
 {
 	/// <summary>
 	/// Contains the <see cref="KeyValue"/>s associated with strings, i.e. <see cref="VirtualButton"/>s.
