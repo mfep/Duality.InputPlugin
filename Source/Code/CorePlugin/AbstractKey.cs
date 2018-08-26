@@ -4,7 +4,7 @@ using Duality.Input;
 
 namespace mfep.Duality.Plugins.InputPlugin
 {
-	public abstract class KeyValue
+	public abstract class AbstractKey
 	{
 		internal abstract bool IsHit { get; }
 		internal abstract bool IsReleased { get; }
@@ -16,7 +16,7 @@ namespace mfep.Duality.Plugins.InputPlugin
 		}
 	}
 
-	public class KeyboardKey : KeyValue
+	public class KeyboardKey : AbstractKey
 	{
 		private Key key;
 		public Key Key { get => key; set => key = value; }
@@ -26,7 +26,7 @@ namespace mfep.Duality.Plugins.InputPlugin
 		internal override bool IsPressed (float deadZone) => DualityApp.Keyboard.KeyPressed (key);
 	}
 
-	public class MouseButton : KeyValue
+	public class MouseButton : AbstractKey
 	{
 		private global::Duality.Input.MouseButton mouseButton;
 		public global::Duality.Input.MouseButton Button { get => mouseButton; set => mouseButton = value; }
@@ -36,7 +36,7 @@ namespace mfep.Duality.Plugins.InputPlugin
 		internal override bool IsPressed (float deadZone) => DualityApp.Mouse.ButtonPressed (mouseButton);
 	}
 
-	public class GamepadButton : KeyValue
+	public class GamepadButton : AbstractKey
 	{
 		private global::Duality.GamepadButton gamepadButton;
 		public global::Duality.GamepadButton Button { get => gamepadButton; set => gamepadButton = value; }
@@ -46,7 +46,7 @@ namespace mfep.Duality.Plugins.InputPlugin
 		internal override bool IsPressed (float deadZone) => DualityApp.Gamepads[0].ButtonPressed (gamepadButton);
 	}
 
-	public class GamepadAxis : KeyValue
+	public class GamepadAxis : AbstractKey
 	{
 		private global::Duality.Input.GamepadAxis gamepadAxis;
 		public global::Duality.Input.GamepadAxis Axis { get => gamepadAxis; set => gamepadAxis = value; }

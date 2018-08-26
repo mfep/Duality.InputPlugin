@@ -7,8 +7,8 @@ namespace mfep.Duality.Plugins.InputPlugin
 {
 	public class VirtualButton
 	{
-		private List<KeyValue> positiveKeyVals;
-		private List<KeyValue> negativeKeyVals;
+		private List<AbstractKey> positiveKeyVals;
+		private List<AbstractKey> negativeKeyVals;
 		private float riseTime = 0.01f;
 		private float incrementPerSecond = 100.0f;
 		private float deadZone = 0.3f;
@@ -39,8 +39,8 @@ namespace mfep.Duality.Plugins.InputPlugin
 			}
 		}
 
-		public List<KeyValue> PositiveKeys { get => positiveKeyVals; set => positiveKeyVals = value; }
-		public List<KeyValue> NegativeKeys { get => negativeKeyVals; set => negativeKeyVals = value; }
+		public List<AbstractKey> PositiveKeys { get => positiveKeyVals; set => positiveKeyVals = value; }
+		public List<AbstractKey> NegativeKeys { get => negativeKeyVals; set => negativeKeyVals = value; }
 
 		internal bool IsPressed =>
 			positiveKeyVals?.Union (negativeKeyVals).Any (keyVal => keyVal.IsPressed (deadZone)) ?? false;

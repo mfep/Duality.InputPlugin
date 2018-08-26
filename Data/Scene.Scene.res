@@ -149,7 +149,7 @@
             </sharedMat>
             <visibilityGroup dataType="Enum" type="Duality.Drawing.VisibilityFlag" name="Group0" value="1" />
           </item>
-          <item dataType="Struct" type="mfep.Duality.Plugins.InputPlugin.Example.MovementComponent" id="1499644342">
+          <item dataType="Struct" type="mfep.Duality.Plugins.InputPlugin.Example.MovementComponent" id="302296630">
             <_x003C_MovementSpeed_x003E_k__BackingField dataType="Float">10</_x003C_MovementSpeed_x003E_k__BackingField>
             <active dataType="Bool">true</active>
             <gameobj dataType="ObjectRef">1347167667</gameobj>
@@ -168,7 +168,7 @@
           <values dataType="Array" type="System.Object[]" id="390635336">
             <item dataType="ObjectRef">1404444885</item>
             <item dataType="ObjectRef">2815786947</item>
-            <item dataType="ObjectRef">1499644342</item>
+            <item dataType="ObjectRef">302296630</item>
           </values>
         </body>
       </compMap>
@@ -239,7 +239,7 @@
             </sharedMat>
             <visibilityGroup dataType="Enum" type="Duality.Drawing.VisibilityFlag" name="Group0" value="1" />
           </item>
-          <item dataType="Struct" type="mfep.Duality.Plugins.InputPlugin.Example.CurrentValueDisplayComponent" id="2995568450">
+          <item dataType="Struct" type="mfep.Duality.Plugins.InputPlugin.Example.CurrentValueDisplayComponent" id="4219902402">
             <_x003C_ButtonName_x003E_k__BackingField dataType="String">Horizontal</_x003C_ButtonName_x003E_k__BackingField>
             <active dataType="Bool">true</active>
             <gameobj dataType="ObjectRef">2388994178</gameobj>
@@ -260,7 +260,7 @@
           <values dataType="Array" type="System.Object[]" id="2108208442">
             <item dataType="ObjectRef">2446271396</item>
             <item dataType="ObjectRef">3857613458</item>
-            <item dataType="ObjectRef">2995568450</item>
+            <item dataType="ObjectRef">4219902402</item>
           </values>
         </body>
       </compMap>
@@ -331,7 +331,7 @@
             </sharedMat>
             <visibilityGroup dataType="Enum" type="Duality.Drawing.VisibilityFlag" name="Group0" value="1" />
           </item>
-          <item dataType="Struct" type="mfep.Duality.Plugins.InputPlugin.Example.CurrentValueDisplayComponent" id="4049503689">
+          <item dataType="Struct" type="mfep.Duality.Plugins.InputPlugin.Example.CurrentValueDisplayComponent" id="978870345">
             <_x003C_ButtonName_x003E_k__BackingField dataType="String">Vertical</_x003C_ButtonName_x003E_k__BackingField>
             <active dataType="Bool">true</active>
             <gameobj dataType="ObjectRef">3442929417</gameobj>
@@ -352,7 +352,7 @@
           <values dataType="Array" type="System.Object[]" id="2734041120">
             <item dataType="ObjectRef">3500206635</item>
             <item dataType="ObjectRef">616581401</item>
-            <item dataType="ObjectRef">4049503689</item>
+            <item dataType="ObjectRef">978870345</item>
           </values>
         </body>
       </compMap>
@@ -373,7 +373,7 @@
       <children />
       <compList dataType="Struct" type="System.Collections.Generic.List`1[[Duality.Component]]" id="970624270">
         <_items dataType="Array" type="Duality.Component[]" id="1105513936" length="4">
-          <item dataType="Struct" type="mfep.Duality.Plugins.InputPlugin.InputManager" id="3391726120">
+          <item dataType="Struct" type="mfep.Duality.Plugins.InputPlugin.InputManager" id="1936387240">
             <active dataType="Bool">true</active>
             <gameobj dataType="ObjectRef">158220936</gameobj>
             <inputMapping dataType="Struct" type="Duality.ContentRef`1[[mfep.Duality.Plugins.InputPlugin.InputMapping]]">
@@ -390,7 +390,7 @@
             <item dataType="Type" id="1752942756" value="mfep.Duality.Plugins.InputPlugin.InputManager" />
           </keys>
           <values dataType="Array" type="System.Object[]" id="1536517878">
-            <item dataType="ObjectRef">3391726120</item>
+            <item dataType="ObjectRef">1936387240</item>
           </values>
         </body>
       </compMap>

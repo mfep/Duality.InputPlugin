@@ -5,7 +5,7 @@ using Duality.Editor;
 namespace mfep.Duality.Plugins.InputPlugin
 {
 	/// <summary>
-	/// Contains the <see cref="KeyValue"/>s associated with strings, i.e. <see cref="VirtualButton"/>s.
+	/// Contains the <see cref="AbstractKey"/>s associated with strings, i.e. <see cref="VirtualButton"/>s.
 	/// </summary>
 	[EditorHintCategory (ResNames.EditorCategory)]
 	[EditorHintImage(ResNames.IconResource)]

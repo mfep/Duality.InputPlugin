@@ -36,10 +36,10 @@ namespace mfep.Duality.Plugins.InputPlugin
 		}
 
 		/// <summary>
-		/// Checks if any of the <see cref="KeyValue"/>s associated with a Virtual Button is pressed at the moment.
+		/// Checks if any of the <see cref="AbstractKey"/>s associated with a Virtual Button is pressed at the moment.
 		/// </summary>
 		/// <param name="buttonName">The string identifier of the Virtual Button.</param>
-		/// <returns>Returns true, if any of the <see cref="KeyValue"/>s is pressed.</returns>
+		/// <returns>Returns true, if any of the <see cref="AbstractKey"/>s is pressed.</returns>
 		public bool IsButtonPressed (string buttonName)
 		{
 			if (ButtonDict.ContainsKey (buttonName)) return ButtonDict[buttonName]?.IsPressed ?? throw new NullReferenceException ("VirtualButton dictionary value is null!");
@@ -47,10 +47,10 @@ namespace mfep.Duality.Plugins.InputPlugin
 		}
 
 		/// <summary>
-		/// Checks if any of the <see cref="KeyValue"/>s associated with a Virtual Button has been hit in the current frame.
+		/// Checks if any of the <see cref="AbstractKey"/>s associated with a Virtual Button has been hit in the current frame.
 		/// </summary>
 		/// <param name="buttonName">The string identifier of the Virtual Button.</param>
-		/// <returns>Returns true, if any of the <see cref="KeyValue"/>s is hit.</returns>
+		/// <returns>Returns true, if any of the <see cref="AbstractKey"/>s is hit.</returns>
 		public bool IsButtonHit (string buttonName)
 		{
 			if (ButtonDict.ContainsKey (buttonName)) return ButtonDict[buttonName]?.IsHit ?? throw new NullReferenceException ("VirtualButton dictionary value is null!"); ;
@@ -58,10 +58,10 @@ namespace mfep.Duality.Plugins.InputPlugin
 		}
 
 		/// <summary>
-		/// Checks if any of the <see cref="KeyValue"/>s associated with a Virtual Button is released in the current frame.
+		/// Checks if any of the <see cref="AbstractKey"/>s associated with a Virtual Button is released in the current frame.
 		/// </summary>
 		/// <param name="buttonName">The string identifier of the Virtual Button.</param>
-		/// <returns>Returns true, if any of the <see cref="KeyValue"/>s is released.</returns>
+		/// <returns>Returns true, if any of the <see cref="AbstractKey"/>s is released.</returns>
 		public bool IsButtonReleased (string buttonName)
 		{
 			if (ButtonDict.ContainsKey (buttonName)) return ButtonDict[buttonName]?.IsReleased ?? throw new NullReferenceException ("VirtualButton dictionary value is null!"); ;
