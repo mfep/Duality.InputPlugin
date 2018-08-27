@@ -1,20 +1,15 @@
 ﻿using Duality;
+using Duality.Resources;
+//using mfep.Duality.Plugins.InputPlugin.Serialization;
 
-namespace MFEP.Duality.Plugins.InputPlugin
+namespace mfep.Duality.Plugins.InputPlugin
 {
 	public class InputPluginCorePlugin : CorePlugin
 	{
-		protected override void InitPlugin ()
+		protected override void OnBeforeUpdate ()
 		{
-			base.InitPlugin ();
-			InputManager.SetSerializer (new DualityXmlSerializer ());
-			InputManager.LoadMapping ();
-		}
-
-		protected override void OnDisposePlugin ()
-		{
-			base.OnDisposePlugin ();
-			InputManager.SaveMapping ();
+			base.OnBeforeUpdate ();
+			Scene.Current.FindComponent<InputManager> ()?.UpdateButtons (Time.TimeMult * Time.SPFMult);
 		}
 	}
 }
