@@ -6,7 +6,7 @@ Keyboard abstraction plugin for Duality game engine
 ## Concepts
 
 ### `InputManager`
-is a `Component` which enables the user to query the status of the `VirtualButton`s  defined in the `InputMapping`. There is an extension method to easily grab a reference to the `InputManager` in the `Scene`. There can be only one `InputManager` in the `Scene`. Example:
+is a `Component` which enables the user to query the status of the `VirtualButtons`  defined in the `InputMapping`. There is an extension method to easily grab a reference to the `InputManager` in the `Scene.` There can be only one `InputManager` in the `Scene.` Example:
 ```csharp
 float horizontalAxis = this.InputManager().GetAxis("Horizontal");
 bool isVerticalPressed = this.InputManager().IsButtonPressed("Vertical");
@@ -14,6 +14,7 @@ bool isVerticalPressed = this.InputManager().IsButtonPressed("Vertical");
 
 ### `InputMapping`
 is a `Resource` which lets you define a dictionary of string identifiers and `VirtualButton`s. It is editable through the *Object Inspector*.
+![Input mapping in inspector](readme_images/inputMapping.png?raw=true)
 
 ### `VirtualButton`
 has zero or more positive keys and negative keys which can be keyboard keys, mouse buttons, gamepad buttons or gamepad axes. If any of them is hit/pressed/released in the current frame, `InputManager` queries will reflect that.
@@ -24,12 +25,15 @@ has zero or more positive keys and negative keys which can be keyboard keys, mou
 
 ## Install
 **`InputPlugin.core.dll` assembly has to be referenced from the game plugin's project to use the InputPlugin in your game!**
+![Reference assembly](readme_images/reference.png?raw=true)
+
 ### Install from Source
 1. Clone the repository
 2. Build the `Source\Code\ProjectPlugins.sln` solution.
 3. Copy `InputPlugin.core.dll` and `InputPlugin.core.pdb` from `Source\Code\CorePlugin\bin\Debug` to the `Plugins` folder of your Duality project.
+
 ### Install via the Duality Package Manager
-is not yet available for version 2.x.
+is not yet available for plugin version 2.x.
 > 1. In Dualitor open the package manager window from the `File` menu.
 > 2. Select the `Online repository` option from the combobox labeled `View`, and from the list choose `InputPlugin`.
 > 3. Click `Install` then `Apply`. These operations will download the plugin from nuget.org, and restart Dualitor with these changes.
