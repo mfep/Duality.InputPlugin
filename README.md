@@ -35,10 +35,9 @@ has zero or more positive keys and negative keys which can be keyboard keys, mou
 3. Copy `InputPlugin.core.dll` and `InputPlugin.core.pdb` from `Source\Code\CorePlugin\bin\Debug` to the `Plugins` folder of your Duality project.
 
 ### Install via the Duality Package Manager
-is not yet available for plugin version 2.x.
-> 1. In Dualitor open the package manager window from the `File` menu.
-> 2. Select the `Online repository` option from the combobox labeled `View`, and from the list choose `InputPlugin`.
-> 3. Click `Install` then `Apply`. These operations will download the plugin from nuget.org, and restart Dualitor with these changes.
+1. In Dualitor open the package manager window from the `File` menu.
+2. Select the `Online repository` option from the combobox labeled `View`, and from the list choose `InputPlugin`.
+3. Click `Install` then `Apply`. These operations will download the plugin from nuget.org, and restart Dualitor with these changes.
 
 ## License
 The code is under MIT license, details in the license file.
