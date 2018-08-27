@@ -7,8 +7,8 @@ namespace mfep.Duality.Plugins.InputPlugin
 {
 	public class VirtualButton
 	{
-		private List<AbstractKey> positiveKeyVals;
-		private List<AbstractKey> negativeKeyVals;
+		private List<AbstractKey> positiveKeys;
+		private List<AbstractKey> negativeKeys;
 		private float riseTime = 0.01f;
 		private float incrementPerSecond = 100.0f;
 		private float deadZone = 0.3f;
@@ -45,28 +45,30 @@ namespace mfep.Duality.Plugins.InputPlugin
 			set => directionSnap = value;
 		}
 
-		public List<AbstractKey> PositiveKeys { get => positiveKeyVals; set => positiveKeyVals = value; }
-		public List<AbstractKey> NegativeKeys { get => negativeKeyVals; set => negativeKeyVals = value; }
+		public List<AbstractKey> PositiveKeys { get => positiveKeys; set => positiveKeys = value; }
+		public List<AbstractKey> NegativeKeys { get => negativeKeys; set => negativeKeys = value; }
+
+		public override string ToString () => $"{typeof(VirtualButton).Name}: {positiveKeys?.Count ?? 0} positive; {negativeKeys?.Count ?? 0} negative"; 
 
 		internal bool IsPressed =>
-			positiveKeyVals?.Union (negativeKeyVals).Any (keyVal => keyVal.IsPressed (deadZone)) ?? false;
+			positiveKeys?.Union (negativeKeys).Any (keyVal => keyVal.IsPressed (deadZone)) ?? false;
 
 		internal bool IsHit =>
-			positiveKeyVals?.Union (negativeKeyVals).Any (keyVal => keyVal.IsHit) ?? false;
+			positiveKeys?.Union (negativeKeys).Any (keyVal => keyVal.IsHit) ?? false;
 
 		internal bool IsReleased =>
-			positiveKeyVals?.Union (negativeKeyVals).Any (keyVal => keyVal.IsReleased) ?? false;
+			positiveKeys?.Union (negativeKeys).Any (keyVal => keyVal.IsReleased) ?? false;
 
 		internal float Axis => currentValue;
 
 		internal void Update (float dt)
 		{
 			var target = 0.0f;
-			if (positiveKeyVals != null && positiveKeyVals.Count > 0) {
-				target += positiveKeyVals.Select (keyVal => keyVal?.GetAxis (deadZone) ?? 0.0f).OrderByDescending (MathF.Abs).First ();
+			if (positiveKeys != null && positiveKeys.Count > 0) {
+				target += positiveKeys.Select (keyVal => keyVal?.GetAxis (deadZone) ?? 0.0f).OrderByDescending (MathF.Abs).First ();
 			}
-			if (negativeKeyVals != null && negativeKeyVals.Count > 0) {
-				target -= negativeKeyVals.Select (keyVal => keyVal?.GetAxis (deadZone) ?? 0.0f).OrderByDescending (MathF.Abs).First ();
+			if (negativeKeys != null && negativeKeys.Count > 0) {
+				target -= negativeKeys.Select (keyVal => keyVal?.GetAxis (deadZone) ?? 0.0f).OrderByDescending (MathF.Abs).First ();
 			}
 
 			var newValue = currentValue + MathF.Sign (target - currentValue) * incrementPerSecond * dt;

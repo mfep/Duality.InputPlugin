@@ -7,7 +7,7 @@
         <deadZone dataType="Float">0.3</deadZone>
         <directionSnap dataType="Bool">true</directionSnap>
         <incrementPerSecond dataType="Float">3.33333325</incrementPerSecond>
-        <negativeKeyVals dataType="Struct" type="System.Collections.Generic.List`1[[mfep.Duality.Plugins.InputPlugin.AbstractKey]]" id="2824927200">
+        <negativeKeys dataType="Struct" type="System.Collections.Generic.List`1[[mfep.Duality.Plugins.InputPlugin.AbstractKey]]" id="2824927200">
           <_items dataType="Array" type="mfep.Duality.Plugins.InputPlugin.AbstractKey[]" id="3329633244">
             <item dataType="Struct" type="mfep.Duality.Plugins.InputPlugin.KeyboardKey" id="1933056708">
               <key dataType="Enum" type="Duality.Input.Key" name="Down" value="46" />
@@ -23,8 +23,8 @@
             </item>
           </_items>
           <_size dataType="Int">4</_size>
-        </negativeKeyVals>
-        <positiveKeyVals dataType="Struct" type="System.Collections.Generic.List`1[[mfep.Duality.Plugins.InputPlugin.AbstractKey]]" id="3573126030">
+        </negativeKeys>
+        <positiveKeys dataType="Struct" type="System.Collections.Generic.List`1[[mfep.Duality.Plugins.InputPlugin.AbstractKey]]" id="3573126030">
           <_items dataType="Array" type="mfep.Duality.Plugins.InputPlugin.AbstractKey[]" id="1941610290" length="4">
             <item dataType="Struct" type="mfep.Duality.Plugins.InputPlugin.KeyboardKey" id="4066652112">
               <key dataType="Enum" type="Duality.Input.Key" name="Up" value="45" />
@@ -37,14 +37,14 @@
             </item>
           </_items>
           <_size dataType="Int">3</_size>
-        </positiveKeyVals>
+        </positiveKeys>
         <riseTime dataType="Float">0.3</riseTime>
       </Vertical>
       <Horizontal dataType="Struct" type="mfep.Duality.Plugins.InputPlugin.VirtualButton" id="649525530">
         <deadZone dataType="Float">0.3</deadZone>
         <directionSnap dataType="Bool">true</directionSnap>
         <incrementPerSecond dataType="Float">50</incrementPerSecond>
-        <negativeKeyVals dataType="Struct" type="System.Collections.Generic.List`1[[mfep.Duality.Plugins.InputPlugin.AbstractKey]]" id="411997508">
+        <negativeKeys dataType="Struct" type="System.Collections.Generic.List`1[[mfep.Duality.Plugins.InputPlugin.AbstractKey]]" id="411997508">
           <_items dataType="Array" type="mfep.Duality.Plugins.InputPlugin.AbstractKey[]" id="3760513604">
             <item dataType="Struct" type="mfep.Duality.Plugins.InputPlugin.KeyboardKey" id="438970948">
               <key dataType="Enum" type="Duality.Input.Key" name="Left" value="47" />
@@ -60,8 +60,8 @@
             </item>
           </_items>
           <_size dataType="Int">4</_size>
-        </negativeKeyVals>
-        <positiveKeyVals dataType="Struct" type="System.Collections.Generic.List`1[[mfep.Duality.Plugins.InputPlugin.AbstractKey]]" id="1885627030">
+        </negativeKeys>
+        <positiveKeys dataType="Struct" type="System.Collections.Generic.List`1[[mfep.Duality.Plugins.InputPlugin.AbstractKey]]" id="1885627030">
           <_items dataType="Array" type="mfep.Duality.Plugins.InputPlugin.AbstractKey[]" id="3980502222" length="8">
             <item dataType="Struct" type="mfep.Duality.Plugins.InputPlugin.KeyboardKey" id="1767858128">
               <key dataType="Enum" type="Duality.Input.Key" name="Right" value="48" />
@@ -80,7 +80,7 @@
             </item>
           </_items>
           <_size dataType="Int">5</_size>
-        </positiveKeyVals>
+        </positiveKeys>
         <riseTime dataType="Float">0.02</riseTime>
       </Horizontal>
     </body>
