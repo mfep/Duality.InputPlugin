@@ -74,7 +74,7 @@ namespace mfep.Duality.Plugins.InputPlugin
 		/// </summary>
 		public float GetAxis (string buttonName)
 		{
-			if (ButtonDict.ContainsKey(buttonName)) return ButtonDict[buttonName]?.Value ?? throw new NullReferenceException ("VirtualButton dictionary value is null!"); ;
+			if (ButtonDict.ContainsKey(buttonName)) return ButtonDict[buttonName]?.Axis ?? throw new NullReferenceException ("VirtualButton dictionary value is null!"); ;
 			throw new ArgumentException($"The button named {buttonName} does not exist.");
 		}
 

@@ -57,7 +57,7 @@ namespace mfep.Duality.Plugins.InputPlugin
 		internal bool IsReleased =>
 			positiveKeyVals?.Union (negativeKeyVals).Any (keyVal => keyVal.IsReleased) ?? false;
 
-		internal float Value => currentValue;
+		internal float Axis => currentValue;
 
 		internal void Update (float dt)
 		{
