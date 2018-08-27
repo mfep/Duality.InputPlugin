@@ -14,7 +14,8 @@ bool isVerticalPressed = this.InputManager().IsButtonPressed("Vertical");
 
 ### `InputMapping`
 is a `Resource` which lets you define a dictionary of string identifiers and `VirtualButton`s. It is editable through the *Object Inspector*.
-![Input mapping in inspector](readme_images/inputMapping.png?raw=true)
+
+![Input mapping in inspector](readme_images/inputMapping.PNG?raw=true)
 
 ### `VirtualButton`
 has zero or more positive keys and negative keys which can be keyboard keys, mouse buttons, gamepad buttons or gamepad axes. If any of them is hit/pressed/released in the current frame, `InputManager` queries will reflect that.
@@ -25,6 +26,7 @@ has zero or more positive keys and negative keys which can be keyboard keys, mou
 
 ## Install
 **`InputPlugin.core.dll` assembly has to be referenced from the game plugin's project to use the InputPlugin in your game!**
+
 ![Reference assembly](readme_images/reference.png?raw=true)
 
 ### Install from Source
