@@ -9,7 +9,7 @@ namespace mfep.Duality.Plugins.InputPlugin
 		protected override void OnBeforeUpdate ()
 		{
 			base.OnBeforeUpdate ();
-			Scene.Current.FindComponent<InputManager> ()?.UpdateButtons (Time.TimeMult * Time.SPFMult);
+			Scene.Current.FindComponent<InputManager> ()?.UpdateButtons (Time.DeltaTime);
 		}
 	}
 }

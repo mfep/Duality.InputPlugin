@@ -10,7 +10,7 @@ namespace mfep.Duality.Plugins.InputPlugin
 	/// </summary>
 	[EditorHintCategory (ResNames.EditorCategory)]
 	[EditorHintImage(ResNames.IconResource)]
-	public class InputManager : Component, ICmpInitializable
+	public class InputManager : Component, ICmpAttachmentListener
 	{
 		private Dictionary<string, VirtualButton> ButtonDict => inputMapping.Res.ButtonDict;
 		private ContentRef<InputMapping> inputMapping;
@@ -20,18 +20,15 @@ namespace mfep.Duality.Plugins.InputPlugin
 		/// </summary>
 		public ContentRef<InputMapping> InputMapping { get => inputMapping; set => inputMapping = value; }
 
-		void ICmpInitializable.OnInit (InitContext context)
+		void ICmpAttachmentListener.OnAddToGameObject ()
 		{
-			if (context != InitContext.AddToGameObject) {
-				return;
-			}
 			var presentInputManager = this.InputManager ();
 			if (presentInputManager != null && presentInputManager != this) {
-				Log.Core.WriteError ($"An InputManager is already present in the scene: {presentInputManager}");
+				Logs.Core.WriteError ($"An InputManager is already present in the scene: {presentInputManager}");
 			}
 		}
 
-		void ICmpInitializable.OnShutdown (ShutdownContext context)
+		void ICmpAttachmentListener.OnRemoveFromGameObject ()
 		{
 		}
 

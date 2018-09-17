@@ -14,15 +14,15 @@ namespace mfep.Duality.Plugins.InputPlugin.Example
 		private SpriteRenderer spriteRenderer;
 		private Rect originalRect;
 
-		public void OnInit (InitContext context)
+		public void OnActivate ()
 		{
-			if (context == InitContext.Activate && DualityApp.ExecContext == DualityApp.ExecutionContext.Game) {
+			if (DualityApp.ExecContext == DualityApp.ExecutionContext.Game) {
 				spriteRenderer = GameObj.GetComponent<SpriteRenderer> ();
 				originalRect = spriteRenderer.Rect;
 			}
 		}
 
-		public void OnShutdown (ShutdownContext context)
+		public void OnDeactivate ()
 		{
 		}
 

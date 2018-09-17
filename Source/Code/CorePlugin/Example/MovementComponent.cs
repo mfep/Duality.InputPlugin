@@ -13,7 +13,7 @@ namespace mfep.Duality.Plugins.InputPlugin.Example
 			var direction = Vector2.Zero;
 			direction += this.InputManager ().GetAxis ("Horizontal") * Vector2.UnitX;
 			direction -= this.InputManager ().GetAxis ("Vertical") * Vector2.UnitY;
-			GameObj.Transform.MoveByAbs (direction * MovementSpeed * Time.TimeMult);
+			GameObj.Transform.MoveBy (direction * MovementSpeed * Time.TimeMult);
 		}
 	}
 }
