@@ -12,7 +12,17 @@ namespace mfep.Duality.Plugins.InputPlugin
 	[EditorHintImage(ResNames.IconResource)]
 	public class InputManager : Component, ICmpAttachmentListener
 	{
-		private Dictionary<string, VirtualButton> ButtonDict => inputMapping.Res.ButtonDict;
+		private Dictionary<string, VirtualButton> ButtonDict
+		{
+			get
+			{ 
+				if (inputMapping == null || inputMapping.IsExplicitNull)
+				{
+					throw new NullReferenceException("No InputMapping is set in InputManager");
+				}
+				return inputMapping.Res.ButtonDict;
+			}
+		}
 		private ContentRef<InputMapping> inputMapping;
 
 		/// <summary>
